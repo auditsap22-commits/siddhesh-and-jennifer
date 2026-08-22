@@ -13,16 +13,16 @@ export const siteConfig = {
     backgroundMusic:"/background_music/Palagi - Tj Monterde  Violin Cover.mp3"
   },
   googleAPI:{
-    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSdaUbCMaLUQAraDcOvhq5R_oQCzpE70uujeBB47DH4idAv1Hw/formResponse",   //done
-    message: "https://script.google.com/macros/s/AKfycbyBN-aOqEmK5O_AplwIgYvrtlUMq4Unj5eZWxq8GLTzkB_0QV7ylsC9Bfdmzm7aUsnALg/exec",  //done
-    guestList: "https://script.google.com/macros/s/AKfycbxwjELLlM0tNgICDTkAoAwf58upeV3GSC_N0nB2jNUKGNOKvfegJ6OQsRpmC7CnpSuy8A/exec",  //done
-    guestRequest: "https://script.google.com/macros/s/AKfycbxrTpvUQeVUAlr7z9Mr_xJWlew-0WBNtcHaL_TIadzFnB1bb0nkItXbggKglp9r2oXspQ/exec",   //done
-    entourage: "https://script.google.com/macros/s/AKfycbwPUshi0AaU8wCpv1iIFZIyrZ5RUKw_97HeyHdshSiMZP_5GM5n0duAbxEI0yxlb_iDrQ/exec",  //done
-    sponsors: "https://script.google.com/macros/s/AKfycbzImGg-M0Vi8pYD4F9bVpHhT19HyGnHqRnzjOfPwnAUWN3SxTt9id1qQDci_119TiYg/exec",  //done 
+    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSc9zfh2TNkiZoEm2o4WE6BIpHMuiqbhWpiIZPx3HvyQo_-zTw/formResponse",   //done
+    message: "https://script.google.com/macros/s/AKfycbyAWDC5cghN91R7rsqsdKosXrEO5ID0LAEPYudF0EHEvvdL8F4QMynF_5JhojXjkx4Q/exec",  //done
+    guestList: "https://script.google.com/macros/s/AKfycbwSgwsIqCfwSQaL_ACVyQlJ1VuPEGcYZdTw_X6EaK0vGnOv85VSOt73sO-4VKYVnH5m/exec",  //done
+    guestRequest: "https://script.google.com/macros/s/AKfycbw4YabqsDct9QHQTANthXmtVESU_pOafDTdvACCBoeTEl8KS5sqgV9l9Cd36ES2MYvM/exec",   //done
+    entourage: "https://script.google.com/macros/s/AKfycbzO_HgD5l5H2RmGVsOVp3M1-6HDRe-0zIo9DiaH_ALWtM1urIjZP5IkpzX_0bIxRdz6/exec",  //done
+    sponsors: "https://script.google.com/macros/s/AKfycbxejBXFT3hVZz1ziTqRcd2g8gy2NgpEEfW6po4fNkuIqhZi5ppVnh3qBhFamlZOfSNE/exec",  //done 
     proposalResponses: "https://script.google.com/macros/s/AKfycbwIUDKMoMIHVwbmr6KbgmBtlGRpMGj1Z9maeHSEwsFaXNi0dAH8WYhqbtiAfg_p5D4lgw/exec", // uses entourage script with action: proposal
-    weddingDetails: "https://script.google.com/macros/s/AKfycbz_ixxkHMii2gWNfNBcQYTbLd5rA7JST8fMsHRgOvTFPvaQbiRk8kyFqeeQxvgIN5H71g/exec",   //done
+    weddingDetails: "https://script.google.com/macros/s/AKfycbwJiEsJKgPaY0ro5G6cOsgJ_vR84bIrfdgugJY-zpI-HyqM9qK6bgOfxy_vbxNpv-9T/exec",   //done
 ////google share 
-    googleShare: "https://docs.google.com/spreadsheets/d/1_9wneLrfMwUsFUIZ4g3j9AB2UVtRgTJZeDOlXfnnjXA/edit?usp=sharing", 
+    googleShare: "https://docs.google.com/spreadsheets/d/1HThE9SkrMxV7v-LzvPAt8fOMJ0JHR_NKqdc3_CEFkGg/edit?usp=sharing", 
   },
   wedding: {
     date: "November 28, 2026",
@@ -270,7 +270,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   },
   snapShare: {
     googleDriveLink:
-      "https://drive.google.com/drive/folders/1ZDzsznLVCIwJzmdGln0LSlnWTt-WFjDQ?usp=sharing",
+      "https://drive.google.com/drive/folders/1RkdZxTxgWR354PpqkdEe79LU7zujFST9?usp=sharing",
     albumQR: "/QR/AlbumQR.png",
     hashtag: ["#JENfoundHisdesTINy"],
     instructions: "Please scan this QR Code and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
