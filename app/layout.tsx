@@ -8,10 +8,10 @@ import { siteConfig } from "@/content/site"
 import { ClientLayout } from "@/components/client-layout"
 import { anastasiaScript } from "@/lib/fonts"
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://janlee-and-christine.weddinginvitationrsvp.com/"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://jayson-and-juvy.weddinginvitationrsvp.com/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
-  const desktopHero = "/Details/LinkPreview.png"
-const mobileHero = "/Details/LinkPreview.png"
+  const desktopHero = "/Details/linkPreviewnew.png"
+const mobileHero = "/Details/linkPreviewnew.png"
 const eventImageUrl = `${canonicalUrl}${desktopHero}`
 const OG_IMAGE_FALLBACK = `${canonicalUrl}${desktopHero}`
 
