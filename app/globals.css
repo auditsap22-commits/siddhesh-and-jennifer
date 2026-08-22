@@ -146,29 +146,31 @@
   /* Updated serif font to Great Vibes */
   --font-serif: "Great Vibes", "Great Vibes Fallback";
   
-  /* ─── Motif palette — edit here, affects every component ─── */
+/* ─── Motif palette — edit here, affects every component ─── */
 /* ==========================================
    MOTIF COLORS
-   Theme: Nested Arch — Deep Navy + Antique Gold + Warm Cream
+   Theme: Sage Green + Eucalyptus + Warm Ivory
 ========================================== */
 
 /* Background */
---color-motif-cream:   #EEEDEB; /* Warm ivory */
+--color-motif-cream:   #F4F1E8; /* Warm ivory */
 
 /* Primary Highlight */
---color-motif-yellow:  #AB832E; /* Antique gold */
+--color-motif-yellow:  #87996A; /* Muted sage */
 
 /* Secondary */
---color-motif-soft:    #EEEDEB; /* Soft warm cream */
---color-motif-accent:  #DDBA7A; /* Champagne gold */
+--color-motif-soft:    #ECE5DB; /* Soft warm beige */
+
+/* Primary Accent */
+--color-motif-accent:  #C4D1B8; /* Light eucalyptus sage */
 
 /* Primary Brand */
---color-motif-ink:     #04103B; /* Midnight navy */
---color-motif-deep:    #192030; /* Deep navy */
---color-motif-medium:  #364061; /* Slate navy */
+--color-motif-ink:     #5B6655; /* Deep olive sage */
+--color-motif-deep:    #4E5B4A; /* Deep eucalyptus */
+--color-motif-medium:  #8799A7; /* Muted eucalyptus-gray */
 
 /* Neutral */
---color-motif-silver:  #EEEDEB; /* Warm ivory */
+--color-motif-silver:  #F4F1E8; /* Warm ivory */
 
 
 /* ==========================================
@@ -184,24 +186,31 @@
 
 
 /* Paragraphs */
---color-welcome-text:      #192030; /* Deep navy ink */
---color-welcome-text-soft: color-mix(in srgb, #192030 68%, white);
+--color-welcome-text: 
+    #4E5B4A; /* Deep eucalyptus ink */
+
+--color-welcome-text-soft:
+    color-mix(in srgb, #4E5B4A 68%, white);
 
 
 /* Small Headings */
---color-welcome-heading:   #364061; /* Slate navy */
+--color-welcome-heading:
+    #5B6655; /* Deep olive sage */
 
 
 /* Script Font */
---color-welcome-script:    #AB832E; /* Antique gold */
+--color-welcome-script:
+    #5B6655; /* Deep sage */
 
 
 /* Main Hero Heading */
---color-welcome-navy:      #192030; /* Deep navy */
+--color-welcome-navy:
+    #4E5B4A; /* Deep eucalyptus */
 
 
 /* Buttons / Decorative Lines / Icons */
---color-welcome-green:     #192030; /* Deep navy */
+--color-welcome-green:
+    #5B6655; /* Deep olive sage */
   /* ─────────────────────────────────────────────────────────── */
   --font-imperial-script: "Imperial Script", cursive;
   --font-anastasia-script: "CoupleAnastasia";
@@ -283,6 +292,10 @@ html {
   -webkit-mask-position: center;
   mask-position: center;
   filter: drop-shadow(0 0 16px color-mix(in srgb, #c5a059 38%, transparent));
+}
+
+#countdown.hero-invite {
+  background: transparent !important;
 }
 
 .hero-invite {

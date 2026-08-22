@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { RefreshCw } from "lucide-react"
 import localFont from "next/font/local"
+import Image from "next/image"
 import { Cinzel } from "next/font/google"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
@@ -24,30 +25,27 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const CORNER_DECO_CLASS =
-  "block h-auto w-auto max-w-[88px] sm:max-w-[108px] md:max-w-[124px] lg:max-w-[140px]"
-
 const reminderInk = {
-  navy: "#192030",
-  deep: "#04103B",
-  slate: "#364061",
-  gold: "#AB832E",
-  champagne: "#DDBA7A",
+  navy: "#4b5d44",
+  deep: "#3d4a36",
+  slate: "#6a7b5c",
+  gold: "#6a7b5c",
+  champagne: "#c9d2bc",
 } as const
 
 const paperWash = {
-  cream: "#f7f3e9",
-  lift: "#faf7ef",
-  champagne: reminderInk.champagne,
-  gold: reminderInk.gold,
-  slate: reminderInk.slate,
+  cream: "#f7f4eb",
+  lift: "#f9f6ee",
+  sage: "#4b5d44",
+  sageSoft: "#6a7b5c",
+  wash: "#8b9d78",
 } as const
 
 const creamWash = `
-  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, ${paperWash.champagne} 35%, transparent) 0%, transparent 55%),
-  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${paperWash.slate} 16%, transparent) 0%, transparent 58%),
-  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${paperWash.gold} 14%, transparent) 0%, transparent 55%),
-  linear-gradient(180deg, ${paperWash.cream} 0%, ${paperWash.lift} 48%, ${paperWash.cream} 100%)
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 28%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 22%, transparent), transparent 68%),
+  linear-gradient(180deg, #ece6d6 0%, #e4ddcc 100%)
 `
 
 const palette = {
@@ -66,7 +64,7 @@ const guestCardStyle = {
 
 const headerDividerLineStyle = {
   background:
-    "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent), transparent)",
+    "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent), transparent)",
 } as const
 
 const dividerLineStyle = {
@@ -74,10 +72,10 @@ const dividerLineStyle = {
 } as const
 
 const refreshButtonStyle = {
-  color: reminderInk.deep,
-  backgroundColor: reminderInk.gold,
-  borderColor: reminderInk.champagne,
-  boxShadow: `0 8px 22px color-mix(in srgb, ${reminderInk.gold} 32%, transparent)`,
+  color: paperWash.lift,
+  backgroundColor: paperWash.sage,
+  borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+  boxShadow: "0 8px 22px color-mix(in srgb, #4b5d44 28%, transparent)",
 } as const
 
 const chipPrimaryStyle = {
@@ -134,7 +132,7 @@ const ct = {
 function GuestsCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
   const lineStyle = {
     background:
-      "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-welcome-navy) 35%, transparent))",
+      "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 35%, transparent))",
   }
 
   return (
@@ -142,14 +140,14 @@ function GuestsCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
       <span className="h-px w-5 sm:w-7 md:w-9" style={lineStyle} aria-hidden />
       <p
         className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
-        style={{ color: "var(--color-welcome-navy)" }}
+        style={{ color: paperWash.sage }}
       >
         Celebrating With {groom}
         <span
           className={`${aboveTheBeyond.className} mx-1.5 inline-block normal-case tracking-normal sm:mx-2`}
           style={{
             fontSize: "1.35em",
-            color: "var(--color-welcome-green)",
+            color: paperWash.sageSoft,
             verticalAlign: "middle",
           }}
           aria-hidden
@@ -162,7 +160,7 @@ function GuestsCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
         className="h-px w-5 sm:w-7 md:w-9"
         style={{
           background:
-            "linear-gradient(to left, transparent, color-mix(in srgb, var(--color-welcome-navy) 35%, transparent))",
+            "linear-gradient(to left, transparent, color-mix(in srgb, #4b5d44 35%, transparent))",
         }}
         aria-hidden
       />
@@ -185,7 +183,7 @@ function BookOfGuestsTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: "var(--color-welcome-navy)",
+          color: paperWash.sage,
         }}
       >
         Book of Guests
@@ -195,7 +193,7 @@ function BookOfGuestsTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: "var(--color-welcome-green)",
+          color: paperWash.sageSoft,
         }}
       >
         celebrating with us
@@ -374,49 +372,56 @@ export function BookOfGuests() {
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative isolate z-10 overflow-hidden pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14`}
       style={{ background: creamWash }}
     >
-      {/* Corner decorations */}
-      <div className="pointer-events-none absolute left-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-top-corner.png"
+      <div className="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image
+          src="/decoration/left-top-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1138}
+          height={1172}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 42vw, 264px"
         />
       </div>
-      <div className="pointer-events-none absolute right-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-top-corner.png"
+      <div className="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image
+          src="/decoration/right-top-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1283}
+          height={1226}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 38vw, 232px"
         />
       </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-bottom-corner.png"
+      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image
+          src="/decoration/left-bottom-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1115}
+          height={1411}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 38vw, 232px"
         />
       </div>
-      <div className="pointer-events-none absolute bottom-0 right-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-bottom-corner.png"
+      <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image
+          src="/decoration/right-bottom-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={988}
+          height={1487}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 42vw, 264px"
         />
       </div>
 
       {/* Section Header */}
-      <div className="relative z-20 mx-auto mb-6 max-w-5xl px-6 text-center @container/book-of-guests sm:mb-8 sm:px-10 md:mb-10 md:px-12">
+      <div className="relative z-20 mx-auto mb-6 max-w-5xl px-6 pt-10 text-center @container/book-of-guests sm:mb-8 sm:px-10 sm:pt-12 md:mb-10 md:px-12 md:pt-14">
         <GuestsCoupleLabel groom={groomName} bride={brideName} />
         <div className="mt-6 mb-4 sm:mt-8 sm:mb-5 md:mt-10 md:mb-6">
           <BookOfGuestsTitle />
         </div>
         <p
           className={`font-goudy-italic mx-auto max-w-2xl px-2 ${sectionType.textRelaxed}`}
-          style={{ color: "var(--color-welcome-text)" }}
+          style={{ color: paperWash.sage }}
         >
           Meet the cherished souls joining us in celebration — your presence makes our day truly
           special.

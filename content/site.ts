@@ -5,11 +5,11 @@ import {
 
 export const siteConfig = {
   couple: {
-    bride: "Ana Margarita Benigno", //Noenyl Bryle M. Gonzaga
-    brideNickname: "TIN", //Ltryl
-    groom: "Marion Paul Serrano", //Ltryl B. Benitez
-    groomNickname: "JEN",
-    monogram:"/monogram/the-monogram.png" ,//Ltryl
+    bride: "Juvy S. Delgaco", //Noenyl Bryle M. Gonzaga
+    brideNickname: "Juvy", //Ltryl
+    groom: "Jayson A. Papa", //Ltryl B. Benitez
+    groomNickname: "Jayson",
+    monogram:"/monogram/monogram.png" ,//Ltryl
     backgroundMusic:"/background_music/Palagi - Tj Monterde  Violin Cover.mp3"
   },
   googleAPI:{
@@ -27,7 +27,7 @@ export const siteConfig = {
   wedding: {
     date: "November 28, 2026",
     time: "3:00 PM",
-    venue: "RAI Atrium Suites Cauayan City",
+    venue: "St. Dominic of Guzman Parish",
     tagline: "are getting married!!!!!",
     theme: "Our wedding palette is inspired by timeless elegance. Motif Colors: Midnight Navy, Deep Navy, Slate Navy, Antique Gold, Champagne",
     motif: "#04103B, #192030, #364061, #AB832E, #DDBA7A",
@@ -41,7 +41,7 @@ export const siteConfig = {
   details: {
     rsvp: {
       deadline: "November 15, 2026",
-      coordinator: "Jen / Tin",
+      coordinator: "Juvy / Jayson",
       phone: "to be announced",
     },
   },
@@ -72,24 +72,24 @@ export const siteConfig = {
     }
   },
   ceremony: {
-    location: "RAI Atrium Suites",
-    venue: "Canciller Ave, Cauayan City, Isabela",
-    map: "https://maps.app.goo.gl/9GSNbKBFjNg28Wjj6",
+    location: "St. Dominic of Guzman Parish",
+    venue: "Nabua, Camarines Sur, Philippines",
+    map: "https://maps.app.goo.gl/YZntUqTwBU5GrdVT7",
     date: "November 28, 2026",
     day: "Saturday",
     time: "3:00 PM",
     entourageTime: "2:00 PM",
     guestsTime: "2:30 PM",
-    image: ["/Details/reception.png", "/Details/reception2.png","/Details/reception3.png"],
+    image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
   },
   reception: {
-    location: "RAI Atrium Suites",
-    venue: "Canciller Ave, Cauayan City, Isabela",
-    map: "https://maps.app.goo.gl/9GSNbKBFjNg28Wjj6",
+    location: "Residence of the Couple",
+    venue: "Nabua, Camarines Sur, Philippines",
+    map: "https://maps.app.goo.gl/YZntUqTwBU5GrdVT7",
     date: "November 28, 2026",
     day: "Saturday",
     time: "6:00 PM",
-    image: ["/Details/reception.png", "/Details/reception2.png","/Details/reception3.png"],
+    image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
   },
   dressCode: {
     theme: "STRICTLY FORMAL",

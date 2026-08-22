@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, type ReactNode } from "react"
 import { motion } from "motion/react"
 import localFont from "next/font/local"
 import { Instagram, Twitter, Facebook, Music2 } from "lucide-react"
+import Image from "next/image"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import { sectionType } from "@/lib/section-typography"
 import { Cinzel } from "next/font/google"
@@ -25,42 +26,39 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const CORNER_DECO_CLASS =
-  "block h-auto w-auto max-w-[88px] sm:max-w-[108px] md:max-w-[124px] lg:max-w-[140px]"
-
 const reminderInk = {
-  navy: "#192030",
-  deep: "#04103B",
-  slate: "#364061",
-  gold: "#AB832E",
-  champagne: "#DDBA7A",
+  navy: "#4b5d44",
+  deep: "#3d4a36",
+  slate: "#6a7b5c",
+  gold: "#6a7b5c",
+  champagne: "#c9d2bc",
 } as const
 
 const paperWash = {
-  cream: "#f7f3e9",
-  lift: "#faf7ef",
-  champagne: reminderInk.champagne,
-  gold: reminderInk.gold,
-  slate: reminderInk.slate,
+  cream: "#f7f4eb",
+  lift: "#f9f6ee",
+  sage: "#4b5d44",
+  sageSoft: "#6a7b5c",
+  wash: "#8b9d78",
 } as const
 
 const creamWash = `
-  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, ${paperWash.champagne} 35%, transparent) 0%, transparent 55%),
-  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${paperWash.slate} 16%, transparent) 0%, transparent 58%),
-  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${paperWash.gold} 14%, transparent) 0%, transparent 55%),
-  linear-gradient(180deg, ${paperWash.cream} 0%, ${paperWash.lift} 48%, ${paperWash.cream} 100%)
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 28%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 22%, transparent), transparent 68%),
+  linear-gradient(180deg, #ece6d6 0%, #e4ddcc 100%)
 `
 
 const palette = {
-  body: "var(--color-welcome-text)",
-  heading: "var(--color-welcome-navy)",
-  label: "var(--color-welcome-heading)",
-  accent: reminderInk.gold,
+  body: paperWash.sage,
+  heading: paperWash.sage,
+  label: paperWash.sageSoft,
+  accent: paperWash.sageSoft,
 } as const
 
 const dividerLineStyle = {
   background:
-    "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent), transparent)",
+    "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent), transparent)",
 } as const
 
 const ct = {
@@ -72,21 +70,21 @@ const ct = {
 } as const
 
 const cardStyle = {
-  background: "var(--color-welcome-bg)",
+  background: paperWash.lift,
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
+  borderColor: "color-mix(in srgb, #4b5d44 14%, transparent)",
   boxShadow:
-    "0 8px 28px color-mix(in srgb, var(--color-motif-deep) 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
+    "0 8px 28px color-mix(in srgb, #4b5d44 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
 } as const
 
 const socialLinkStyle = {
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: `color-mix(in srgb, ${reminderInk.gold} 40%, transparent)`,
-  backgroundColor: `color-mix(in srgb, ${reminderInk.gold} 10%, var(--color-welcome-bg))`,
-  color: reminderInk.gold,
-  boxShadow: "0 4px 12px color-mix(in srgb, var(--color-motif-deep) 10%, transparent)",
+  borderColor: `color-mix(in srgb, ${paperWash.sage} 28%, transparent)`,
+  backgroundColor: paperWash.cream,
+  color: paperWash.sage,
+  boxShadow: "0 4px 12px color-mix(in srgb, #4b5d44 10%, transparent)",
 } as const
 
 const FOOTER_QUOTES = [
@@ -103,7 +101,7 @@ function FooterCoupleNames({ groom, bride }: { groom: string; bride: string }) {
   return (
     <h2
       className={`${cinzel.className} mx-auto whitespace-nowrap text-center ${sectionType.subheader} font-semibold tracking-[0.12em] sm:tracking-[0.16em] md:tracking-[0.18em]`}
-      style={{ color: "var(--color-welcome-navy)" }}
+      style={{ color: paperWash.sage }}
     >
       {groom}
       <span
@@ -240,64 +238,66 @@ export function Footer() {
       style={{ background: creamWash }}
     >
       <footer className="relative z-10 pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14">
-        {/* Corner decorations */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/decoration/deco/left-top-corner.png"
+        <div className="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+          <Image
+            src="/decoration/left-top-decoration.png"
             alt=""
-            className={CORNER_DECO_CLASS}
+            width={1138}
+            height={1172}
+            className="h-auto w-full"
+            sizes="(max-width: 768px) 42vw, 264px"
           />
         </div>
-        <div className="pointer-events-none absolute right-0 top-0 z-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/decoration/deco/right-top-corner.png"
+        <div className="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+          <Image
+            src="/decoration/right-top-decoration.png"
             alt=""
-            className={CORNER_DECO_CLASS}
+            width={1283}
+            height={1226}
+            className="h-auto w-full"
+            sizes="(max-width: 768px) 38vw, 232px"
           />
         </div>
-        <div className="pointer-events-none absolute bottom-0 left-0 z-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/decoration/deco/left-bottom-corner.png"
+        <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+          <Image
+            src="/decoration/left-bottom-decoration.png"
             alt=""
-            className={CORNER_DECO_CLASS}
+            width={1115}
+            height={1411}
+            className="h-auto w-full"
+            sizes="(max-width: 768px) 38vw, 232px"
           />
         </div>
-        <div className="pointer-events-none absolute bottom-0 right-0 z-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/decoration/deco/right-bottom-corner.png"
+        <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+          <Image
+            src="/decoration/right-bottom-decoration.png"
             alt=""
-            className={CORNER_DECO_CLASS}
+            width={988}
+            height={1487}
+            className="h-auto w-full"
+            sizes="(max-width: 768px) 42vw, 264px"
           />
         </div>
 
         {/* Monogram + couple header */}
-        <div className="relative z-10 flex flex-col items-center mb-6 sm:mb-8 md:mb-10 px-6 sm:px-10">
+        <div className="relative z-10 flex flex-col items-center mb-6 sm:mb-8 md:mb-10 px-6 pt-10 sm:px-10 sm:pt-12 md:pt-14">
           <motion.div
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center"
           >
-            <div
-              className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72"
-              role="img"
-              aria-label={`${coupleDisplayName} monogram`}
-              style={{
-                backgroundColor: reminderInk.gold,
-                WebkitMaskImage: `url(${siteConfig.couple.monogram})`,
-                maskImage: `url(${siteConfig.couple.monogram})`,
-                WebkitMaskSize: "contain",
-                maskSize: "contain",
-                WebkitMaskRepeat: "no-repeat",
-                maskRepeat: "no-repeat",
-                WebkitMaskPosition: "center",
-                maskPosition: "center",
-              }}
-            />
+            {siteConfig.couple.monogram ? (
+              <div className="relative h-44 w-44 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72">
+                <Image
+                  src={siteConfig.couple.monogram}
+                  alt={`${coupleDisplayName} monogram`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 288px"
+                />
+              </div>
+            ) : null}
           </motion.div>
 
           <div className="mt-4 max-w-md text-center sm:mt-5 md:mt-6">
@@ -473,7 +473,7 @@ export function Footer() {
           <motion.div
             className="pt-6 sm:pt-8 border-t"
             style={{
-              borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
+              borderColor: "color-mix(in srgb, #4b5d44 14%, transparent)",
             }}
             variants={fadeInUp}
           >

@@ -41,19 +41,24 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  navy: "#04103B",
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
-  paper: "#f7f3e9",
+  navy: "#4b5d44",
+  gold: "#6a7b5c",
+  goldBright: "#4b5d44",
+  goldSoft: "#6a7b5c",
+  paper: "#f9f6ee",
 } as const
 
 const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
+const outsideInk = {
+  text: "#ffffff",
+  textSoft: "rgba(255, 255, 255, 0.82)",
+  line: "rgba(255, 255, 255, 0.45)",
+} as const
 
 const palette = {
   body: C.navy,
-  heading: C.gold,
-  label: "#364061",
+  heading: C.goldBright,
+  label: C.goldSoft,
   accent: C.gold,
 } as const
 
@@ -85,10 +90,10 @@ const dividerLineStyle = {
 } as const
 
 const buttonStyle = {
-  backgroundColor: C.gold,
-  borderColor: `color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-  color: C.navy,
-  boxShadow: `0 10px 24px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+  backgroundColor: C.navy,
+  borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+  color: C.paper,
+  boxShadow: "0 10px 24px color-mix(in srgb, #4b5d44 28%, transparent)",
 } as const
 
 interface ApiGuest {
@@ -473,9 +478,9 @@ export function GuestList() {
       <div className="relative z-10 mx-auto mb-4 max-w-5xl px-2 text-center @container/guest-list sm:mb-6 sm:px-3 md:mb-8 md:px-4 lg:mb-10">
         {/* Ornamental divider */}
         <div className="mx-auto mb-5 flex items-center justify-center gap-1.5 sm:mb-6 md:mb-7">
-          <span className="h-px w-6 sm:w-10" style={{ background: `linear-gradient(to right, transparent, ${goldLine}, transparent)` }} />
-          <span className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1" style={{ backgroundColor: goldLine }} aria-hidden />
-          <span className="h-px w-6 sm:w-10" style={{ background: `linear-gradient(to left, transparent, ${goldLine}, transparent)` }} />
+          <span className="h-px w-6 sm:w-10" style={{ background: `linear-gradient(to right, transparent, ${outsideInk.line}, transparent)` }} />
+          <span className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1" style={{ backgroundColor: outsideInk.line }} aria-hidden />
+          <span className="h-px w-6 sm:w-10" style={{ background: `linear-gradient(to left, transparent, ${outsideInk.line}, transparent)` }} />
         </div>
 
         {/* Title block */}
@@ -490,7 +495,7 @@ export function GuestList() {
         >
           <span
             className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em] pb-1 sm:pb-1.5`}
-            style={{ fontSize: "var(--title-size)", color: C.goldBright }}
+            style={{ fontSize: "var(--title-size)", color: outsideInk.text }}
           >
             RSVP
           </span>
@@ -499,7 +504,7 @@ export function GuestList() {
             className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
             style={{
               fontSize: "var(--script-size)",
-              color: C.goldSoft,
+              color: outsideInk.textSoft,
             }}
           >
             Confirm your attendance
@@ -508,14 +513,14 @@ export function GuestList() {
 
         {/* Subtitle block */}
         <div className="mx-auto mt-5 max-w-xl space-y-2 px-2 sm:mt-6 sm:space-y-3">
-          <p className={`font-goudy-italic ${sectionType.textRelaxed}`} style={{ color: C.goldSoft }}>
+          <p className={`font-goudy-italic ${sectionType.textRelaxed}`} style={{ color: outsideInk.textSoft }}>
             To help us plan a beautiful and intimate celebration, we kindly ask that you confirm your
             attendance. Please search for your name below to confirm your presence at our special day.
           </p>
-          <p className={`font-goudy-italic ${sectionType.textRelaxed}`} style={{ color: C.goldSoft }}>
+          <p className={`font-goudy-italic ${sectionType.textRelaxed}`} style={{ color: outsideInk.textSoft }}>
             If we do not receive your response by the deadline, we will assume you are unable to attend.
           </p>
-          <p className={`${cinzel.className} ${sectionType.text} font-semibold tracking-wide`} style={{ color: C.goldBright }}>
+          <p className={`${cinzel.className} ${sectionType.text} font-semibold tracking-wide`} style={{ color: outsideInk.text }}>
             RSVP Deadline: {siteConfig.details.rsvp.deadline}
           </p>
           {/* <p className={`${cinzel.className} ${sectionType.text} font-semibold tracking-wide`} style={{ color: OUTSIDE_TEXT }}>
@@ -525,7 +530,7 @@ export function GuestList() {
 
         {/* Divider below header */}
         <div className="mt-4 flex items-center justify-center sm:mt-5">
-          <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: goldLine }} />
+          <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: outsideInk.line }} />
         </div>
       </div>
 
@@ -542,9 +547,9 @@ export function GuestList() {
               <div className="flex items-center gap-2 sm:gap-3">
                 <div
                   className="rounded-lg p-1.5 shadow-md sm:p-2"
-                  style={{ backgroundColor: C.gold }}
+                  style={{ backgroundColor: C.navy }}
                 >
-                  <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" style={{ color: C.navy }} />
+                  <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" style={{ color: C.paper }} />
                 </div>
                 <div>
                   <label className={`mb-0.5 block font-sans font-semibold sm:mb-1 ${sectionType.text}`} style={{ color: palette.heading }}>
@@ -602,9 +607,9 @@ export function GuestList() {
                         <div className="relative flex-shrink-0">
                           <div
                             className="rounded-full p-1 shadow-sm transition-all duration-300 group-hover:shadow-md sm:p-1.5"
-                            style={{ backgroundColor: C.gold }}
+                            style={{ backgroundColor: C.navy }}
                           >
-                            <User className="h-3 w-3 sm:h-3.5 sm:w-3.5" style={{ color: C.navy }} />
+                            <User className="h-3 w-3 sm:h-3.5 sm:w-3.5" style={{ color: C.paper }} />
                           </div>
                         </div>
                         <div className="min-w-0 flex-1">
@@ -642,9 +647,9 @@ export function GuestList() {
                       <div className="flex items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
                         <div
                           className="flex-shrink-0 rounded-lg p-1.5 shadow-sm sm:p-2"
-                          style={{ backgroundColor: C.gold }}
+                          style={{ backgroundColor: C.navy }}
                         >
-                          <UserPlus className="h-3 w-3 sm:h-4 sm:w-4" style={{ color: C.navy }} />
+                          <UserPlus className="h-3 w-3 sm:h-4 sm:w-4" style={{ color: C.paper }} />
                         </div>
                         <div className="flex-1">
                           <h4 className="mb-1 text-xs font-semibold sm:text-sm" style={{ color: palette.heading }}>Not finding your name?</h4>
@@ -763,9 +768,9 @@ export function GuestList() {
                   <div className="py-3 text-center sm:py-4 md:py-6">
                     <div
                       className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full sm:mb-4 sm:h-14 sm:w-14 md:h-16 md:w-16"
-                      style={{ backgroundColor: palette.accent }}
+                      style={{ backgroundColor: C.navy }}
                     >
-                      <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" style={{ color: C.navy }} />
+                      <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" style={{ color: C.paper }} />
                     </div>
                     <h4
                       className={`${theSeasons.className} mb-2 uppercase tracking-[0.12em] sm:text-lg md:text-xl ${sectionType.subheader}`}
@@ -1129,9 +1134,9 @@ export function GuestList() {
                     />
                     <div
                       className="relative flex h-12 w-12 items-center justify-center rounded-full shadow-md"
-                      style={{ backgroundColor: palette.accent }}
+                      style={{ backgroundColor: C.navy }}
                     >
-                      <CheckCircle className="h-6 w-6" strokeWidth={2} style={{ color: C.navy }} />
+                      <CheckCircle className="h-6 w-6" strokeWidth={2} style={{ color: C.paper }} />
                     </div>
                   </div>
 
@@ -1425,9 +1430,9 @@ export function GuestList() {
                       />
                       <div
                         className="relative flex h-12 w-12 items-center justify-center rounded-full shadow-xl sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-20 lg:w-20"
-                        style={{ backgroundColor: C.gold }}
+                        style={{ backgroundColor: C.navy }}
                       >
-                        <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10" strokeWidth={2.5} style={{ color: C.navy }} />
+                        <CheckCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10" strokeWidth={2.5} style={{ color: C.paper }} />
                       </div>
                     </div>
                     

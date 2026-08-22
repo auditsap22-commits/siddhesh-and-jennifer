@@ -5,6 +5,7 @@ import type { SiteConfig } from "@/lib/site-config"
 import { Plus } from "lucide-react"
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
+import Image from "next/image"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 
@@ -25,37 +26,34 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const CORNER_DECO_CLASS =
-  "block h-auto w-auto max-w-[88px] sm:max-w-[108px] md:max-w-[124px] lg:max-w-[140px]"
-
 const reminderInk = {
-  navy: "#192030",
-  deep: "#04103B",
-  slate: "#364061",
-  gold: "#AB832E",
-  champagne: "#DDBA7A",
+  navy: "#4b5d44",
+  deep: "#3d4a36",
+  slate: "#6a7b5c",
+  gold: "#6a7b5c",
+  champagne: "#c9d2bc",
 } as const
 
 const paperWash = {
-  cream: "#f7f3e9",
-  lift: "#faf7ef",
-  champagne: reminderInk.champagne,
-  gold: reminderInk.gold,
-  slate: reminderInk.slate,
+  cream: "#f7f4eb",
+  lift: "#f9f6ee",
+  sage: "#4b5d44",
+  sageSoft: "#6a7b5c",
+  wash: "#8b9d78",
 } as const
 
 const creamWash = `
-  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, ${paperWash.champagne} 35%, transparent) 0%, transparent 55%),
-  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${paperWash.slate} 16%, transparent) 0%, transparent 58%),
-  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${paperWash.gold} 14%, transparent) 0%, transparent 55%),
-  linear-gradient(180deg, ${paperWash.cream} 0%, ${paperWash.lift} 48%, ${paperWash.cream} 100%)
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 28%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 22%, transparent), transparent 68%),
+  linear-gradient(180deg, #ece6d6 0%, #e4ddcc 100%)
 `
 
 const palette = {
-  body: "var(--color-welcome-text)",
-  heading: "var(--color-welcome-navy)",
-  label: "var(--color-welcome-heading)",
-  accent: "var(--color-welcome-green)",
+  body: paperWash.sage,
+  heading: paperWash.sage,
+  label: paperWash.sageSoft,
+  accent: paperWash.sageSoft,
 } as const
 
 const faqPalette = {
@@ -67,7 +65,7 @@ const faqPalette = {
 
 const headerDividerLineStyle = {
   background:
-    "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent), transparent)",
+    "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent), transparent)",
 } as const
 
 const ct = {
@@ -89,12 +87,12 @@ function OrnamentalDivider() {
   return (
     <div className="flex items-center justify-center gap-1.5">
       <span className="h-px w-6 sm:w-10" style={headerDividerLineStyle} />
-      <span className="h-0.5 w-0.5 rounded-full bg-motif-deep/45 sm:h-1 sm:w-1" aria-hidden />
+      <span className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1" style={{ backgroundColor: "color-mix(in srgb, #4b5d44 45%, transparent)" }} aria-hidden />
       <span
         className="h-px w-6 sm:w-10"
         style={{
           background:
-            "linear-gradient(to left, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent))",
+            "linear-gradient(to left, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
         }}
       />
     </div>
@@ -116,7 +114,7 @@ function FaqTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em] mt-4 pb-1 sm:mt-5 sm:pb-1.5 md:mt-6`}
         style={{
           fontSize: "var(--title-size)",
-          color: "var(--color-welcome-navy)",
+          color: paperWash.sage,
         }}
       >
         Frequently Asked Questions
@@ -126,7 +124,7 @@ function FaqTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: "var(--color-welcome-green)",
+          color: paperWash.sageSoft,
         }}
       >
         Everything you need to know
@@ -145,7 +143,7 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
   return [
     {
       question: "When is the wedding?",
-      answer: `Our wedding will be held on ${siteConfig.ceremony.date}, ${siteConfig.ceremony.day}, at ${siteConfig.ceremony.location}. The ceremony begins at ${siteConfig.ceremony.time}, and the reception follows at ${siteConfig.reception.time} at the same venue.`,
+      answer: `Our wedding will be held on ${siteConfig.ceremony.date}, ${siteConfig.ceremony.day}. The ceremony begins at ${siteConfig.ceremony.time} at ${siteConfig.ceremony.location}, and the reception follows at ${siteConfig.reception.time} at the residence of the couple.`,
     },
     {
       question: "What time should I arrive?",
@@ -155,9 +153,9 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
       question: "Where will the ceremony and reception take place?",
       answer: (
         <>
-          Both the ceremony and reception will be held at {siteConfig.ceremony.location},{" "}
-          {siteConfig.ceremony.venue}. The ceremony begins at {siteConfig.ceremony.time}, and the
-          reception follows at {siteConfig.reception.time}.{" "}
+          The ceremony will be held at {siteConfig.ceremony.location}, {siteConfig.ceremony.venue},
+          beginning at {siteConfig.ceremony.time}. The reception will follow at{" "}
+          {siteConfig.reception.time} at the residence of the couple, {siteConfig.reception.venue}.{" "}
           <a
             href={siteConfig.ceremony.map}
             target="_blank"
@@ -165,7 +163,7 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
             className={linkClass}
             style={{ color: faqPalette.accent }}
           >
-            Open in Google Maps
+            Open ceremony location in Google Maps
           </a>
           .
         </>
@@ -214,7 +212,7 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
     {
       question: "Can I bring my child to the event?",
       answer:
-        "We kindly request that our wedding be an adults-only celebration, other than the children who are part of the entourage. We hope this allows everyone to relax and fully enjoy the day with us.",
+        "Yes. Children are most welcome. Our celebration is for the whole family, and we would be delighted to share the day with your little ones.",
     },
     {
       question:
@@ -230,12 +228,12 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
     {
       question: "Is there parking available?",
       answer:
-        "Yes, parking is available at the venue. Please arrive a little early so you have time to park comfortably.",
+        "Yes, parking is available at the church and at the couple's residence. Please arrive a little early so you have time to park comfortably.",
     },
     {
       question: "What is the dress code?",
       answer:
-        "Please follow the attire guide in Event Details. Guests may wear a midi or cocktail dress, or a collared shirt with cream trousers, in Midnight Navy, Slate Navy, Antique Gold, or Champagne. Kindly avoid white, black, and casual clothes or shoes.",
+        "Please follow the attire guide in Event Details. Guests may wear a midi or cocktail dress, or a collared shirt, in Sage Hint, Mint, Sage, Moss, or Evergreen. Kindly avoid white and casual clothes or shoes.",
     },
     {
       question: "Will the ceremony be unplugged?",
@@ -302,42 +300,49 @@ export function FAQ() {
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative z-10 isolate overflow-hidden pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14`}
       style={{ background: creamWash }}
     >
-      {/* Corner decorations */}
-      <div className="pointer-events-none absolute left-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-top-corner.png"
+      <div className="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image
+          src="/decoration/left-top-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1138}
+          height={1172}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 42vw, 264px"
         />
       </div>
-      <div className="pointer-events-none absolute right-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-top-corner.png"
+      <div className="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image
+          src="/decoration/right-top-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1283}
+          height={1226}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 38vw, 232px"
         />
       </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-bottom-corner.png"
+      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image
+          src="/decoration/left-bottom-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1115}
+          height={1411}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 38vw, 232px"
         />
       </div>
-      <div className="pointer-events-none absolute bottom-0 right-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-bottom-corner.png"
+      <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image
+          src="/decoration/right-bottom-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={988}
+          height={1487}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 42vw, 264px"
         />
       </div>
 
       {/* Header */}
-      <div className="relative z-20 mx-auto max-w-5xl px-6 text-center @container/faq sm:px-10 md:px-12">
+      <div className="relative z-20 mx-auto max-w-5xl px-6 pt-10 text-center @container/faq sm:px-10 sm:pt-12 md:px-12 md:pt-14">
         <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
           <OrnamentalDivider />
         </div>
@@ -369,13 +374,13 @@ export function FAQ() {
                   style={{
                     borderColor: isOpen
                       ? `color-mix(in srgb, ${reminderInk.gold} 55%, transparent)`
-                      : "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
+                      : "color-mix(in srgb, #4b5d44 14%, transparent)",
                     backgroundColor: isOpen
                       ? `color-mix(in srgb, ${reminderInk.gold} 10%, ${paperWash.cream})`
-                      : "var(--color-welcome-bg)",
+                      : paperWash.lift,
                     boxShadow: isOpen
                       ? `inset 3px 0 0 ${reminderInk.gold}`
-                      : "0 8px 28px color-mix(in srgb, var(--color-motif-deep) 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
+                      : "0 8px 28px color-mix(in srgb, #4b5d44 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
                   }}
                 >
                   <button

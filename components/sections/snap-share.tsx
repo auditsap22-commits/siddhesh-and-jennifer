@@ -27,24 +27,29 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  navy: "#04103B",
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
-  paper: "#f7f3e9",
+  navy: "#4b5d44",
+  gold: "#6a7b5c",
+  goldBright: "#4b5d44",
+  goldSoft: "#6a7b5c",
+  paper: "#f9f6ee",
 } as const
 
 const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
+const outsideInk = {
+  text: "#ffffff",
+  textSoft: "rgba(255, 255, 255, 0.82)",
+  line: "rgba(255, 255, 255, 0.45)",
+} as const
 
 const palette = {
   body: C.navy,
-  heading: C.gold,
-  label: "#364061",
+  heading: C.goldBright,
+  label: C.goldSoft,
   accent: C.gold,
 } as const
 
 const outsideDividerLineStyle = {
-  background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
+  background: `linear-gradient(to right, transparent, ${outsideInk.line}, transparent)`,
 } as const
 
 const insideDividerLineStyle = {
@@ -68,10 +73,10 @@ const cardStyle = {
 } as const
 
 const buttonStyle = {
-  backgroundColor: C.gold,
-  borderColor: `color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-  color: C.navy,
-  boxShadow: `0 10px 24px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+  backgroundColor: C.navy,
+  borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+  color: C.paper,
+  boxShadow: "0 10px 24px color-mix(in srgb, #4b5d44 28%, transparent)",
 } as const
 
 const QR_FG = C.navy
@@ -82,13 +87,13 @@ function OutsideDivider() {
       <span className="h-px w-6 sm:w-10" style={outsideDividerLineStyle} />
       <span
         className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1"
-        style={{ backgroundColor: goldLine }}
+        style={{ backgroundColor: outsideInk.line }}
         aria-hidden
       />
       <span
         className="h-px w-6 sm:w-10"
         style={{
-          background: `linear-gradient(to left, transparent, ${goldLine}, transparent)`,
+          background: `linear-gradient(to left, transparent, ${outsideInk.line}, transparent)`,
         }}
       />
     </div>
@@ -129,7 +134,7 @@ function SnapShareTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: C.goldBright,
+          color: outsideInk.text,
         }}
       >
         Snap and Share
@@ -139,7 +144,7 @@ function SnapShareTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: C.goldSoft,
+          color: outsideInk.textSoft,
         }}
       >
         Share your memories
@@ -194,21 +199,21 @@ function PrimaryButton({
       style={
         active
           ? {
-              backgroundColor: C.goldBright,
+              backgroundColor: "#3d4a36",
               borderColor: C.gold,
-              color: C.navy,
+              color: C.paper,
               boxShadow: buttonStyle.boxShadow,
             }
           : buttonStyle
       }
       onMouseEnter={(e) => {
         if (active) return
-        e.currentTarget.style.backgroundColor = C.goldBright
+        e.currentTarget.style.backgroundColor = "#3d4a36"
         e.currentTarget.style.borderColor = C.gold
       }}
       onMouseLeave={(e) => {
         if (active) return
-        e.currentTarget.style.backgroundColor = C.gold
+        e.currentTarget.style.backgroundColor = C.navy
         e.currentTarget.style.borderColor = buttonStyle.borderColor
       }}
     >
@@ -321,13 +326,13 @@ export function SnapShare() {
           </div>
           <p
             className={`font-goudy-italic mx-auto mt-4 max-w-2xl px-2 sm:mt-5 md:mt-6 ${ct.bodyLg}`}
-            style={{ color: C.goldSoft }}
+            style={{ color: outsideInk.textSoft }}
           >
             Help us remember the little moments of {coupleDisplayName}&apos;s day — every smile,
             embrace, and candid laugh. Your photos and clips complete our love story.
           </p>
           <div className="flex items-center justify-center pt-3 sm:pt-4">
-            <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: goldLine }} />
+            <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: outsideInk.line }} />
           </div>
         </div>
 
@@ -601,11 +606,11 @@ export function SnapShare() {
                     className={`${cinzel.className} group relative inline-flex items-center justify-center gap-1.5 rounded-sm border px-5 py-2.5 font-semibold uppercase tracking-[0.18em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 sm:px-6 sm:py-3 sm:tracking-[0.2em] md:tracking-[0.24em] ${ct.btn}`}
                     style={buttonStyle}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = C.goldBright
+                      e.currentTarget.style.backgroundColor = "#3d4a36"
                       e.currentTarget.style.borderColor = C.gold
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = C.gold
+                      e.currentTarget.style.backgroundColor = C.navy
                       e.currentTarget.style.borderColor = buttonStyle.borderColor
                     }}
                   >
@@ -621,14 +626,14 @@ export function SnapShare() {
         <div className="mt-6 space-y-2 text-center sm:mt-8 md:mt-10">
           <p
             className={`font-goudy-italic ${ct.bodyLg}`}
-            style={{ color: C.goldSoft }}
+            style={{ color: outsideInk.textSoft }}
           >
             Thank you for helping make {coupleDisplayName}&apos;s wedding celebration memorable.
             Your photos and messages create beautiful memories we will treasure for a lifetime.
           </p>
           <p
             className={`${cinzel.className} ${ct.label} uppercase tracking-[0.18em] sm:tracking-[0.2em]`}
-            style={{ color: C.goldBright }}
+            style={{ color: outsideInk.text }}
           >
             Thank you for sharing the joy
           </p>

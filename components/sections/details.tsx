@@ -37,57 +37,62 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const CORNER_DECO_CLASS =
-  "block h-auto w-auto max-w-[88px] sm:max-w-[108px] md:max-w-[124px] lg:max-w-[140px]"
-
 const paperWash = {
-  cream: "#f7f3e9",
-  lift: "#faf7ef",
-  champagne: "#DDBA7A",
-  gold: "#AB832E",
-  slate: "#364061",
+  cream: "#f7f4eb",
+  lift: "#f9f6ee",
+  sage: "#4b5d44",
+  sageSoft: "#6a7b5c",
+  wash: "#8b9d78",
 } as const
 
 const detailsBackground = `
-  radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, ${paperWash.champagne} 35%, transparent) 0%, transparent 55%),
-  radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${paperWash.slate} 16%, transparent) 0%, transparent 58%),
-  radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${paperWash.gold} 14%, transparent) 0%, transparent 55%),
-  linear-gradient(180deg, ${paperWash.cream} 0%, ${paperWash.lift} 48%, ${paperWash.cream} 100%)
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 28%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 22%, transparent), transparent 68%),
+  linear-gradient(180deg, #ece6d6 0%, #e4ddcc 100%)
 `
 
 function CornerDecorations() {
   return (
     <>
-      <div className="pointer-events-none absolute left-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-top-corner.png"
+      <div className="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image
+          src="/decoration/left-top-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1138}
+          height={1172}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 42vw, 264px"
         />
       </div>
-      <div className="pointer-events-none absolute right-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-top-corner.png"
+      <div className="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image
+          src="/decoration/right-top-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1283}
+          height={1226}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 38vw, 232px"
         />
       </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-bottom-corner.png"
+      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image
+          src="/decoration/left-bottom-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={1115}
+          height={1411}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 38vw, 232px"
         />
       </div>
-      <div className="pointer-events-none absolute bottom-0 right-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-bottom-corner.png"
+      <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image
+          src="/decoration/right-bottom-decoration.png"
           alt=""
-          className={CORNER_DECO_CLASS}
+          width={988}
+          height={1487}
+          className="h-auto w-full"
+          sizes="(max-width: 768px) 42vw, 264px"
         />
       </div>
     </>
@@ -95,28 +100,28 @@ function CornerDecorations() {
 }
 
 const detailText = {
-  body: "var(--color-welcome-text)",
-  heading: "var(--color-welcome-navy)",
-  label: "var(--color-welcome-heading)",
-  accent: "var(--color-welcome-green)",
+  body: paperWash.sage,
+  heading: paperWash.sage,
+  label: paperWash.sageSoft,
+  accent: paperWash.sageSoft,
 } as const
 
 const cardStyle = {
-  background: "var(--color-welcome-bg)",
-  borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
+  background: paperWash.lift,
+  borderColor: "color-mix(in srgb, #4b5d44 22%, transparent)",
   borderWidth: "1px",
   borderStyle: "solid",
   boxShadow:
-    "0 8px 28px color-mix(in srgb, var(--color-motif-deep) 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
+    "0 8px 28px color-mix(in srgb, #4b5d44 10%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
 } as const
 
 const softPanelStyle = {
-  borderColor: "color-mix(in srgb, var(--color-motif-deep) 10%, transparent)",
-  backgroundColor: "var(--color-welcome-bg-soft)",
+  borderColor: "color-mix(in srgb, #4b5d44 16%, transparent)",
+  backgroundColor: paperWash.cream,
 } as const
 
-const QR_FG = "var(--color-motif-deep)"
-const QR_BG = "#FAF7F2"
+const QR_FG = paperWash.sage
+const QR_BG = paperWash.lift
 
 function SectionIconDivider({ icon }: { icon: React.ReactNode }) {
   return (
@@ -125,7 +130,7 @@ function SectionIconDivider({ icon }: { icon: React.ReactNode }) {
         className="h-px w-8 sm:w-12 md:w-16"
         style={{
           background:
-            "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent))",
+            "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
         }}
       />
       {icon}
@@ -133,7 +138,7 @@ function SectionIconDivider({ icon }: { icon: React.ReactNode }) {
         className="h-px w-8 sm:w-12 md:w-16"
         style={{
           background:
-            "linear-gradient(to left, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent))",
+            "linear-gradient(to left, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
         }}
       />
     </div>
@@ -155,7 +160,7 @@ function DetailsTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: "var(--color-welcome-navy)",
+          color: paperWash.sage,
         }}
       >
         Event Details
@@ -165,7 +170,7 @@ function DetailsTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: "var(--color-motif-accent)",
+          color: paperWash.sageSoft,
         }}
       >
         our special day
@@ -191,6 +196,7 @@ const ct = {
   dayNum: "text-2xl sm:text-4xl md:text-5xl lg:text-6xl",
   year: "text-base sm:text-xl md:text-2xl lg:text-3xl",
   sectionTitle: "text-sm sm:text-lg md:text-xl lg:text-2xl",
+  attireCardTitle: "text-sm sm:text-lg md:text-xl lg:text-2xl",
   btn: "text-xs sm:text-sm md:text-base",
   noteTitle: "text-xl sm:text-2xl md:text-3xl",
   reminderHead: "text-base sm:text-lg md:text-xl",
@@ -198,20 +204,12 @@ const ct = {
 } as const
 
 const reminderInk = {
-  navy: "#192030",
-  deep: "#04103B",
-  slate: "#364061",
-  gold: "#AB832E",
-  champagne: "#DDBA7A",
+  navy: paperWash.sage,
+  deep: "#3d4a36",
+  slate: paperWash.sageSoft,
+  gold: paperWash.sageSoft,
+  champagne: "#c9d2bc",
 } as const
-
-const motifSwatches = [
-  reminderInk.deep,
-  // reminderInk.navy,
-  reminderInk.slate,
-  reminderInk.gold,
-  reminderInk.champagne,
-] as const
 
 function ColorPalette({
   colors,
@@ -323,222 +321,244 @@ function ReminderCard({
   )
 }
 
-function AttireRowLabel({ children }: { children: string }) {
-  const line = {
-    background: `linear-gradient(to right, transparent, ${reminderInk.gold}, transparent)`,
-  }
+const attireGuide = {
+  entourage: {
+    image: "/Details/entourage.png",
+    imageAspect: "3/2",
+    ladies: {
+      colors: ["#DFE8DD", "#BFCFB8", "#8EA58C", "#738A6E", "#344C3D"] as const,
+      description:
+        "Ladies are requested to wear a floor-length gown in Evergreen or Moss. Sage, Mint, and Sage Hint from our palette may also be worn.",
+    },
+    gentlemen: {
+      colors: ["#DFE8DD", "#344C3D"] as const,
+      description:
+        "Gentlemen are requested to wear a long-sleeved Sage Hint Barong Tagalog, paired with tailored Evergreen trousers and polished black formal shoes.",
+    },
+  },
+  guests: {
+    image: "/Details/guest.png",
+    imageAspect: "3/2",
+    ladies: {
+      colors: ["#DFE8DD", "#BFCFB8", "#8EA58C", "#738A6E", "#344C3D"] as const,
+      description:
+        "Ladies may wear a midi or cocktail dress in Sage Hint, Mint, Sage, Moss, or Evergreen. We welcome a range of elegant styles, so long as they stay within the guide.",
+    },
+    gentlemen: {
+      colors: ["#DFE8DD", "#BFCFB8", "#8EA58C", "#738A6E", "#344C3D"] as const,
+      description:
+        "Gentlemen may wear a collared shirt in Sage Hint, Mint, Sage, Moss, or Evergreen, paired with Sage Hint trousers and brown leather loafers.",
+    },
+  },
+} as const
+
+const dressCodePalette = [
+  { name: "SAGE HINT", hex: "#DFE8DD" },
+  { name: "MINT", hex: "#BFCFB8" },
+  { name: "SAGE", hex: "#8EA58C" },
+  { name: "MOSS", hex: "#738A6E" },
+  { name: "EVERGREEN", hex: "#344C3D" },
+] as const
+
+const dressCodePalettePanelStyle = {
+  borderColor: "color-mix(in srgb, #4b5d44 10%, transparent)",
+  backgroundColor: paperWash.lift,
+  color: paperWash.sage,
+} as const
+
+function DressCodePaletteSwatch({
+  name,
+  hex,
+  isLast = false,
+}: (typeof dressCodePalette)[number] & { isLast?: boolean }) {
+  const n = Number.parseInt(hex.slice(1), 16)
+  const r = (n >> 16) & 255
+  const g = (n >> 8) & 255
+  const b = n & 255
+  const isLight = 0.299 * r + 0.587 * g + 0.114 * b > 165
 
   return (
-    <div className="flex items-center justify-center gap-2.5 sm:gap-3.5">
-      <span className="h-px w-10 sm:w-16 md:w-24" style={line} aria-hidden />
-      <span
-        className="h-1.5 w-1.5 rotate-45 sm:h-2 sm:w-2"
-        style={{ backgroundColor: reminderInk.gold }}
-        aria-hidden
-      />
-      <p
-        className={`${cinzel.className} ${ct.label} shrink-0 font-semibold uppercase tracking-[0.28em] sm:tracking-[0.34em]`}
-        style={{ color: reminderInk.deep }}
+    <div
+      className={`flex min-w-0 flex-1 flex-col ${isLast ? "" : "border-r border-white"}`}
+    >
+      <div
+        className="relative flex min-h-[132px] w-full items-center justify-center sm:min-h-[168px] md:min-h-[200px] lg:min-h-[232px]"
+        style={{ backgroundColor: hex }}
       >
-        {children}
-      </p>
-      <span
-        className="h-1.5 w-1.5 rotate-45 sm:h-2 sm:w-2"
-        style={{ backgroundColor: reminderInk.gold }}
-        aria-hidden
-      />
-      <span
-        className="h-px w-10 sm:w-16 md:w-24"
-        style={{
-          background: `linear-gradient(to left, transparent, ${reminderInk.gold}, transparent)`,
-        }}
-        aria-hidden
-      />
+        <span
+          className={`text-[6px] font-semibold uppercase tracking-[0.08em] sm:text-[7px] md:text-[8px] lg:text-[9px] ${
+            isLight ? "text-[#3D3429]" : "text-white"
+          }`}
+          style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+        >
+          {name}
+        </span>
+      </div>
     </div>
   )
 }
 
-const guestSwatches = [
-  { color: "#04103B", name: "Navy Blue" },
-  { color: "#F4EFE4", name: "Ivory" },
-  { color: "#DDBA7A", name: "Champagne Gold" },
-] as const
+function DressCodePaletteHeader() {
+  return (
+    <div
+      className="px-3 py-5 sm:px-4 sm:py-6 md:px-5 md:py-7"
+      style={dressCodePalettePanelStyle}
+    >
+      <div className="mx-auto max-w-3xl text-center">
+        <h5
+          className={`${cinzel.className} text-sm font-semibold uppercase tracking-[0.14em] sm:text-base md:text-lg lg:text-xl`}
+        >
+          Dress Code Palette
+        </h5>
+        <p
+          className={`${aboveTheBeyond.className} mt-1 text-lg leading-none sm:mt-1.5 sm:text-xl md:text-2xl`}
+          style={{ color: paperWash.sageSoft }}
+        >
+          Entourage and Guests
+        </p>
+        <div className="mx-auto mt-3 flex max-w-xs items-center justify-center gap-2 sm:mt-4 sm:max-w-sm md:max-w-md">
+          <span className="h-px flex-1" style={{ backgroundColor: "color-mix(in srgb, #4b5d44 30%, transparent)" }} />
+          <Heart className="h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3" style={{ color: paperWash.sageSoft }} aria-hidden />
+          <span className="h-px flex-1" style={{ backgroundColor: "color-mix(in srgb, #4b5d44 30%, transparent)" }} />
+        </div>
+      </div>
+    </div>
+  )
+}
 
-function GuestDressGuide() {
-  const siteConfig = useSiteConfig()
-  const groomInitial = (siteConfig.couple.groomNickname || siteConfig.couple.groom).charAt(0)
-  const brideInitial = (siteConfig.couple.brideNickname || siteConfig.couple.bride).charAt(0)
-  const dateParts = siteConfig.ceremony.date.replace(",", "").split(" ")
-  const monthNum =
-    [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December",
-    ].indexOf(dateParts[0]) + 1
-  const dayNum = dateParts[1]
-  const yearNum = dateParts[2]
-  const dateMark =
-    monthNum > 0 && dayNum && yearNum
-      ? `${String(monthNum).padStart(2, "0")}  •  ${String(dayNum).padStart(2, "0")}  •  ${yearNum}`
-      : siteConfig.ceremony.date
+function DressCodePaletteCaption() {
+  return (
+    <div
+      className="px-3 py-5 text-center sm:px-4 sm:py-6 md:px-5 md:py-7"
+      style={dressCodePalettePanelStyle}
+    >
+      <p className={`${cinzel.className} text-[10px] font-bold uppercase tracking-[0.12em] sm:text-xs md:text-sm`}>
+        Color Guide
+      </p>
+      <p className="font-goudy-italic mt-1.5 text-[10px] italic leading-relaxed sm:mt-2 sm:text-xs md:text-sm">
+        Please refer to the exact colors above for dress code.
+      </p>
+    </div>
+  )
+}
+
+function DressCodePaletteSwatches() {
+  return (
+    <div
+      className="flex w-full border-t border-white"
+      role="img"
+      aria-label="Dress code color palette: Sage Hint, Mint, Sage, Moss, Evergreen"
+    >
+      {dressCodePalette.map((color, index) => (
+        <DressCodePaletteSwatch
+          key={color.hex}
+          {...color}
+          isLast={index === dressCodePalette.length - 1}
+        />
+      ))}
+    </div>
+  )
+}
+
+function highlightAttirePhrase(text: string, phrase: string): ReactNode {
+  const index = text.indexOf(phrase)
+  if (index === -1) return text
 
   return (
-    <article
-      className="relative mx-auto overflow-hidden rounded-xl border sm:rounded-2xl"
-      style={{
-        ...cardStyle,
-        background: `linear-gradient(180deg, ${paperWash.lift} 0%, ${paperWash.cream} 48%, ${paperWash.lift} 100%)`,
-      }}
-    >
+    <>
+      {text.slice(0, index)}
+      <strong className="font-bold underline">{phrase}</strong>
+      {text.slice(index + phrase.length)}
+    </>
+  )
+}
+
+function AttirePaletteGroup({
+  label,
+  colors,
+  description,
+}: {
+  label: string
+  colors?: readonly string[]
+  description: ReactNode
+}) {
+  return (
+    <div className="space-y-2 sm:space-y-2.5">
+      <p
+        className={`${cinzel.className} text-center ${ct.labelSm} uppercase tracking-[0.16em] font-semibold`}
+        style={{ color: detailText.label }}
+      >
+        {label}
+      </p>
+      {colors ? <ColorPalette colors={colors} /> : null}
+      <p
+        className={`font-goudy-italic ${ct.body} px-1 text-center leading-relaxed`}
+        style={{ color: detailText.body }}
+      >
+        {description}
+      </p>
+    </div>
+  )
+}
+
+function AttireCard({
+  title,
+  image,
+  alt,
+  imageAspect,
+  children,
+}: {
+  title: string
+  image: string
+  alt: string
+  imageAspect: string
+  children: ReactNode
+}) {
+  return (
+    <div className="relative group h-full">
       <div
-        className="pointer-events-none absolute inset-3 z-10 sm:inset-4 md:inset-5"
-        aria-hidden
+        className="absolute -inset-1 rounded-2xl opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100"
         style={{
-          boxShadow: `inset 0 0 0 1px color-mix(in srgb, ${reminderInk.gold} 55%, transparent)`,
+          background:
+            "linear-gradient(to bottom right, color-mix(in srgb, #6a7b5c 18%, transparent), transparent)",
         }}
       />
-
-      <div className="relative z-20 px-5 py-8 sm:px-8 sm:py-10 md:px-12 md:py-12">
-        <header className="relative text-center">
-          {siteConfig.couple.monogram ? (
-            <div className="absolute left-0 top-0 hidden h-14 w-14 sm:block md:h-16 md:w-16">
-              <Image
-                src={siteConfig.couple.monogram}
-                alt=""
-                fill
-                className="object-contain"
-                sizes="64px"
-              />
-            </div>
-          ) : null}
-
-          <p
-            className={`${cinzel.className} text-[0.55rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.625rem] sm:tracking-[0.34em] md:tracking-[0.4em]`}
-            style={{ color: reminderInk.deep }}
-          >
-            Wedding Guest Dress Guide
-          </p>
+      <div
+        className="relative flex h-full flex-col overflow-hidden rounded-xl border transition-all duration-300 sm:rounded-2xl"
+        style={cardStyle}
+      >
+        <div
+          className="border-b px-4 py-3 sm:px-5 sm:py-4"
+          style={{ borderColor: "color-mix(in srgb, #4b5d44 10%, transparent)" }}
+        >
           <h4
-            className={`${theSeasons.className} mt-1 lowercase leading-none tracking-[0.04em] sm:mt-1.5`}
-            style={{
-              fontSize: "clamp(2.4rem, 8vw, 4.75rem)",
-              color: reminderInk.gold,
-            }}
+            className={`${cinzel.className} ${ct.attireCardTitle} text-center uppercase tracking-[0.22em] font-semibold leading-tight`}
+            style={{ color: detailText.heading }}
           >
-            attire
+            {title}
           </h4>
-          <div className="mt-3 flex items-center justify-center gap-2 sm:mt-4 sm:gap-3">
-            <span
-              className="h-px w-8 sm:w-12"
-              style={{ backgroundColor: reminderInk.gold }}
-              aria-hidden
-            />
-            <p
-              className={`${cinzel.className} text-[0.55rem] font-semibold uppercase tracking-[0.22em] sm:text-[0.625rem] sm:tracking-[0.28em]`}
-              style={{ color: reminderInk.deep }}
-            >
-              Soft • Warm • Nocturnal
-            </p>
-            <span
-              className="h-px w-8 sm:w-12"
-              style={{ backgroundColor: reminderInk.gold }}
-              aria-hidden
-            />
-          </div>
-        </header>
-
-        <div className="mt-7 flex items-center justify-center gap-4 sm:mt-8 sm:gap-6 md:mt-10 md:gap-8">
-          {guestSwatches.map((swatch) => (
-            <div key={swatch.name} className="flex flex-col items-center gap-1.5">
-              <span
-                className="h-11 w-11 rounded-full shadow-inner sm:h-14 sm:w-14 md:h-16 md:w-16"
-                style={{
-                  backgroundColor: swatch.color,
-                  boxShadow: `inset 0 1px 2px rgba(255,255,255,0.22), 0 4px 12px color-mix(in srgb, ${reminderInk.deep} 18%, transparent)`,
-                  border: swatch.name === "Ivory" ? `1px solid color-mix(in srgb, ${reminderInk.gold} 45%, transparent)` : "none",
-                }}
-                title={swatch.name}
-                aria-label={swatch.name}
-              />
-            </div>
-          ))}
         </div>
 
-        <p
-          className={`font-goudy-italic mx-auto mt-6 max-w-xl text-center ${ct.body} leading-relaxed sm:mt-7`}
-          style={{ color: reminderInk.navy }}
-        >
-          We&apos;re excited to enjoy this special event with you! Our theme is{" "}
-          <strong className="font-semibold" style={{ color: reminderInk.deep }}>
-            Navy Blue
-          </strong>{" "}
-          and{" "}
-          <strong className="font-semibold" style={{ color: reminderInk.gold }}>
-            Champagne Gold
-          </strong>
-          . We&apos;d love to see you in these colors as we celebrate this meaningful day.
-        </p>
-
-        <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5 md:mt-12">
-          <AttireRowLabel>For Men</AttireRowLabel>
-          <div className="overflow-hidden">
+        <div className="relative flex w-full shrink-0 items-center justify-center overflow-hidden" style={{ backgroundColor: paperWash.lift }}>
+          <div className="relative w-full" style={{ aspectRatio: imageAspect }}>
             <Image
-              src="/Details/attire-guide.png"
-              alt="Guest attire examples — gentlemen in navy and champagne suits, ladies in navy, ivory, and champagne gowns"
-              width={1536}
-              height={1024}
-              className="h-auto w-full object-contain"
-              sizes="(max-width: 768px) 100vw, 960px"
-              priority={false}
+              src={image}
+              alt={alt}
+              fill
+              className="object-contain object-center w-full h-full transition-transform duration-700 group-hover:scale-[1.01]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1024px"
             />
           </div>
-          <AttireRowLabel>For Women</AttireRowLabel>
         </div>
 
-        <p
-          className={`font-goudy-italic mx-auto mt-7 max-w-xl text-center ${ct.body} leading-relaxed sm:mt-8`}
-          style={{ color: reminderInk.navy }}
+        <div
+          className="flex flex-1 flex-col border-t px-4 py-4 sm:px-5 sm:py-5 md:px-6"
+          style={{ borderColor: "color-mix(in srgb, #4b5d44 10%, transparent)" }}
         >
-          Kindly avoid sharp patterns or prints, denim, or casual items. Our color palette is
-          thoughtfully chosen to create a warm and timeless celebration.
-        </p>
-
-        <footer className="relative mt-8 flex flex-col items-center text-center sm:mt-10">
-          <Heart
-            className="mb-2 h-3.5 w-3.5 sm:h-4 sm:w-4"
-            style={{ color: reminderInk.gold }}
-            fill="currentColor"
-            aria-hidden
-          />
-          <p
-            className={`${aboveTheBeyond.className} leading-none`}
-            style={{
-              fontSize: "clamp(1.65rem, 5vw, 2.75rem)",
-              color: reminderInk.gold,
-            }}
-          >
-            Thank You!
-          </p>
-          <p
-            className={`${cinzel.className} mt-2 text-[0.55rem] font-semibold uppercase tracking-[0.22em] sm:text-[0.625rem] sm:tracking-[0.28em]`}
-            style={{ color: reminderInk.deep }}
-          >
-            We can&apos;t wait to celebrate with you!
-          </p>
-          <p
-            className={`${aboveTheBeyond.className} mt-3 text-xl sm:mt-4 sm:text-2xl`}
-            style={{ color: reminderInk.deep }}
-          >
-            {groomInitial} & {brideInitial}
-          </p>
-          <p
-            className={`${cinzel.className} mt-1 text-[0.55rem] font-semibold uppercase tracking-[0.28em] sm:tracking-[0.34em]`}
-            style={{ color: reminderInk.gold }}
-          >
-            {dateMark}
-          </p>
-        </footer>
+          {children}
+        </div>
       </div>
-    </article>
+    </div>
   )
 }
 
@@ -591,7 +611,7 @@ function EventVenueCard({
         className="absolute -inset-1 rounded-2xl opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            "linear-gradient(to bottom right, color-mix(in srgb, var(--color-welcome-green) 15%, transparent), transparent)",
+            "linear-gradient(to bottom right, color-mix(in srgb, #6a7b5c 15%, transparent), transparent)",
         }}
       />
 
@@ -677,7 +697,7 @@ function EventVenueCard({
                   </p>
                   <div
                     className="h-10 sm:h-12 md:h-14 w-[2px] rounded-full"
-                    style={{ backgroundColor: "var(--color-welcome-green)" }}
+                    style={{ backgroundColor: paperWash.sageSoft }}
                   />
                   <p
                     className={`${cinzel.className} ${ct.year} font-semibold leading-none`}
@@ -737,8 +757,8 @@ function EventVenueCard({
                 <div
                   className="p-1.5 sm:p-2 md:p-2.5 rounded-lg border shadow-sm"
                   style={{
-                    backgroundColor: "var(--color-welcome-bg)",
-                    borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
+                    backgroundColor: paperWash.lift,
+                    borderColor: "color-mix(in srgb, #4b5d44 14%, transparent)",
                   }}
                 >
                   <QRCodeSVG
@@ -763,20 +783,20 @@ function EventVenueCard({
               onClick={() => onOpenMaps(mapsLink)}
               className={`${cinzel.className} flex-1 flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2.5 sm:py-3 md:py-3.5 rounded-full border font-semibold uppercase tracking-[0.12em] ${ct.btn} transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]`}
               style={{
-                backgroundColor: "var(--color-welcome-green)",
-                borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
-                color: "var(--color-welcome-bg)",
+                backgroundColor: paperWash.sage,
+                borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+                color: paperWash.lift,
                 boxShadow:
-                  "0 6px 20px color-mix(in srgb, var(--color-welcome-green) 35%, transparent)",
+                  "0 6px 20px color-mix(in srgb, #4b5d44 28%, transparent)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--color-welcome-navy)"
-                e.currentTarget.style.borderColor = "var(--color-welcome-green)"
+                e.currentTarget.style.backgroundColor = "#3d4a36"
+                e.currentTarget.style.borderColor = paperWash.sageSoft
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--color-welcome-green)"
+                e.currentTarget.style.backgroundColor = paperWash.sage
                 e.currentTarget.style.borderColor =
-                  "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)"
+                  "color-mix(in srgb, #3d4a36 35%, transparent)"
               }}
               aria-label={`Get directions to ${badge.toLowerCase()} venue`}
             >
@@ -789,13 +809,13 @@ function EventVenueCard({
               className={`${cinzel.className} flex-1 flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2.5 sm:py-3 md:py-3.5 border-2 rounded-full font-semibold uppercase tracking-[0.12em] ${ct.btn} transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]`}
               style={{
                 color: detailText.heading,
-                backgroundColor: "var(--color-welcome-bg-soft)",
-                borderColor: "color-mix(in srgb, var(--color-motif-deep) 20%, transparent)",
+                backgroundColor: paperWash.cream,
+                borderColor: "color-mix(in srgb, #4b5d44 20%, transparent)",
               }}
               aria-label={`Copy ${badge.toLowerCase()} venue address`}
             >
               {copiedItems.has(copyId) ? (
-                <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0" style={{ color: "var(--color-welcome-green)" }} />
+                <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0" style={{ color: paperWash.sage }} />
               ) : (
                 <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0" />
               )}
@@ -860,7 +880,6 @@ export function Details() {
   const ceremonyMapsLink = siteConfig.ceremony.map
 
   const receptionVenueName = siteConfig.reception.location
-  const receptionVenueDetail = ""
   const receptionAddress = siteConfig.reception.venue
   const receptionVenue = `${receptionVenueName}, ${receptionAddress}`
   const receptionMapsLink =
@@ -892,10 +911,10 @@ export function Details() {
         <CornerDecorations />
 
         {/* Header */}
-        <div className="relative z-20 mb-6 px-6 text-center sm:mb-8 sm:px-10 md:mb-10 md:px-12">
+        <div className="relative z-20 mb-6 px-6 pt-10 text-center sm:mb-8 sm:px-10 sm:pt-12 md:mb-10 md:px-12 md:pt-14">
           <p
             className={`${cinzel.className} mb-2 text-[0.525rem] font-semibold uppercase tracking-[0.34em] min-[400px]:text-[0.55rem] min-[400px]:tracking-[0.38em] sm:text-[0.575rem] sm:tracking-[0.44em]`}
-            style={{ color: "var(--color-welcome-green)" }}
+            style={{ color: paperWash.sageSoft }}
           >
             Our Celebration
           </p>
@@ -904,7 +923,7 @@ export function Details() {
           </div>
           <p
             className="font-goudy-italic mx-auto max-w-2xl px-2 text-[0.75rem] leading-[1.62] sm:text-[0.8125rem] sm:leading-[1.65] md:text-[0.84375rem]"
-            style={{ color: "var(--color-welcome-text)" }}
+            style={{ color: paperWash.sage }}
           >
             Everything you need to know about our special day.
           </p>
@@ -913,7 +932,7 @@ export function Details() {
             icon={
               <MapPin
                 className="h-3.5 w-3.5 sm:h-4 sm:w-4"
-                style={{ color: "var(--color-welcome-green)" }}
+                style={{ color: paperWash.sageSoft }}
                 aria-hidden
               />
             }
@@ -923,7 +942,7 @@ export function Details() {
       {/* Venue and Event Information */}
       <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mb-8 sm:mb-10 md:mb-12 space-y-6 sm:space-y-10 md:space-y-14">
         <EventVenueCard
-          badge="Ceremony & Reception"
+          badge="Ceremony"
           images={ceremonyImages}
           activeImageIndex={currentCeremonyImageIndex}
           locationName={ceremonyVenueName}
@@ -933,34 +952,60 @@ export function Details() {
           dateString={siteConfig.ceremony.date}
           time={siteConfig.ceremony.time}
           arrivalTime={siteConfig.ceremony.guestsTime}
-          venueSectionLabel="Ceremony & Reception"
+          venueSectionLabel="Ceremony"
           mapsLink={ceremonyMapsLink}
-          copyId="ceremony & reception"
+          copyId="ceremony"
           fullVenue={ceremonyVenue}
           copiedItems={copiedItems}
           onCopy={copyToClipboard}
           onOpenMaps={openInMaps}
         />
 
-        {/* <EventVenueCard
-          badge="Reception"
-          images={receptionImages}
-          activeImageIndex={currentReceptionImageIndex}
-          locationName={receptionVenueName}
-          venueAddress={receptionAddress}
-          venueDetail={receptionVenueDetail}
-          day={siteConfig.reception.day}
-          dateString={siteConfig.reception.date}
-          time={siteConfig.reception.time}
-          showDateDetails={false}
-          venueSectionLabel="Reception Venue"
-          mapsLink={receptionMapsLink}
-          copyId="reception"
-          fullVenue={receptionVenue}
-          copiedItems={copiedItems}
-          onCopy={copyToClipboard}
-          onOpenMaps={openInMaps}
-        /> */}
+        <div
+          className="mx-auto max-w-xl rounded-xl px-6 py-8 text-center sm:rounded-2xl sm:px-10 sm:py-10"
+          style={cardStyle}
+        >
+          <p
+            className={`${cinzel.className} text-[0.625rem] font-semibold uppercase tracking-[0.32em] sm:text-[0.6875rem] sm:tracking-[0.38em]`}
+            style={{ color: paperWash.sageSoft }}
+          >
+            Reception to follow
+          </p>
+          <div className="my-4 flex items-center justify-center gap-3 sm:my-5">
+            <span
+              className="h-px w-8 sm:w-12"
+              style={{
+                background:
+                  "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
+              }}
+            />
+            <Heart
+              className="h-3 w-3 sm:h-3.5 sm:w-3.5"
+              style={{ color: paperWash.sageSoft }}
+              aria-hidden
+            />
+            <span
+              className="h-px w-8 sm:w-12"
+              style={{
+                background:
+                  "linear-gradient(to left, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
+              }}
+            />
+          </div>
+          <p
+            className={`${theSeasons.className} text-sm font-semibold uppercase tracking-[0.14em] sm:text-base`}
+            style={{ color: paperWash.sage }}
+          >
+            At {siteConfig.reception.time}
+          </p>
+          <p
+            className="font-goudy-italic mx-auto mt-3 max-w-[28rem] text-[0.8125rem] leading-[1.7] sm:mt-4 sm:text-[0.9375rem] sm:leading-[1.75]"
+            style={{ color: paperWash.sage }}
+          >
+            After the ceremony, we warmly invite you to continue the celebration
+            at the residence of the couple.
+          </p>
+        </div>
        
       </div>
 
@@ -971,20 +1016,85 @@ export function Details() {
             icon={
               <Shirt
                 className="h-3.5 w-3.5 sm:h-4 sm:w-4"
-                style={{ color: "var(--color-welcome-green)" }}
+                style={{ color: paperWash.sageSoft }}
                 aria-hidden
               />
             }
           />
           <h3
             className={`${theSeasons.className} ${ct.sectionTitle} mt-3 font-semibold uppercase leading-tight tracking-[0.12em] sm:mt-4 md:tracking-[0.15em]`}
-            style={{ color: "var(--color-welcome-navy)" }}
+            style={{ color: paperWash.sage }}
           >
             Attire Guidelines
           </h3>
+          <p
+            className={`font-goudy-italic ${ct.bodyLg} mt-3 leading-relaxed sm:mt-4`}
+            style={{ color: paperWash.sage }}
+          >
+            Please dress according to the guidelines below.
+          </p>
         </div>
 
-        <GuestDressGuide />
+        <div className="mb-6 grid grid-cols-1 items-start gap-6 sm:mb-8 sm:gap-8 md:mb-10">
+          <div className="mx-auto w-full max-w-5xl space-y-6 sm:space-y-8">
+            <AttireCard
+              title="Entourage"
+              image={attireGuide.entourage.image}
+              imageAspect={attireGuide.entourage.imageAspect}
+              alt="Entourage attire guide"
+            >
+              <div className="grid grid-cols-1 gap-5 sm:gap-6">
+                <AttirePaletteGroup
+                  label="Ladies"
+                  description={highlightAttirePhrase(
+                    attireGuide.entourage.ladies.description,
+                    "floor-length gown",
+                  )}
+                />
+                <AttirePaletteGroup
+                  label="Gentlemen"
+                  description={highlightAttirePhrase(
+                    attireGuide.entourage.gentlemen.description,
+                    "Sage Hint Barong Tagalog",
+                  )}
+                />
+              </div>
+            </AttireCard>
+
+            <AttireCard
+              title="Guests"
+              image={attireGuide.guests.image}
+              imageAspect={attireGuide.guests.imageAspect}
+              alt="Guests attire guide"
+            >
+              <div className="grid grid-cols-1 gap-5 sm:gap-6">
+                <AttirePaletteGroup
+                  label="Ladies"
+                  description={highlightAttirePhrase(
+                    attireGuide.guests.ladies.description,
+                    "midi or cocktail dress",
+                  )}
+                />
+                <AttirePaletteGroup
+                  label="Gentlemen"
+                  description={highlightAttirePhrase(
+                    attireGuide.guests.gentlemen.description,
+                    "collared shirt",
+                  )}
+                />
+              </div>
+            </AttireCard>
+
+            <div
+              className="overflow-hidden rounded-xl border sm:rounded-2xl"
+              style={cardStyle}
+            >
+              <DressCodePaletteHeader />
+              <DressCodePaletteSwatches />
+              <DressCodePaletteCaption />
+            </div>
+          </div>
+        </div>
 
         {/* Gentle Reminders */}
         <div className="relative z-20 mx-auto mt-6 w-full max-w-3xl px-3 pb-2 sm:mt-8 sm:max-w-4xl sm:px-6 md:px-8 lg:max-w-5xl">
@@ -1020,20 +1130,19 @@ export function Details() {
               </p>
 
               <div className="flex w-full flex-col items-center gap-11 sm:gap-14 md:gap-16">
-                <ReminderCard title="Adults-Only Celebration">
+                <ReminderCard title="A Family Celebration">
                   <ReminderTone label="Formal">
-                    While we adore your little ones, we have chosen to celebrate as an
-                    adults-only affair, other than the children who are part of the
-                    entourage. We hope this gives you a well-deserved night out.
+                    Children are most welcome at our wedding. We would be delighted to
+                    celebrate this day with your little ones and with every generation of
+                    family and friends.
                   </ReminderTone>
                   <ReminderTone label="Warm">
-                    We love your kids, but consider this your night off! Please note that
-                    our celebration is adults-only.
+                    Bring the kids! Our celebration is for the whole family, and we can&apos;t
+                    wait to share the joy with them too.
                   </ReminderTone>
                   <ReminderTone label="Tagalog">
-                    Bagama&apos;t mahal namin ang inyong mga anak, ang aming pagdiriwang
-                    ay para lamang sa mga bisitang may sapat na gulang. Maraming salamat
-                    sa inyong pag-unawa.
+                    Malugod naming inaanyayahan ang inyong mga anak. Ang aming pagdiriwang
+                    ay para sa buong pamilya, at masaya kaming makasama sila sa araw na ito.
                   </ReminderTone>
                 </ReminderCard>
 
@@ -1075,7 +1184,7 @@ export function Details() {
                     Kindly follow our suggested attire and color palette above to match our
                     wedding theme. Strictly no casual clothes, shoes, or white-colored attire.
                   </ReminderTone>
-                  <ColorPalette colors={motifSwatches} frame="gold" />
+                  <ColorPalette colors={attireGuide.guests.ladies.colors} frame="gold" />
                 </ReminderCard>
 
                 <div
@@ -1101,29 +1210,29 @@ export function Details() {
         <div
           className="fixed inset-0 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-500"
           onClick={() => setShowImageModal(null)}
-          style={{ backgroundColor: "rgba(91,102,85,0.96)" }}
+          style={{ backgroundColor: "rgba(61,74,54,0.96)" }}
         >
           {/* Decorative background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div
               className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "var(--color-motif-cream)", opacity: 0.12 }}
+              style={{ backgroundColor: "#f7f4eb", opacity: 0.12 }}
             />
             <div
               className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "var(--color-motif-cream)", opacity: 0.14, animationDelay: "1s" }}
+              style={{ backgroundColor: "#f7f4eb", opacity: 0.14, animationDelay: "1s" }}
             />
           </div>
 
           <div
-            className="relative max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] bg-motif-deep rounded-3xl overflow-hidden shadow-2xl border-2 animate-in zoom-in-95 duration-500 group"
+            className="relative max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] rounded-3xl overflow-hidden shadow-2xl border-2 animate-in zoom-in-95 duration-500 group"
             onClick={(e) => e.stopPropagation()}
-            style={{ borderColor: "var(--color-motif-cream)" }}
+            style={{ backgroundColor: reminderInk.deep, borderColor: paperWash.cream }}
           >
             {/* Decorative top accent */}
             <div
               className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
-              style={{ background: "linear-gradient(to right, var(--color-motif-cream), var(--color-motif-cream), var(--color-motif-deep))" }}
+              style={{ background: "linear-gradient(to right, #f7f4eb, #f7f4eb, #3d4a36)" }}
             />
 
             {/* Enhanced close button */}
@@ -1131,7 +1240,7 @@ export function Details() {
               onClick={() => setShowImageModal(null)}
               className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20 hover:bg-motif-accent backdrop-blur-sm p-2.5 sm:p-3 rounded-xl shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 border-2 group/close"
               title="Close (ESC)"
-              style={{ backgroundColor: "var(--color-motif-deep)", borderColor: "var(--color-motif-cream)", color: "var(--color-motif-cream)" }}
+              style={{ backgroundColor: "#3d4a36", borderColor: "#f7f4eb", color: "#f7f4eb" }}
             >
               <X className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover/close:text-[#E1D5C7] transition-colors" />
             </button>
@@ -1140,19 +1249,19 @@ export function Details() {
             <div className="absolute top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 z-20">
               <div
                 className="flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-full shadow-xl border-2"
-                style={{ backgroundColor: "var(--color-motif-deep)", borderColor: "var(--color-motif-cream)" }}
+                style={{ backgroundColor: "#3d4a36", borderColor: "#f7f4eb" }}
               >
                 {showImageModal === "ceremony" ? (
                   <>
-                    <Heart className="w-4 h-4" fill="var(--color-motif-cream)" style={{ color: "var(--color-motif-cream)" }} />
-                    <span className="text-xs sm:text-sm font-bold text-motif-cream">
+                    <Heart className="w-4 h-4" fill="#f7f4eb" style={{ color: "#f7f4eb" }} />
+                    <span className="text-xs sm:text-sm font-bold" style={{ color: paperWash.cream }}>
                       Ceremony Venue
                     </span>
                   </>
                 ) : (
                   <>
-                    <Utensils className="w-4 h-4 text-motif-cream" />
-                    <span className="text-xs sm:text-sm font-bold text-motif-cream">
+                    <Utensils className="w-4 h-4" style={{ color: paperWash.cream }} />
+                    <span className="text-xs sm:text-sm font-bold" style={{ color: paperWash.cream }}>
                       Reception Venue
                     </span>
                   </>
@@ -1163,7 +1272,7 @@ export function Details() {
             {/* Image section with enhanced effects */}
             <div
               className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] overflow-hidden"
-              style={{ backgroundColor: "var(--color-motif-deep)" }}
+              style={{ backgroundColor: "#3d4a36" }}
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-0" />
@@ -1184,8 +1293,8 @@ export function Details() {
 
             {/* Enhanced content section */}
             <div
-              className="relative border-t-2 p-5 sm:p-6 md:p-8 bg-motif-deep backdrop-blur-sm"
-              style={{ borderColor: "var(--color-motif-cream)" }}
+              className="relative border-t-2 p-5 sm:p-6 md:p-8 backdrop-blur-sm"
+              style={{ backgroundColor: reminderInk.deep, borderColor: paperWash.cream }}
             >
               {/* Decorative line */}
               <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-motif-cream/30 to-transparent" />
@@ -1196,17 +1305,17 @@ export function Details() {
                   <div className="space-y-2">
                     <h3
                       className={`${cinzel.className} text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-3`}
-                      style={{ color: "var(--color-motif-cream)" }}
+                      style={{ color: "#f7f4eb" }}
                     >
                       {showImageModal === "ceremony" ? (
-                        <Heart className="w-6 h-6 text-motif-cream" fill="var(--color-motif-cream)" />
+                        <Heart className="w-6 h-6 text-motif-cream" fill="#f7f4eb" />
                       ) : (
                         <Utensils className="w-6 h-6 text-motif-cream" />
                       )}
                       {showImageModal === "ceremony" ? siteConfig.ceremony.venue : siteConfig.reception.venue}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm opacity-70 text-motif-cream">
-                      <MapPin className="w-4 h-4 text-motif-cream" />
+                    <div className="flex items-center gap-2 text-sm opacity-70" style={{ color: paperWash.cream }}>
+                      <MapPin className="w-4 h-4" />
                       <span>
                         {showImageModal === "ceremony"
                           ? ceremonyLocationFormatted
@@ -1219,10 +1328,10 @@ export function Details() {
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
                         style={{
-                          color: "var(--color-motif-cream)",
-                          backgroundColor: "var(--color-motif-deep)",
+                          color: "#f7f4eb",
+                          backgroundColor: "#3d4a36",
                           opacity: 0.9,
-                          borderColor: "var(--color-motif-cream)",
+                          borderColor: "#f7f4eb",
                         }}
                       >
                         <Clock className="w-4 h-4 text-motif-cream shrink-0" />
@@ -1235,10 +1344,10 @@ export function Details() {
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
                         style={{
-                          color: "var(--color-motif-cream)",
-                          backgroundColor: "var(--color-motif-deep)",
+                          color: "#f7f4eb",
+                          backgroundColor: "#3d4a36",
                           opacity: 0.9,
-                          borderColor: "var(--color-motif-cream)",
+                          borderColor: "#f7f4eb",
                         }}
                       >
                         <Clock className="w-4 h-4 text-motif-cream" />
@@ -1260,9 +1369,9 @@ export function Details() {
                           `modal-${showImageModal}`,
                         )
                       }
-                      className="flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 bg-motif-deep border-2 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 shadow-md hover:bg-motif-accent whitespace-nowrap text-motif-cream"
+                      className="flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 border-2 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 shadow-md whitespace-nowrap"
                       title="Copy address"
-                      style={{ borderColor: "var(--color-motif-cream)" }}
+                      style={{ backgroundColor: reminderInk.deep, borderColor: paperWash.cream, color: paperWash.cream }}
                     >
                       {copiedItems.has(`modal-${showImageModal}`) ? (
                         <>
@@ -1281,7 +1390,8 @@ export function Details() {
                       onClick={() =>
                         openInMaps(showImageModal === "ceremony" ? ceremonyMapsLink : receptionMapsLink)
                       }
-                      className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 shadow-lg whitespace-nowrap bg-motif-cream text-motif-deep"
+                      className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 shadow-lg whitespace-nowrap"
+                      style={{ backgroundColor: paperWash.cream, color: reminderInk.deep }}
                     >
                       <Navigation className="w-4 h-4 sm:w-5 sm:h-5" />
                       <span>Get Directions</span>
@@ -1290,7 +1400,7 @@ export function Details() {
                 </div>
 
                 {/* Additional info */}
-                  <div className="flex items-center gap-2 text-xs opacity-65 text-motif-cream">
+                  <div className="flex items-center gap-2 text-xs opacity-65" style={{ color: paperWash.cream }}>
                   <span className="flex items-center gap-1.5">
                     <Camera className="w-3 h-3" />
                     Click outside to close

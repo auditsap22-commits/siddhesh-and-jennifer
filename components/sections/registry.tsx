@@ -25,16 +25,22 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  navy: "#04103B",
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
+  navy: "#4b5d44",
+  gold: "#6a7b5c",
+  goldBright: "#4b5d44",
+  goldSoft: "#6a7b5c",
+  paper: "#f9f6ee",
 } as const
 
 const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
+const outsideInk = {
+  text: "#ffffff",
+  textSoft: "rgba(255, 255, 255, 0.82)",
+  line: "rgba(255, 255, 255, 0.45)",
+} as const
 
 const outsideDividerLineStyle = {
-  background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
+  background: `linear-gradient(to right, transparent, ${outsideInk.line}, transparent)`,
 } as const
 
 const ct = {
@@ -49,13 +55,13 @@ function OutsideDivider() {
       <span className="h-px w-6 sm:w-10" style={outsideDividerLineStyle} />
       <span
         className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1"
-        style={{ backgroundColor: goldLine }}
+        style={{ backgroundColor: outsideInk.line }}
         aria-hidden
       />
       <span
         className="h-px w-6 sm:w-10"
         style={{
-          background: `linear-gradient(to left, transparent, ${goldLine}, transparent)`,
+          background: `linear-gradient(to left, transparent, ${outsideInk.line}, transparent)`,
         }}
       />
     </div>
@@ -77,7 +83,7 @@ function RegistryTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: C.goldBright,
+          color: outsideInk.text,
         }}
       >
         Gift Guide
@@ -87,7 +93,7 @@ function RegistryTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: C.goldSoft,
+          color: outsideInk.textSoft,
         }}
       >
         With gratitude
@@ -119,12 +125,12 @@ export function Registry() {
           </div>
           <p
             className={`font-goudy-italic mx-auto mt-4 max-w-2xl whitespace-pre-line px-2 sm:mt-5 md:mt-6 ${ct.bodyLg}`}
-            style={{ color: C.goldSoft }}
+            style={{ color: outsideInk.textSoft }}
           >
             {`As love is what this day is all about,\nyour presence is already the greatest gift we could ever ask for.\nHowever, if you'd like to give, a monetary gift toward our future would be most appreciated.`}
           </p>
           <div className="flex items-center justify-center pt-3 sm:pt-4">
-            <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: goldLine }} />
+            <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: outsideInk.line }} />
           </div>
         </div>
 
@@ -143,15 +149,15 @@ export function Registry() {
                       style={
                         isActive
                           ? {
-                              backgroundColor: C.gold,
-                              borderColor: `color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-                              color: C.navy,
-                              boxShadow: `0 8px 20px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+                              backgroundColor: C.navy,
+                              borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+                              color: C.paper,
+                              boxShadow: "0 8px 20px color-mix(in srgb, #4b5d44 28%, transparent)",
                             }
                           : {
                               backgroundColor: "transparent",
-                              borderColor: goldLine,
-                              color: C.goldSoft,
+                              borderColor: outsideInk.line,
+                              color: outsideInk.textSoft,
                             }
                       }
                     >
@@ -164,7 +170,7 @@ export function Registry() {
 
             <p
               className={`${cinzel.className} ${ct.label} mb-4 font-semibold uppercase tracking-[0.18em] sm:mb-5`}
-              style={{ color: C.goldBright }}
+              style={{ color: outsideInk.text }}
             >
               {activeItem.label}
             </p>
@@ -185,13 +191,13 @@ export function Registry() {
               <div className="mx-auto max-w-sm">
                 <p
                   className={`${cinzel.className} ${ct.label} mb-1 font-semibold uppercase tracking-[0.14em]`}
-                  style={{ color: C.goldBright }}
+                  style={{ color: outsideInk.text }}
                 >
                   Account Details
                 </p>
                 <p
                   className={`font-goudy-italic ${ct.bodyLg}`}
-                  style={{ color: C.goldSoft }}
+                  style={{ color: outsideInk.textSoft }}
                 >
                   {activeItem.accountNumber}
                 </p>
@@ -203,13 +209,13 @@ export function Registry() {
         <div className="mt-6 space-y-2 text-center sm:mt-8">
           <p
             className={`font-goudy-italic ${ct.body}`}
-            style={{ color: C.goldSoft }}
+            style={{ color: outsideInk.textSoft }}
           >
             Thank you from the bottom of our hearts.
           </p>
           <p
             className={`font-goudy-italic ${ct.body} italic`}
-            style={{ color: C.goldSoft }}
+            style={{ color: outsideInk.textSoft }}
           >
             With love,
             <br />

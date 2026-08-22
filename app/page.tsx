@@ -169,7 +169,7 @@ export default function Home() {
           >
             {cinematicEntry && (
               <motion.div
-                className="fixed inset-0 z-[28] pointer-events-none bg-[#04103B]"
+                className="fixed inset-0 z-[28] pointer-events-none bg-[#707B6B]"
                 aria-hidden="true"
                 initial={{ clipPath: "circle(0% at 50% 38%)", opacity: 0.95 }}
                 animate={{ clipPath: "circle(145% at 50% 38%)", opacity: 0 }}
@@ -186,7 +186,7 @@ export default function Home() {
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
                 <Suspense fallback={<div className="w-full h-full bg-gradient-to-b from-primary/10 to-secondary/5" />}>
-                  <Silk speed={8} scale={0.9} color="#04103B" noiseIntensity={0} rotation={0.3} />
+                  <Silk speed={8} scale={0.9} color="#707B6B" noiseIntensity={0} rotation={0.3} />
                 </Suspense>
               </motion.div>
             )}
@@ -219,11 +219,11 @@ export default function Home() {
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
               <Welcome />
-               <CoupleVideo /> 
-              <LoveStory />
+               {/* <CoupleVideo />  */}
+              {/* <LoveStory /> */}
               {/* <ProposalVideo /> */}
               <Countdown />
-              <Gallery />
+              {/* <Gallery /> */}
               <Details />
               <VideoMessage />
               <Messages />
@@ -238,7 +238,7 @@ export default function Home() {
               {/* <WeddingPlaylist /> */}
               <FAQ />
               <Registry />
-              <SnapShare />
+              {/* <SnapShare /> */}
 
               <Footer />
               </motion.div>

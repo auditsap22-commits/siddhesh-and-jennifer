@@ -29,17 +29,14 @@ interface HeroProps {
 }
 
 const DECO = {
-  top: '/decoration/deco/top-center-decoration.png',
-  bl: '/decoration/deco/left-bottom-small.png',
-  br: '/decoration/deco/right-bottom-small.png',
-  names: '/decoration/deco/couple name.png',
-  monogram: '/decoration/deco/monogram.png',
+  tl: '/decoration/left-top-decoration.png',
+  tr: '/decoration/right-top-decoration.png',
+  bl: '/decoration/left-bottom-decoration.png',
+  br: '/decoration/right-bottom-decoration.png',
+  names: '/decoration/coupleName.png',
 } as const;
 
-const BG_VIDEO =
-  '/background_music/No Copyright Video, Background, Blue Screen, Motion Graphics, Animated Background.mp4';
-
-const GOLD_PARTICLES = ['#c5a059', '#d4af37', '#e6d3a3', '#d4af37'] as const;
+const SAGE_PARTICLES = ['#4b5d44', '#6a7b5c', '#8b9d78', '#c9d2bc'] as const;
 
 const focusLiftEase: Transition = { duration: 1.15, ease: [0.22, 1, 0.36, 1] };
 const revealEntryEase: Transition = { duration: 0.9, ease: [0.22, 1, 0.36, 1] };
@@ -96,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({
   const groomName = siteConfig.couple.groomNickname;
   const brideName = siteConfig.couple.brideNickname;
   const coupleNames = `${groomName} & ${brideName}`;
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const monogramSrc = siteConfig.couple.monogram || '/monogram/monogram.png';
 
   const letterDateNumeric = useMemo(() => {
     const parsed = parseWeddingDate(siteConfig.ceremony.date ?? siteConfig.wedding.date);
@@ -162,51 +159,6 @@ export const Hero: React.FC<HeroProps> = ({
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-
-    const playLoop = () => {
-      if (reduceMotion) return;
-      video.muted = true;
-      const playback = video.play();
-      if (playback) playback.catch(() => {});
-    };
-
-    const restart = () => {
-      if (reduceMotion) return;
-      video.currentTime = 0.001;
-      playLoop();
-    };
-
-    const keepAlive = () => {
-      if (reduceMotion || !video.duration) return;
-      if (video.currentTime >= video.duration - 0.05) {
-        restart();
-      }
-    };
-
-    if (reduceMotion) {
-      video.pause();
-      return;
-    }
-
-    playLoop();
-    video.addEventListener('ended', restart);
-    video.addEventListener('timeupdate', keepAlive);
-    video.addEventListener('stalled', playLoop);
-
-    return () => {
-      video.removeEventListener('ended', restart);
-      video.removeEventListener('timeupdate', keepAlive);
-      video.removeEventListener('stalled', playLoop);
-    };
-  }, [reduceMotion, mounted]);
 
   useEffect(() => {
     if (!visible) {
@@ -455,48 +407,39 @@ export const Hero: React.FC<HeroProps> = ({
     >
       {!reduceMotion && (
         <div className="env-invite-particles pointer-events-none" aria-hidden="true">
-          <InviteParticles count={28} palette={GOLD_PARTICLES} />
+          <InviteParticles count={28} palette={SAGE_PARTICLES} />
         </div>
       )}
 
-      <video
-        ref={videoRef}
-        className="env-invite-video"
-        src={encodeURI(BG_VIDEO)}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        disablePictureInPicture
-        aria-hidden="true"
-      />
-
       <div className="env-invite-bg-glow pointer-events-none" aria-hidden="true" />
 
-      <div className="env-invite-frame" aria-hidden="true">
-        <span className="env-invite-frame-arm env-invite-frame-arm--top-left" />
-        <span className="env-invite-frame-arm env-invite-frame-arm--top-right" />
-        <span className="env-invite-frame-arm env-invite-frame-arm--left" />
-        <span className="env-invite-frame-arm env-invite-frame-arm--right" />
-        <span className="env-invite-frame-arm env-invite-frame-arm--bottom" />
-      </div>
+      <div className="env-invite-frame" aria-hidden="true" />
 
-      <div className="env-invite-deco env-invite-deco--top pointer-events-none" aria-hidden="true">
+      <div className="env-invite-deco env-invite-deco--tl pointer-events-none" aria-hidden="true">
         <Image
-          src={DECO.top}
+          src={DECO.tl}
           alt=""
-          width={2078}
-          height={598}
+          width={1138}
+          height={1172}
           priority
-          sizes="(max-width: 768px) 90vw, 480px"
+          sizes="(max-width: 768px) 52vw, 280px"
+        />
+      </div>
+      <div className="env-invite-deco env-invite-deco--tr pointer-events-none" aria-hidden="true">
+        <Image
+          src={DECO.tr}
+          alt=""
+          width={1283}
+          height={1226}
+          priority
+          sizes="(max-width: 768px) 50vw, 260px"
         />
       </div>
       <div className="env-invite-deco env-invite-deco--bl pointer-events-none" aria-hidden="true">
-        <Image src={DECO.bl} alt="" width={851} height={1472} sizes="200px" />
+        <Image src={DECO.bl} alt="" width={1115} height={1411} sizes="(max-width: 768px) 50vw, 260px" />
       </div>
       <div className="env-invite-deco env-invite-deco--br pointer-events-none" aria-hidden="true">
-        <Image src={DECO.br} alt="" width={851} height={1472} sizes="200px" />
+        <Image src={DECO.br} alt="" width={988} height={1487} sizes="(max-width: 768px) 52vw, 280px" />
       </div>
 
       <div className="env-invite-ghost-date pointer-events-none select-none" aria-hidden="true">
@@ -636,11 +579,15 @@ export const Hero: React.FC<HeroProps> = ({
                         className="env-invite-letter-names"
                         role="img"
                         aria-label={coupleNames}
-                        style={{
-                          WebkitMaskImage: `url("${encodeURI(DECO.names)}")`,
-                          maskImage: `url("${encodeURI(DECO.names)}")`,
-                        }}
-                      />
+                      >
+                        <Image
+                          src={DECO.names}
+                          alt={coupleNames}
+                          width={1672}
+                          height={941}
+                          sizes="220px"
+                        />
+                      </div>
                       <span className="env-invite-letter-verse-title">
                         Two Become One
                       </span>
@@ -710,16 +657,16 @@ export const Hero: React.FC<HeroProps> = ({
                 >
                   <defs>
                     <radialGradient id={sealWaxGrad} cx="38%" cy="30%" r="72%">
-                      <stop offset="0%" stopColor="#e6d3a3" />
-                      <stop offset="48%" stopColor="#d4af37" />
-                      <stop offset="100%" stopColor="#8a6a18" />
+                      <stop offset="0%" stopColor="#c5d0b4" />
+                      <stop offset="48%" stopColor="#6a7b5c" />
+                      <stop offset="100%" stopColor="#3d4d36" />
                     </radialGradient>
                     <clipPath id={`${sealId}-circle`}>
                       <circle cx="60" cy="60" r="54" />
                     </clipPath>
                     <mask id={`${sealId}-mono-mask`}>
                       <image
-                        href={DECO.monogram}
+                        href={monogramSrc}
                         x="18"
                         y="16"
                         width="84"
@@ -741,7 +688,7 @@ export const Hero: React.FC<HeroProps> = ({
                     cy="60"
                     r="54"
                     fill="none"
-                    stroke="rgba(255,255,255,0.28)"
+                    stroke="rgba(247,244,235,0.35)"
                     strokeWidth="1"
                   />
 
@@ -751,7 +698,7 @@ export const Hero: React.FC<HeroProps> = ({
                       y="16"
                       width="84"
                       height="84"
-                      fill="#04103B"
+                      fill="#f7f4eb"
                       mask={`url(#${sealId}-mono-mask)`}
                       className="env-invite-seal-mono-img"
                     />

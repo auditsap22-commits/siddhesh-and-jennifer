@@ -7,7 +7,6 @@ import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import Counter from "@/components/Counter"
-import Image from "next/image"
 import { parseWeddingDate } from "@/lib/wedding-date"
 
 interface TimeLeft {
@@ -40,24 +39,13 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
+  text: "#ffffff",
+  textSoft: "rgba(255, 255, 255, 0.82)",
+  line: "rgba(255, 255, 255, 0.45)",
 } as const
-
-const DECO = {
-  top: "/decoration/deco/top-center-decoration.png",
-  bl: "/decoration/deco/left-bottom-small.png",
-  br: "/decoration/deco/right-bottom-small.png",
-} as const
-
-const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
-const goldFill =
-  "linear-gradient(180deg, #e6d3a3 0%, #d4af37 42%, #c5a059 100%)"
-const goldGlow = `drop-shadow(0 0 16px color-mix(in srgb, ${C.gold} 38%, transparent))`
 
 const outsideDividerLineStyle = {
-  background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
+  background: `linear-gradient(to right, transparent, ${C.line}, transparent)`,
 } as const
 
 function OutsideDivider() {
@@ -66,13 +54,13 @@ function OutsideDivider() {
       <span className="h-px w-6 sm:w-10" style={outsideDividerLineStyle} />
       <span
         className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1"
-        style={{ backgroundColor: goldLine }}
+        style={{ backgroundColor: C.line }}
         aria-hidden
       />
       <span
         className="h-px w-6 sm:w-10"
         style={{
-          background: `linear-gradient(to left, transparent, ${goldLine}, transparent)`,
+          background: `linear-gradient(to left, transparent, ${C.line}, transparent)`,
         }}
       />
     </div>
@@ -94,7 +82,7 @@ function CountdownTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: C.goldBright,
+          color: C.text,
         }}
       >
         Counting Down
@@ -104,7 +92,7 @@ function CountdownTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: C.goldSoft,
+          color: C.textSoft,
         }}
       >
         To our forever
@@ -125,8 +113,8 @@ function CountdownUnit({ value, label }: CountdownUnitProps) {
         <div
           className="relative rounded-xl px-2.5 py-2.5 sm:rounded-2xl sm:px-3.5 sm:py-3.5 md:px-4 md:py-4"
           style={{
-            border: `1px solid ${goldLine}`,
-            backgroundColor: `color-mix(in srgb, ${C.gold} 10%, transparent)`,
+            border: `1px solid ${C.line}`,
+            backgroundColor: "transparent",
           }}
         >
           <div className="relative z-10 flex items-center justify-center">
@@ -136,7 +124,7 @@ function CountdownUnit({ value, label }: CountdownUnitProps) {
               fontSize={26}
               padding={4}
               gap={2}
-              textColor={C.goldBright}
+              textColor={C.text}
               fontWeight={800}
               borderRadius={6}
               horizontalPadding={3}
@@ -149,7 +137,7 @@ function CountdownUnit({ value, label }: CountdownUnitProps) {
               digitStyle={{
                 minWidth: "1.15ch",
                 fontFamily: "Arial, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                color: C.goldBright,
+                color: C.text,
               }}
             />
           </div>
@@ -158,7 +146,7 @@ function CountdownUnit({ value, label }: CountdownUnitProps) {
 
       <span
         className="text-[10px] font-inter font-semibold uppercase tracking-[0.16em] sm:text-xs md:text-sm"
-        style={{ color: C.goldSoft }}
+        style={{ color: C.textSoft }}
       >
         {label}
       </span>
@@ -258,32 +246,8 @@ export function Countdown() {
   return (
     <Section
       id="countdown"
-      className={`${theSeasons.variable} ${aboveTheBeyond.variable} hero-invite relative overflow-hidden`}
+      className={`${theSeasons.variable} ${aboveTheBeyond.variable} hero-invite relative overflow-hidden !bg-transparent [background:transparent] [--hero-gold:rgba(255,255,255,0.62)] [--hero-gold-bright:#ffffff] [--hero-gold-soft:rgba(255,255,255,0.82)]`}
     >
-      <div className="hero-invite-frame" aria-hidden="true">
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--top-left" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--top-right" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--left" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--right" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--bottom" />
-      </div>
-
-      <div className="hero-invite-deco hero-invite-deco--top" aria-hidden="true">
-        <Image
-          src={DECO.top}
-          alt=""
-          width={2078}
-          height={598}
-          sizes="(max-width: 768px) 90vw, 480px"
-        />
-      </div>
-      <div className="hero-invite-deco hero-invite-deco--bl" aria-hidden="true">
-        <Image src={DECO.bl} alt="" width={851} height={1472} sizes="200px" />
-      </div>
-      <div className="hero-invite-deco hero-invite-deco--br" aria-hidden="true">
-        <Image src={DECO.br} alt="" width={851} height={1472} sizes="200px" />
-      </div>
-      
       {/* Monogram - centered at top */}
       <div className="relative z-10 mb-6 flex justify-center pt-16 sm:mb-8 sm:pt-20 md:mb-10 md:pt-24">
         <motion.div
@@ -297,7 +261,7 @@ export function Countdown() {
             role="img"
             aria-label={`${groomNickname} & ${brideNickname} Monogram`}
             style={{
-              background: goldFill,
+              background: "#ffffff",
               WebkitMaskImage: `url("${encodeURI(siteConfig.couple.monogram)}")`,
               maskImage: `url("${encodeURI(siteConfig.couple.monogram)}")`,
               WebkitMaskSize: "contain",
@@ -306,7 +270,7 @@ export function Countdown() {
               maskRepeat: "no-repeat",
               WebkitMaskPosition: "center",
               maskPosition: "center",
-              filter: goldGlow,
+              filter: "drop-shadow(0 0 18px rgb(255 255 255 / 28%))",
             }}
           />
         </motion.div>
@@ -319,7 +283,7 @@ export function Countdown() {
         </div>
         <CountdownTitle />
         <div className="mt-3 flex items-center justify-center sm:mt-4">
-          <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: goldLine }} />
+          <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: C.line }} />
         </div>
       </div>
 
@@ -349,7 +313,7 @@ export function Countdown() {
               <div className="w-full max-w-2xl mx-auto">
                 <div
                   className={`${cinzel.className} flex flex-col items-center gap-1.5 font-bold sm:gap-2.5 md:gap-3`}
-                  style={{ color: C.goldBright }}
+                  style={{ color: C.text }}
                 >
                   {/* Month */}
                   <span className="text-[0.65rem] uppercase tracking-[0.4em] sm:text-xs sm:tracking-[0.5em] md:text-sm">
@@ -360,14 +324,14 @@ export function Countdown() {
                   <div className="flex w-full items-center gap-2 sm:gap-4 md:gap-5">
                     {/* Day of week & divider */}
                     <div className="flex flex-1 items-center justify-end gap-1.5 sm:gap-2.5">
-                      <span className="h-[0.5px] flex-1" style={{ background: goldLine }} />
+                      <span className="h-[0.5px] flex-1" style={{ background: C.line }} />
                       <span
                         className="text-[0.6rem] uppercase tracking-[0.3em] sm:text-[0.7rem] sm:tracking-[0.4em] md:text-xs"
-                        style={{ color: C.goldSoft }}
+                        style={{ color: C.textSoft }}
                       >
                         {ceremonyDayShort}
                       </span>
-                      <span className="h-[0.5px] w-6 sm:w-8 md:w-10" style={{ background: goldLine }} />
+                      <span className="h-[0.5px] w-6 sm:w-8 md:w-10" style={{ background: C.line }} />
                     </div>
 
                     {/* Day number */}
@@ -381,14 +345,14 @@ export function Countdown() {
 
                     {/* Time */}
                     <div className="flex flex-1 items-center gap-1.5 sm:gap-2.5">
-                      <span className="h-[0.5px] w-6 sm:w-8 md:w-10" style={{ background: goldLine }} />
+                      <span className="h-[0.5px] w-6 sm:w-8 md:w-10" style={{ background: C.line }} />
                       <span
                         className="text-[0.6rem] uppercase tracking-[0.3em] sm:text-[0.7rem] sm:tracking-[0.4em] md:text-xs"
-                        style={{ color: C.goldSoft }}
+                        style={{ color: C.textSoft }}
                       >
                         {ceremonyTimeDisplay.split(",")[0]}
                       </span>
-                      <span className="h-[0.5px] flex-1" style={{ background: goldLine }} />
+                      <span className="h-[0.5px] flex-1" style={{ background: C.line }} />
                     </div>
                   </div>
 
@@ -407,7 +371,7 @@ export function Countdown() {
             className={`${theSeasons.className} block uppercase tracking-[0.16em] sm:tracking-[0.2em]`}
             style={{
               fontSize: "clamp(0.8rem, 2.2vw, 1.1rem)",
-              color: C.goldSoft,
+              color: C.textSoft,
             }}
           >
             Until We Say
@@ -416,7 +380,7 @@ export function Countdown() {
             className={`${aboveTheBeyond.className} mt-1 block leading-[0.9] sm:mt-1.5`}
             style={{
               fontSize: "clamp(1.35rem, 4.5vw, 2.25rem)",
-              color: C.goldBright,
+              color: C.text,
             }}
           >
             &ldquo;I Do.&rdquo;

@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useState, useEffect } from "react"
 import { Cinzel } from "next/font/google"
 import { sectionType } from "@/lib/section-typography"
+import { useSiteConfig } from "@/hooks/use-site-config"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -12,19 +13,19 @@ const cinzel = Cinzel({
 })
 
 const C = {
-  navy: "#04103B",
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
-  paper: "#f7f3e9",
+  navy: "#4b5d44",
+  gold: "#6a7b5c",
+  goldBright: "#4b5d44",
+  goldSoft: "#6a7b5c",
+  paper: "#f9f6ee",
 } as const
 
 const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
 
 const palette = {
   body: C.navy,
-  heading: C.gold,
-  label: "#364061",
+  heading: C.goldBright,
+  label: C.goldSoft,
   accent: C.gold,
 } as const
 
@@ -50,6 +51,10 @@ interface MessageWallDisplayProps {
 }
 
 export default function MessageWallDisplay({ messages, loading }: MessageWallDisplayProps) {
+  const siteConfig = useSiteConfig()
+  const groom = siteConfig.couple.groomNickname || siteConfig.couple.groom
+  const bride = siteConfig.couple.brideNickname || siteConfig.couple.bride
+  const together = `${groom} & ${bride}`
   const [visibleMessages, setVisibleMessages] = useState<Message[]>([])
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -93,15 +98,15 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
       <div className="px-4 py-8 text-center sm:py-12 md:py-16">
         <h3
           className={`${cinzel.className} mb-2 font-semibold sm:mb-3 ${sectionType.subheader}`}
-          style={{ color: C.goldBright }}
+          style={{ color: "#ffffff" }}
         >
           No messages yet
         </h3>
         <p
           className={`font-goudy-italic mx-auto mb-5 max-w-md sm:mb-6 ${sectionType.textRelaxed}`}
-          style={{ color: C.goldSoft }}
+          style={{ color: "rgba(255, 255, 255, 0.82)" }}
         >
-          Be the first to leave a short note for J & C.
+          Be the first to leave a short note for {together}.
         </p>
         <div className="flex justify-center">
           <span
@@ -158,13 +163,13 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
                 <div
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-md ring-2 transition-transform duration-300 group-hover:scale-110 sm:h-9 sm:w-9 md:h-10 md:w-10"
                   style={{
-                    backgroundColor: C.gold,
-                    boxShadow: `0 0 0 2px color-mix(in srgb, ${C.goldSoft} 80%, white), 0 4px 12px color-mix(in srgb, ${C.gold} 40%, transparent)`,
+                    backgroundColor: C.navy,
+                    boxShadow: `0 0 0 2px color-mix(in srgb, ${C.goldSoft} 40%, white), 0 4px 12px color-mix(in srgb, ${C.navy} 28%, transparent)`,
                   }}
                 >
                   <span
                     className={`${cinzel.className} ${sectionType.label} font-semibold`}
-                    style={{ color: C.navy }}
+                    style={{ color: C.paper }}
                   >
                     {msg.name
                       .split(" ")

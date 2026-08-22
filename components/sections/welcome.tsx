@@ -12,30 +12,13 @@ const cinzel = Cinzel({
 })
 
 const C = {
-  navy: "#04103B",
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
-  paper: "#f7f3e9",
+  sage: "#4b5d44",
+  sageSoft: "#6a7b5c",
+  cream: "#f7f4eb",
+  paper: "#f9f6ee",
 } as const
 
-const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
-
-const WEDDING_BRAND = [
-  "God wrote our story.",
-  "He guided our journey.",
-  "He strengthened our faith.",
-  "He taught us patience.",
-  "And in His perfect time,",
-  "He brought us together.",
-] as const
-
-const WEDDING_COVENANT = [
-  "Two lives.",
-  "One covenant.",
-  "One faith.",
-  "One future.",
-] as const
+const sageLine = `color-mix(in srgb, ${C.sage} 48%, transparent)`
 
 const theSeasons = localFont({
   src: "../../Font/Fontspring-DEMO-theseasons-reg.otf",
@@ -55,18 +38,18 @@ function OrnamentalDivider({ compact = false }: { compact?: boolean }) {
       <span
         className={`h-px ${compact ? "w-6 sm:w-10" : "w-8 sm:w-12"}`}
         style={{
-          background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
+          background: `linear-gradient(to right, transparent, ${sageLine}, transparent)`,
         }}
       />
       <span
         className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1"
-        style={{ backgroundColor: goldLine }}
+        style={{ backgroundColor: sageLine }}
         aria-hidden
       />
       <span
         className={`h-px ${compact ? "w-6 sm:w-10" : "w-8 sm:w-12"}`}
         style={{
-          background: `linear-gradient(to left, transparent, ${goldLine}, transparent)`,
+          background: `linear-gradient(to left, transparent, ${sageLine}, transparent)`,
         }}
       />
     </div>
@@ -75,7 +58,7 @@ function OrnamentalDivider({ compact = false }: { compact?: boolean }) {
 
 function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
   const lineStyle = {
-    background: `linear-gradient(to right, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
+    background: `linear-gradient(to right, transparent, color-mix(in srgb, ${C.sage} 55%, transparent))`,
   }
 
   return (
@@ -83,14 +66,14 @@ function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
       <span className="h-px w-5 sm:w-7 md:w-9" style={lineStyle} aria-hidden />
       <p
         className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
-        style={{ color: C.navy }}
+        style={{ color: C.sage }}
       >
         {groom}
         <span
           className={`${aboveTheBeyond.className} mx-1.5 inline-block normal-case tracking-normal sm:mx-2`}
           style={{
             fontSize: "1.35em",
-            color: C.gold,
+            color: C.sageSoft,
             verticalAlign: "middle",
           }}
           aria-hidden
@@ -102,7 +85,7 @@ function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
       <span
         className="h-px w-5 sm:w-7 md:w-9"
         style={{
-          background: `linear-gradient(to left, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
+          background: `linear-gradient(to left, transparent, color-mix(in srgb, ${C.sage} 55%, transparent))`,
         }}
         aria-hidden
       />
@@ -126,7 +109,7 @@ function LayeredWelcomeTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--welcome-size)",
-          color: C.navy,
+          color: C.sage,
         }}
       >
         Welcome
@@ -137,7 +120,7 @@ function LayeredWelcomeTitle() {
         className={`${aboveTheBeyond.className} relative z-10 mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9]`}
         style={{
           fontSize: "var(--script-size)",
-          color: C.navy,
+          color: C.sage,
         }}
       >
         to our love story
@@ -145,63 +128,6 @@ function LayeredWelcomeTitle() {
 
       <span className="sr-only"> to our love story</span>
     </h2>
-  )
-}
-
-function WeddingBrand() {
-  return (
-    <blockquote className="relative mx-auto max-w-md px-6 py-2 text-center sm:px-8 sm:py-3">
-      <span
-        aria-hidden
-        className={`${theSeasons.className} pointer-events-none absolute -top-1 left-0 leading-none select-none sm:-top-2`}
-        style={{
-          fontSize: "3.25rem",
-          color: C.goldBright,
-          opacity: 0.7,
-        }}
-      >
-        “
-      </span>
-      <span
-        aria-hidden
-        className={`${theSeasons.className} pointer-events-none absolute -bottom-4 right-0 leading-none select-none sm:-bottom-5`}
-        style={{
-          fontSize: "3.25rem",
-          color: C.goldBright,
-          opacity: 0.7,
-        }}
-      >
-        ”
-      </span>
-
-      <div
-        className={`font-goudy-italic space-y-0 leading-snug ${sectionType.textSnug}`}
-        style={{ color: C.navy }}
-      >
-        {WEDDING_BRAND.map((line) => (
-          <p key={line}>{line}</p>
-        ))}
-      </div>
-
-      <div className="mt-3 space-y-0 leading-snug sm:mt-3.5">
-        {WEDDING_COVENANT.map((line) => (
-          <p
-            key={line}
-            className={`${cinzel.className} text-[0.72rem] font-medium uppercase tracking-[0.22em] sm:text-[0.78rem] sm:tracking-[0.26em]`}
-            style={{ color: C.gold }}
-          >
-            {line}
-          </p>
-        ))}
-      </div>
-
-      <p
-        className={`${cinzel.className} mt-3 text-[0.82rem] font-semibold uppercase tracking-[0.28em] sm:mt-3.5 sm:text-[0.9rem] sm:tracking-[0.32em]`}
-        style={{ color: C.goldBright }}
-      >
-        Two become one.
-      </p>
-    </blockquote>
   )
 }
 
@@ -223,16 +149,21 @@ export function Welcome() {
           transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
           className="relative min-w-0 overflow-visible rounded-lg border px-4 pt-6 pb-10 @container/welcome sm:rounded-xl sm:px-7 sm:pt-7 sm:pb-12 md:rounded-2xl md:px-8 md:pt-8 md:pb-14"
           style={{
-            background: `linear-gradient(180deg, color-mix(in srgb, ${C.goldSoft} 28%, ${C.paper}) 0%, ${C.paper} 48%, color-mix(in srgb, ${C.gold} 10%, ${C.paper}) 100%)`,
-            borderColor: goldLine,
-            boxShadow: `0 12px 36px color-mix(in srgb, ${C.navy} 28%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.goldSoft} 55%, transparent)`,
+            backgroundColor: C.paper,
+            backgroundImage: `
+              radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, #8b9d78 22%, transparent), transparent 68%),
+              radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, #8b9d78 18%, transparent), transparent 68%),
+              linear-gradient(180deg, ${C.cream} 0%, ${C.paper} 52%, #f3eee2 100%)
+            `,
+            borderColor: sageLine,
+            boxShadow: `0 12px 36px color-mix(in srgb, ${C.sage} 14%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.cream} 70%, transparent)`,
           }}
         >
           <div
             className="wedding-frame-inner hidden min-[400px]:block"
             aria-hidden
             style={{
-              borderColor: goldLine,
+              borderColor: sageLine,
             }}
           />
 
@@ -240,7 +171,7 @@ export function Welcome() {
             aria-hidden
             className="pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
-              background: `linear-gradient(135deg, color-mix(in srgb, ${C.goldSoft} 22%, transparent) 0%, transparent 48%)`,
+              background: `linear-gradient(135deg, color-mix(in srgb, #8b9d78 12%, transparent) 0%, transparent 48%)`,
             }}
           />
 
@@ -248,7 +179,7 @@ export function Welcome() {
             aria-hidden
             className="pointer-events-none absolute inset-x-5 top-0 h-px sm:inset-x-8"
             style={{
-              background: `linear-gradient(to right, transparent, ${C.gold}, transparent)`,
+              background: `linear-gradient(to right, transparent, ${C.sageSoft}, transparent)`,
             }}
           />
 
@@ -261,22 +192,18 @@ export function Welcome() {
           </header>
 
           <div className="relative z-10 mx-4 space-y-5 text-center sm:mx-6 sm:space-y-6 md:mx-7 md:space-y-7">
-            <WeddingBrand />
-
-            <OrnamentalDivider compact />
-
             <figure className="px-1 py-1 sm:px-2">
               <blockquote>
                 <p
                   className={`font-goudy-italic ${sectionType.textSnug}`}
-                  style={{ color: C.navy }}
+                  style={{ color: C.sage }}
                 >
                   &ldquo;When the time is right, I, the Lord will make it happen.&rdquo;
                 </p>
                 <figcaption className="mt-2 sm:mt-2.5">
                   <cite
                     className={`${cinzel.className} ${sectionType.label} not-italic uppercase tracking-[0.2em] sm:tracking-[0.24em]`}
-                    style={{ color: C.goldBright }}
+                    style={{ color: C.sageSoft }}
                   >
                     Isaiah 60:22
                   </cite>
@@ -286,7 +213,7 @@ export function Welcome() {
 
             <div
               className={`font-goudy-italic space-y-3 px-1 text-center sm:space-y-3.5 sm:px-2 md:space-y-4 ${sectionType.textRelaxed}`}
-              style={{ color: C.navy }}
+              style={{ color: C.sage }}
             >
               <p>
                 Dear family and friends, we are overjoyed to begin this new chapter together and
@@ -304,42 +231,20 @@ export function Welcome() {
               </p>
             </div>
 
-            <div className="space-y-5 pt-1 sm:space-y-6 sm:pt-2 md:space-y-7">
-              <aside className="px-1 py-1 sm:px-2">
-                <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-center sm:gap-2.5">
-                  <p
-                    className={`${cinzel.className} ${sectionType.label} shrink-0 font-semibold uppercase tracking-[0.18em] sm:tracking-[0.22em]`}
-                    style={{ color: C.gold }}
-                  >
-                    Share in our joy
-                  </p>
-                  <span className="hidden sm:inline" style={{ color: `${C.gold}66` }} aria-hidden>
-                    ·
-                  </span>
-                  <p
-                    className={`font-goudy-italic ${sectionType.textSnug}`}
-                    style={{ color: C.navy }}
-                  >
-                    {siteConfig.snapShare.hashtag.join(" ")}
-                  </p>
-                </div>
-              </aside>
-
-              <footer className="space-y-2 px-1 pt-4 pb-2 sm:space-y-2.5 sm:px-2 sm:pt-5 sm:pb-3 md:pt-6 md:pb-4">
-                <p
-                  className={`${aboveTheBeyond.className} ${sectionType.script}`}
-                  style={{ color: C.goldSoft }}
-                >
-                  With all our love,
-                </p>
-                <p
-                  className={`${cinzel.className} ${sectionType.subheader} mb-3 font-semibold tracking-[0.12em] sm:mb-4 sm:tracking-[0.16em] md:mb-5 md:tracking-[0.18em]`}
-                  style={{ color: C.navy }}
-                >
-                  {groomName} &amp; {brideName}
-                </p>
-              </footer>
-            </div>
+            <footer className="space-y-2 px-1 pt-4 pb-2 sm:space-y-2.5 sm:px-2 sm:pt-5 sm:pb-3 md:pt-6 md:pb-4">
+              <p
+                className={`${aboveTheBeyond.className} ${sectionType.script}`}
+                style={{ color: C.sageSoft }}
+              >
+                With all our love,
+              </p>
+              <p
+                className={`${cinzel.className} ${sectionType.subheader} mb-3 font-semibold tracking-[0.12em] sm:mb-4 sm:tracking-[0.16em] md:mb-5 md:tracking-[0.18em]`}
+                style={{ color: C.sage }}
+              >
+                {groomName} &amp; {brideName}
+              </p>
+            </footer>
           </div>
         </motion.article>
       </div>

@@ -7,7 +7,6 @@ import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 import { motion } from "motion/react"
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
-import Image from "next/image"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -27,24 +26,17 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
+  text: "#ffffff",
+  textSoft: "rgba(255, 255, 255, 0.82)",
+  line: "rgba(255, 255, 255, 0.45)",
 } as const
 
-const DECO = {
-  top: "/decoration/deco/top-center-decoration.png",
-  bl: "/decoration/deco/left-bottom-small.png",
-  br: "/decoration/deco/right-bottom-small.png",
-} as const
-
-const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
-const goldFill =
-  "linear-gradient(180deg, #e6d3a3 0%, #d4af37 42%, #c5a059 100%)"
-const goldGlow = `drop-shadow(0 0 16px color-mix(in srgb, ${C.gold} 38%, transparent))`
+const goldLine = C.line
+const goldFill = "#ffffff"
+const goldGlow = "drop-shadow(0 0 16px rgb(255 255 255 / 28%))"
 
 const outsideDividerLineStyle = {
-  background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
+  background: `linear-gradient(to right, transparent, ${C.line}, transparent)`,
 } as const
 
 type TimelineIcon = React.ComponentType<React.SVGProps<SVGSVGElement>>
@@ -92,7 +84,7 @@ function TimelineTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: C.goldBright,
+          color: C.text,
         }}
       >
         Wedding Timeline
@@ -102,7 +94,7 @@ function TimelineTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: C.goldSoft,
+          color: C.textSoft,
         }}
       >
         Our day, moment by moment
@@ -169,34 +161,10 @@ export function WeddingTimeline() {
   return (
     <section
       id="wedding-timeline"
-      className={`${theSeasons.variable} ${aboveTheBeyond.variable} hero-invite relative z-10 overflow-hidden bg-transparent py-10 sm:py-12 md:py-16 lg:py-20`}
+      className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative z-10 overflow-hidden !bg-transparent [background:transparent] py-10 sm:py-12 md:py-16 lg:py-20`}
     >
-      <div className="hero-invite-frame" aria-hidden="true">
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--top-left" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--top-right" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--left" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--right" />
-        <span className="hero-invite-frame-arm hero-invite-frame-arm--bottom" />
-      </div>
-
-      <div className="hero-invite-deco hero-invite-deco--top" aria-hidden="true">
-        <Image
-          src={DECO.top}
-          alt=""
-          width={2078}
-          height={598}
-          sizes="(max-width: 768px) 90vw, 480px"
-        />
-      </div>
-      <div className="hero-invite-deco hero-invite-deco--bl" aria-hidden="true">
-        <Image src={DECO.bl} alt="" width={851} height={1472} sizes="200px" />
-      </div>
-      <div className="hero-invite-deco hero-invite-deco--br" aria-hidden="true">
-        <Image src={DECO.br} alt="" width={851} height={1472} sizes="200px" />
-      </div>
-
       {/* Header */}
-      <div className="relative z-10 mx-auto mb-8 max-w-5xl px-3 pt-16 text-center @container/timeline sm:mb-10 sm:px-4 sm:pt-20 md:mb-12 md:pt-24">
+      <div className="relative z-10 mx-auto mb-8 max-w-5xl px-3 pt-2 text-center @container/timeline sm:mb-10 sm:px-4 md:mb-12">
         <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
           <OutsideDivider />
         </div>
@@ -205,7 +173,7 @@ export function WeddingTimeline() {
         </div>
         <p
           className={`font-goudy-italic mx-auto mt-4 max-w-xl px-2 sm:mt-5 md:mt-6 ${sectionType.textRelaxed}`}
-          style={{ color: C.goldSoft }}
+          style={{ color: C.text }}
         >
           A simple overview of the key moments of our day, from arrival to farewell.
         </p>
@@ -263,7 +231,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
         </div>
 
         <div className="relative flex items-center justify-center">
-          <div className="h-2 w-2 rounded-full" style={{ backgroundColor: C.goldBright }} />
+          <div className="h-2 w-2 rounded-full" style={{ backgroundColor: C.text }} />
         </div>
 
         <div>
@@ -301,7 +269,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
         </div>
 
         <div className="relative flex items-center justify-center">
-          <div className="h-2 w-2 rounded-full" style={{ backgroundColor: C.goldBright }} />
+          <div className="h-2 w-2 rounded-full" style={{ backgroundColor: C.text }} />
         </div>
 
         <div>
@@ -337,13 +305,13 @@ function TimelineText({
     <div className={`max-w-md ${textAlign} ${align === "right" ? "ml-auto" : "mr-auto"}`}>
       <p
         className={`${cinzel.className} ${sectionType.label} tracking-[0.22em] uppercase`}
-        style={{ color: C.goldBright }}
+        style={{ color: C.text }}
       >
         {event.title}
       </p>
       <p
         className={`font-goudy-italic ${sectionType.textSnug} mt-0.5 opacity-95`}
-        style={{ color: C.goldSoft }}
+        style={{ color: C.textSoft }}
       >
         at {event.time}
       </p>
@@ -351,7 +319,7 @@ function TimelineText({
       {event.description && (
         <p
           className={`font-goudy-italic ${sectionType.textRelaxed} mt-1.5 opacity-90`}
-          style={{ color: C.goldSoft }}
+          style={{ color: C.textSoft }}
         >
           {event.description}
         </p>
@@ -360,7 +328,7 @@ function TimelineText({
       {event.location && (
         <p
           className={`font-goudy-italic ${sectionType.text} mt-1.5 leading-relaxed opacity-90`}
-          style={{ color: C.goldSoft }}
+          style={{ color: C.textSoft }}
         >
           {event.location}
         </p>
@@ -407,19 +375,19 @@ function IconMark({
       } flex items-center justify-center rounded-full border`}
       style={{
         borderColor: goldLine,
-        backgroundColor: `color-mix(in srgb, ${C.gold} 10%, transparent)`,
+        backgroundColor: "color-mix(in srgb, #ffffff 10%, transparent)",
         filter: goldGlow,
       }}
     >
       <Icon
         className={`${mobile ? "h-7 w-7" : "h-8 w-8 lg:h-9 lg:w-9"}`}
-        style={{ color: C.goldBright }}
+        style={{ color: C.text }}
       />
     </div>
   )
 }
 
-const iconStroke = C.goldBright
+const iconStroke = C.text
 
 function GuestsIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
