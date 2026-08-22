@@ -239,6 +239,7 @@ const ROLE_CATEGORY_ORDER = [
   "The Couple",
   "Parents of the Groom",
   "Parents of the Bride",
+  "Principal Sponsors",
   "Family of the Groom",
   "Family of the Bride",
   "Man of Honor",
@@ -265,8 +266,6 @@ const SINGLE_COLUMN_SECTIONS = new Set([
   "Ring Bearer",
   "Coin Bearer",
   "Bible Bearer",
-  "Flower Ladies",
-  "Flower Girls",
   "Presider",
 ])
 
@@ -456,24 +455,22 @@ export function Entourage() {
     const displayName = member.name.trim()
     return (
       <div
-        className={`relative flex flex-col ${containerAlign} justify-center py-0.5 sm:py-1 min-w-0 w-full max-w-full group/item transition-all duration-300`}
+        className={`relative flex flex-col ${containerAlign} justify-start py-0.5 sm:py-1 min-w-0 w-full max-w-full group/item transition-all duration-300`}
       >
         <div
           className="absolute inset-0 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 rounded-md"
           style={{ background: `linear-gradient(to right, transparent, color-mix(in srgb, ${reminderInk.champagne} 28%, transparent), transparent)` }}
         />
         <p
-          className={`font-goudy-italic relative font-medium normal-case ${textAlign} transition-all duration-300 whitespace-nowrap max-w-full overflow-hidden text-ellipsis`}
-          style={{ ...nameStyle, color: palette.heading }}
-          title={displayName}
+          className={`font-goudy-italic relative font-medium normal-case ${textAlign} max-w-full text-pretty break-words [overflow-wrap:anywhere]`}
+          style={{ ...nameStyle, color: palette.heading, lineHeight: 1.28 }}
         >
           {displayName}
         </p>
         {showRole && member.roleTitle && (
           <p
-            className={`relative ${ct.role} font-medium mt-0.5 leading-tight ${textAlign} tracking-wide uppercase transition-colors duration-300 whitespace-nowrap max-w-full overflow-hidden text-ellipsis`}
+            className={`relative ${ct.role} font-medium mt-0.5 leading-snug ${textAlign} tracking-wide uppercase max-w-full text-pretty break-words`}
             style={{ color: palette.label }}
-            title={member.roleTitle}
           >
             {member.roleTitle}
           </p>
@@ -500,7 +497,7 @@ export function Entourage() {
       return (
         <div className="mb-2 sm:mb-2.5 md:mb-3">
           <SectionTitle>{singleTitle}</SectionTitle>
-          <div className={`grid grid-cols-2 gap-x-1.5 sm:gap-x-3 md:gap-x-5 gap-y-1 sm:gap-y-1.5 ${centerContent ? 'max-w-3xl mx-auto' : ''}`}>
+          <div className={`grid grid-cols-2 items-start gap-x-1.5 sm:gap-x-3 md:gap-x-5 gap-y-1 sm:gap-y-1.5 ${centerContent ? 'max-w-3xl mx-auto' : ''}`}>
             {children}
           </div>
         </div>
@@ -509,7 +506,7 @@ export function Entourage() {
 
     return (
       <div className="mb-2 sm:mb-2.5 md:mb-3">
-        <div className="grid grid-cols-2 gap-x-1.5 sm:gap-x-3 md:gap-x-5 mb-2 sm:mb-2.5 md:mb-3">
+        <div className="grid grid-cols-2 items-start gap-x-1.5 sm:gap-x-3 md:gap-x-5 mb-2 sm:mb-2.5 md:mb-3">
           {leftTitle && (
             <SectionTitle align="right" className="pr-0.5 sm:pr-1">{leftTitle}</SectionTitle>
           )}
@@ -517,7 +514,7 @@ export function Entourage() {
             <SectionTitle align="left" className="pl-0.5 sm:pl-1">{rightTitle}</SectionTitle>
           )}
         </div>
-        <div className={`grid grid-cols-2 gap-x-1.5 sm:gap-x-3 md:gap-x-5 gap-y-1 sm:gap-y-1.5 ${centerContent ? 'max-w-3xl mx-auto' : ''}`}>
+        <div className={`grid grid-cols-2 items-start gap-x-1.5 sm:gap-x-3 md:gap-x-5 gap-y-1 sm:gap-y-1.5 ${centerContent ? 'max-w-3xl mx-auto' : ''}`}>
           {children}
         </div>
       </div>
@@ -652,7 +649,7 @@ export function Entourage() {
                   </button>
                 </div>
               </div>
-            ) : entourage.length === 0 ? (
+            ) : entourage.length === 0 && sponsors.length === 0 ? (
               <div className="text-center py-24 sm:py-28 md:py-32">
                 <p className={`font-goudy-italic ${ct.bodyLg}`} style={{ color: palette.body }}>
                   No entourage members yet
@@ -665,10 +662,14 @@ export function Entourage() {
                 const bridalPartyHasMembers =
                   (grouped["Groomsmen"]?.length ?? 0) > 0 ||
                   (grouped["Bridesmaids"]?.length ?? 0) > 0
+                const peerSponsors = grouped["Peer Sponsors"] || []
+                const hasSponsorsToShow =
+                  sponsors.length > 0 || peerSponsors.length > 0
                 
                 if (
                   members.length === 0 &&
-                  !(category === "Groomsmen" && bridalPartyHasMembers)
+                  !(category === "Groomsmen" && bridalPartyHasMembers) &&
+                  !(category === "Principal Sponsors" && hasSponsorsToShow)
                 ) {
                   return null
                 }
@@ -769,124 +770,125 @@ export function Entourage() {
                             </div>
                           )
                         })()}
-
-                        {/* Principal Sponsors section - displayed after Parents */}
-                        {sponsors.length > 0 && (
-                          <div key="SponsorsAfterParents">
-                            <div className="flex justify-center py-1.5 sm:py-2 md:py-2.5 mb-2 sm:mb-2.5 md:mb-3">
-                            </div>
-                            <TwoColumnLayout singleTitle="Principal Sponsors" centerContent={true}>
-                              {sponsors.map((sponsor, idx) => (
-                                <React.Fragment key={`sponsor-row-${idx}`}>
-                                  <div key={`sponsor-male-${idx}`} className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                    {sponsor.malePrincipalSponsor ? (
-                                      <NameItem 
-                                        member={{
-                                          name: sponsor.malePrincipalSponsor,
-                                          roleCategory: "",
-                                          roleTitle: "",
-                                          email: ""
-                                        }} 
-                                        align="right" 
-                                        showRole={false}
-                                      />
-                                    ) : (
-                                      <div className="py-0.5 sm:py-1 md:py-1.5" />
-                                    )}
-                                  </div>
-                                  <div key={`sponsor-female-${idx}`} className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                    {sponsor.femalePrincipalSponsor ? (
-                                      <NameItem 
-                                        member={{
-                                          name: sponsor.femalePrincipalSponsor,
-                                          roleCategory: "",
-                                          roleTitle: "",
-                                          email: ""
-                                        }} 
-                                        align="left" 
-                                        showRole={false}
-                                      />
-                                    ) : (
-                                      <div className="py-0.5 sm:py-1 md:py-1.5" />
-                                    )}
-                                  </div>
-                                </React.Fragment>
-                              ))}
-                            </TwoColumnLayout>
-                          </div>
-                        )}
-
-                        {/* Peer Sponsors section - displayed after Principal Sponsors */}
-                        {(() => {
-                          const peerSponsors = grouped["Peer Sponsors"] || []
-                          if (peerSponsors.length === 0) return null
-                          return (
-                            <div key="PeerSponsorsAfterPrincipal">
-                              <div className="flex justify-center py-1.5 sm:py-2 md:py-2.5 mb-2 sm:mb-2.5 md:mb-3" />
-                              <TwoColumnLayout singleTitle="Peer Sponsors" centerContent={true}>
-                                {peerSponsors.length === 2 ? (
-                                  <>
-                                    <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                      <NameItem member={peerSponsors[0]} align="right" showRole={false} />
-                                    </div>
-                                    <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                      <NameItem member={peerSponsors[1]} align="left" showRole={false} />
-                                    </div>
-                                  </>
-                                ) : peerSponsors.length <= 2 ? (
-                                  <div className="col-span-full">
-                                    <div className="max-w-sm mx-auto flex flex-col items-center gap-0.5 sm:gap-1 md:gap-1">
-                                      {peerSponsors.map((member, idx) => (
-                                        <NameItem
-                                          key={`peer-sponsor-${idx}-${member.name}`}
-                                          member={member}
-                                          align="center"
-                                          showRole={false}
-                                        />
-                                      ))}
-                                    </div>
-                                  </div>
-                                ) : (
-                                  (() => {
-                                    const half = Math.ceil(peerSponsors.length / 2)
-                                    const left = peerSponsors.slice(0, half)
-                                    const right = peerSponsors.slice(half)
-                                    const maxLen = Math.max(left.length, right.length)
-                                    const rows = []
-                                    for (let i = 0; i < maxLen; i++) {
-                                      const l = left[i]
-                                      const r = right[i]
-                                      rows.push(
-                                        <React.Fragment key={`peer-sponsor-row-${i}`}>
-                                          <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                            {l ? (
-                                              <NameItem member={l} align="right" showRole={false} />
-                                            ) : (
-                                              <div className="py-0.5 sm:py-1 md:py-1.5" />
-                                            )}
-                                          </div>
-                                          <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
-                                            {r ? (
-                                              <NameItem member={r} align="left" showRole={false} />
-                                            ) : (
-                                              <div className="py-0.5 sm:py-1 md:py-1.5" />
-                                            )}
-                                          </div>
-                                        </React.Fragment>
-                                      )
-                                    }
-                                    return rows
-                                  })()
-                                )}
-                              </TwoColumnLayout>
-                            </div>
-                          )
-                        })()}
                       </div>
                     )
                   }
                   // Skip rendering for "Parents of the Bride" since it's already rendered above
                   return null
+                }
+
+                if (category === "Principal Sponsors") {
+                  if (!hasSponsorsToShow) return null
+
+                  return (
+                    <div key="PrincipalSponsors" id="sponsors">
+                      {categoryIndex > 0 && (
+                        <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
+                          <div className="w-full max-w-md h-px" style={dividerLineStyle} />
+                        </div>
+                      )}
+                      {sponsors.length > 0 && (
+                        <TwoColumnLayout singleTitle="Principal Sponsors" centerContent={true}>
+                          {sponsors.map((sponsor, idx) => (
+                            <React.Fragment key={`sponsor-row-${idx}`}>
+                              <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                {sponsor.malePrincipalSponsor ? (
+                                  <NameItem
+                                    member={{
+                                      name: sponsor.malePrincipalSponsor,
+                                      roleCategory: "",
+                                      roleTitle: "",
+                                      email: "",
+                                    }}
+                                    align="right"
+                                    showRole={false}
+                                  />
+                                ) : (
+                                  <div className="py-0.5 sm:py-1 md:py-1.5" />
+                                )}
+                              </div>
+                              <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                {sponsor.femalePrincipalSponsor ? (
+                                  <NameItem
+                                    member={{
+                                      name: sponsor.femalePrincipalSponsor,
+                                      roleCategory: "",
+                                      roleTitle: "",
+                                      email: "",
+                                    }}
+                                    align="left"
+                                    showRole={false}
+                                  />
+                                ) : (
+                                  <div className="py-0.5 sm:py-1 md:py-1.5" />
+                                )}
+                              </div>
+                            </React.Fragment>
+                          ))}
+                        </TwoColumnLayout>
+                      )}
+                      {peerSponsors.length > 0 && (
+                        <div className={sponsors.length > 0 ? "mt-2 sm:mt-2.5 md:mt-3" : undefined}>
+                          <TwoColumnLayout singleTitle="Peer Sponsors" centerContent={true}>
+                            {peerSponsors.length === 2 ? (
+                              <>
+                                <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                  <NameItem member={peerSponsors[0]} align="right" showRole={false} />
+                                </div>
+                                <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                  <NameItem member={peerSponsors[1]} align="left" showRole={false} />
+                                </div>
+                              </>
+                            ) : peerSponsors.length <= 2 ? (
+                              <div className="col-span-full">
+                                <div className="max-w-sm mx-auto flex flex-col items-center gap-0.5 sm:gap-1">
+                                  {peerSponsors.map((member, idx) => (
+                                    <NameItem
+                                      key={`peer-sponsor-${idx}-${member.name}`}
+                                      member={member}
+                                      align="center"
+                                      showRole={false}
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                            ) : (
+                              (() => {
+                                const half = Math.ceil(peerSponsors.length / 2)
+                                const left = peerSponsors.slice(0, half)
+                                const right = peerSponsors.slice(half)
+                                const maxLen = Math.max(left.length, right.length)
+                                const rows = []
+                                for (let i = 0; i < maxLen; i++) {
+                                  const l = left[i]
+                                  const r = right[i]
+                                  rows.push(
+                                    <React.Fragment key={`peer-sponsor-row-${i}`}>
+                                      <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                        {l ? (
+                                          <NameItem member={l} align="right" showRole={false} />
+                                        ) : (
+                                          <div className="py-0.5 sm:py-1 md:py-1.5" />
+                                        )}
+                                      </div>
+                                      <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                        {r ? (
+                                          <NameItem member={r} align="left" showRole={false} />
+                                        ) : (
+                                          <div className="py-0.5 sm:py-1 md:py-1.5" />
+                                        )}
+                                      </div>
+                                    </React.Fragment>
+                                  )
+                                }
+                                return rows
+                              })()
+                            )}
+                          </TwoColumnLayout>
+                        </div>
+                      )}
+                    </div>
+                  )
                 }
 
                 // Special handling for Family of the Groom/Bride - combine into single two-column layout
@@ -1061,33 +1063,6 @@ export function Entourage() {
                   }
                   // Skip rendering for "Little Bride" since it's already rendered above
                   return null
-                }
-
-                // Flower Ladies — always a single centered column
-                if (category === "Flower Ladies") {
-                  if (members.length === 0) return null
-
-                  return (
-                    <div key="FlowerLadies">
-                      {categoryIndex > 0 && (
-                        <div className="flex justify-center py-2 sm:py-2.5 md:py-3 mb-2 sm:mb-2.5 md:mb-3">
-                          <div className="w-full max-w-md h-px" style={dividerLineStyle} />
-                        </div>
-                      )}
-                      <div className="mb-2 sm:mb-2.5 md:mb-3">
-                        <SectionTitle>Flower Ladies</SectionTitle>
-                        <div className="max-w-sm mx-auto flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2">
-                          {members.map((member, idx) => (
-                            <NameItem
-                              key={`flower-lady-${idx}-${member.name}`}
-                              member={member}
-                              align="center"
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )
                 }
 
                 // Special handling for Bridesmaids and Groomsmen - combine into single two-column layout
