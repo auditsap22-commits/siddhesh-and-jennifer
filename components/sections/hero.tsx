@@ -53,10 +53,12 @@ export function Hero() {
     return () => clearTimeout(t)
   }, [])
 
-  const ceremonyDay = siteConfig.ceremony.day ?? "Saturday"
+  const ceremonyDay = siteConfig.ceremony.day
   const ceremonyTime = siteConfig.ceremony.time
   const ceremonyDate = siteConfig.ceremony.date
   const ceremonyLocation = siteConfig.ceremony.location
+  const receptionLocation = siteConfig.reception.location
+  const receptionTime = siteConfig.reception.time
   const groomName = siteConfig.couple.groomNickname ?? siteConfig.couple.groom
   const brideName = siteConfig.couple.brideNickname ?? siteConfig.couple.bride
 
@@ -153,9 +155,13 @@ export function Hero() {
               {ceremonyDate ? (
                 <p className="hero-invite__date">{ceremonyDate}</p>
               ) : null}
-              <p className="hero-invite__follow">
-                Reception to follow at the residence of the couple
-              </p>
+              {(receptionLocation || receptionTime) && (
+                <p className="hero-invite__follow">
+                  Reception to follow
+                  {receptionLocation ? ` at ${receptionLocation}` : ""}
+                  {receptionTime ? ` · ${receptionTime}` : ""}
+                </p>
+              )}
             </div>
           </div>
 

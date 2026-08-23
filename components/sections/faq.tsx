@@ -143,7 +143,7 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
   return [
     {
       question: "When is the wedding?",
-      answer: `Our wedding will be held on ${siteConfig.ceremony.date}, ${siteConfig.ceremony.day}. The ceremony begins at ${siteConfig.ceremony.time} at ${siteConfig.ceremony.location}, and the reception follows at ${siteConfig.reception.time} at the residence of the couple.`,
+      answer: `Our wedding will be held on ${siteConfig.ceremony.date}, ${siteConfig.ceremony.day}. The ceremony begins at ${siteConfig.ceremony.time} at ${siteConfig.ceremony.location}, and the reception follows at ${siteConfig.reception.time} at ${siteConfig.reception.location}.`,
     },
     {
       question: "What time should I arrive?",
@@ -155,7 +155,8 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
         <>
           The ceremony will be held at {siteConfig.ceremony.location}, {siteConfig.ceremony.venue},
           beginning at {siteConfig.ceremony.time}. The reception will follow at{" "}
-          {siteConfig.reception.time} at the residence of the couple, {siteConfig.reception.venue}.{" "}
+          {siteConfig.reception.time} at {siteConfig.reception.location},{" "}
+          {siteConfig.reception.venue}.{" "}
           <a
             href={siteConfig.ceremony.map}
             target="_blank"
@@ -164,6 +165,16 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
             style={{ color: faqPalette.accent }}
           >
             Open ceremony location in Google Maps
+          </a>
+          {" · "}
+          <a
+            href={siteConfig.reception.map}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+            style={{ color: faqPalette.accent }}
+          >
+            Open reception location in Google Maps
           </a>
           .
         </>
@@ -228,7 +239,7 @@ function getFaqItems(siteConfig: SiteConfig): FAQItem[] {
     {
       question: "Is there parking available?",
       answer:
-        "Yes, parking is available at the church and at the couple's residence. Please arrive a little early so you have time to park comfortably.",
+        `Yes, parking is available at ${siteConfig.ceremony.location} and at ${siteConfig.reception.location}. Please arrive a little early so you have time to park comfortably.`,
     },
     {
       question: "What is the dress code?",

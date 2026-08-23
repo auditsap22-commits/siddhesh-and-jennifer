@@ -25,9 +25,9 @@ export const siteConfig = {
     googleShare: "https://docs.google.com/spreadsheets/d/1HThE9SkrMxV7v-LzvPAt8fOMJ0JHR_NKqdc3_CEFkGg/edit?usp=sharing", 
   },
   wedding: {
-    date: "November 28, 2026",
-    time: "3:00 PM",
-    venue: "St. Dominic of Guzman Parish",
+    date: "September 24, 2026",
+    time: "8:00 AM",
+    venue: "Holy Cross Parish",
     tagline: "are getting married!!!!!",
     theme: "Our wedding palette is inspired by timeless elegance. Motif Colors: Midnight Navy, Deep Navy, Slate Navy, Antique Gold, Champagne",
     motif: "#04103B, #192030, #364061, #AB832E, #DDBA7A",
@@ -72,23 +72,23 @@ export const siteConfig = {
     }
   },
   ceremony: {
-    location: "St. Dominic of Guzman Parish",
-    venue: "Nabua, Camarines Sur, Philippines",
-    map: "https://maps.app.goo.gl/YZntUqTwBU5GrdVT7",
-    date: "November 28, 2026",
-    day: "Saturday",
-    time: "3:00 PM",
-    entourageTime: "2:00 PM",
-    guestsTime: "2:30 PM",
+    location: "Holy Cross Parish",
+    venue: "1, San Esteban, Nabua, Camarines Sur, Philippines",
+    map: "https://maps.app.goo.gl/AocmtuurjoLwFAMz5",
+    date: "September 24, 2026",
+    day: "Thursday",
+    time: "8:00 AM",
+    entourageTime: "7:00 AM",
+    guestsTime: "7:30 AM",
     image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
   },
   reception: {
-    location: "Residence of the Couple",
-    venue: "Nabua, Camarines Sur, Philippines",
-    map: "https://maps.app.goo.gl/YZntUqTwBU5GrdVT7",
-    date: "November 28, 2026",
-    day: "Saturday",
-    time: "6:00 PM",
+    location: "DELGACO RESIDENCE",
+    venue: "Zone 2 San Vicente Ogbon Nabua Camarines Sur",
+    map: "https://maps.app.goo.gl/djZ317evDTZX4ghG9",
+    date: "September 24, 2026",
+    day: "Thursday",
+    time: "1:00 PM",
     image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
   },
   dressCode: {
@@ -212,19 +212,19 @@ Now, as they prepare to say yes before God and the people they love most, Cather
     spotifyTitle: "Jen and Tin Wedding",
     curator: "Lance",
     coverUrl:
-      "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da846306cebfbcee35881606468d",
+      "https://image-cdn-ak.spotifycdn.com/image/05e34086ac8a4dc1",
     embedUrl:
     //https://open.spotify.com/embed/playlist/58WOfUVSty9PSetlcVNRsr?utm_source=generator&si=0668eb4188c6446d
-      "https://open.spotify.com/embed/playlist/58WOfUVSty9PSetlcVNRsr?utm_source=generator&theme=0&si=0668eb4188c6446d",
-    spotifyUrl: "https://open.spotify.com/playlist/58WOfUVSty9PSetlcVNRsr",
+      "https://open.spotify.com/embed/playlist/46fNK9rWuddDg3afoOS22T?utm_source=generator&si=05e34086ac8a4dc1",
+    spotifyUrl: "https://open.spotify.com/playlist/46fNK9rWuddDg3afoOS22T",
     tracks: [
       {
         title: "Ikaw At Ako",
         artist: "TJ Monterde",
         duration: "04:06",
-        uri: "spotify:track:5tDjVBApQnsOe57pdJ68QA",
+        uri: "spotify:track:46fNK9rWuddDg3afoOS22T",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/54cc95e7253ad30284a8448c505b5f50c0e54f95",
+          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
       },
       {
         title: "Palagi - TJxKZ Version",
@@ -232,7 +232,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "04:01",
         uri: "spotify:track:4WgViu9gw3qYOr3iF9OuLG",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/4b67c794c7cc123c08dfe67fe2117555e9ea6a93",
+          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
       },
       {
         title: "Tahanan - Wedding Version",
@@ -240,7 +240,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "04:54",
         uri: "spotify:track:2zxXtgZG2kd7rtbG2T2mQn",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/1b11ac5317904b08a4bca6eb37881c5e1cdae0d4",
+          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
       },
       {
         title: "Beautiful In White",
@@ -248,7 +248,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "03:52",
         uri: "spotify:track:43wROOsAEK0F3Fu46Vjn7W",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/661f2bdd7bc521dd156f1834a35db9f0998ee903",
+          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
       },
       {
         title: "Wedding Dress",
@@ -256,7 +256,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "04:02",
         uri: "spotify:track:2NO4CA2TFvhGeg7XMz8PmT",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/1e83067a5a7080339c0407d1581028b40ad11dd9",
+          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
       },
       {
         title: "Handa Na",
@@ -264,7 +264,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "03:04",
         uri: "spotify:track:3iF3k047ZbFs4p5GM0Q7LL",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/9a6a92c063c59ff824400988804290bd88ef2a75",
+          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
       },
     ],
   },

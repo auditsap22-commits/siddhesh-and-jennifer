@@ -122,21 +122,27 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  navy: "#04103B",
-  gold: "#c5a059",
-  goldBright: "#d4af37",
-  goldSoft: "#e6d3a3",
-  paper: "#f7f3e9",
+  navy: "#4b5d44",
+  gold: "#6a7b5c",
+  goldBright: "#4b5d44",
+  goldSoft: "#6a7b5c",
+  paper: "#f9f6ee",
 } as const
 
 const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
 
+const outsideInk = {
+  text: "#ffffff",
+  textSoft: "rgba(255, 255, 255, 0.82)",
+  line: "rgba(255, 255, 255, 0.45)",
+} as const
+
 const palette = {
-  heading: C.gold,
+  heading: C.goldBright,
 } as const
 
 const outsideDividerLineStyle = {
-  background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
+  background: `linear-gradient(to right, transparent, ${outsideInk.line}, transparent)`,
 } as const
 
 const ct = {
@@ -153,10 +159,10 @@ const cardStyle = {
 } as const
 
 const buttonStyle = {
-  backgroundColor: C.gold,
-  borderColor: `color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-  color: C.navy,
-  boxShadow: `0 10px 24px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+  backgroundColor: C.navy,
+  borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+  color: C.paper,
+  boxShadow: "0 10px 24px color-mix(in srgb, #4b5d44 28%, transparent)",
 } as const
 
 function OutsideDivider() {
@@ -165,13 +171,13 @@ function OutsideDivider() {
       <span className="h-px w-6 sm:w-10" style={outsideDividerLineStyle} />
       <span
         className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1"
-        style={{ backgroundColor: goldLine }}
+        style={{ backgroundColor: outsideInk.line }}
         aria-hidden
       />
       <span
         className="h-px w-6 sm:w-10"
         style={{
-          background: `linear-gradient(to left, transparent, ${goldLine}, transparent)`,
+          background: `linear-gradient(to left, transparent, ${outsideInk.line}, transparent)`,
         }}
       />
     </div>
@@ -193,7 +199,7 @@ function PlaylistTitle({ title, script }: { title: string; script: string }) {
         className={`${theSeasons.className} block max-w-[16ch] mx-auto text-balance uppercase leading-[0.98] tracking-[0.04em] min-[400px]:tracking-[0.08em] sm:max-w-none sm:leading-[0.86] sm:tracking-[0.13em] md:leading-[0.78] md:tracking-[0.14em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: C.goldBright,
+          color: outsideInk.text,
         }}
       >
         {title}
@@ -203,7 +209,7 @@ function PlaylistTitle({ title, script }: { title: string; script: string }) {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-[92%] px-1 leading-[1.05] sm:leading-[0.9] mt-1.5 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: C.goldSoft,
+          color: outsideInk.textSoft,
         }}
       >
         {script}
@@ -449,12 +455,12 @@ export function WeddingPlaylist() {
           </div>
           <p
             className={`font-goudy-italic ${ct.bodyLg} mx-auto mt-3 max-w-[22rem] leading-relaxed px-1 sm:mt-5 sm:max-w-lg sm:px-2 md:mt-6`}
-            style={{ color: C.goldSoft }}
+            style={{ color: outsideInk.textSoft }}
           >
             {subtitle}
           </p>
           <div className="flex items-center justify-center pt-2.5 sm:pt-4">
-            <span className="h-px w-12 sm:w-24 md:w-32" style={{ background: goldLine }} />
+            <span className="h-px w-12 sm:w-24 md:w-32" style={{ background: outsideInk.line }} />
           </div>
         </div>
 
@@ -481,11 +487,11 @@ export function WeddingPlaylist() {
               <div
                 className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9"
                 style={{
-                  backgroundColor: C.gold,
-                  boxShadow: `0 4px 12px color-mix(in srgb, ${C.gold} 40%, transparent)`,
+                  backgroundColor: C.navy,
+                  boxShadow: `0 4px 12px color-mix(in srgb, ${C.navy} 40%, transparent)`,
                 }}
               >
-                <Music2 className="h-3 w-3 sm:h-4 sm:w-4" style={{ color: C.navy }} />
+                <Music2 className="h-3 w-3 sm:h-4 sm:w-4" style={{ color: C.paper }} />
               </div>
               <p
                 className={`${cinzel.className} text-[0.625rem] font-semibold uppercase tracking-[0.16em] sm:text-[0.6875rem] sm:tracking-[0.26em] md:text-xs`}
@@ -572,11 +578,11 @@ export function WeddingPlaylist() {
                 className={`${cinzel.className} group relative inline-flex w-full min-h-11 items-center justify-center gap-2 rounded-md border px-3 py-2.5 text-center font-semibold uppercase tracking-[0.12em] touch-manipulation transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-12 sm:rounded-sm sm:px-8 sm:py-3 sm:tracking-[0.24em] md:tracking-[0.28em] ${ct.btn}`}
                 style={buttonStyle}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = C.goldBright
+                  e.currentTarget.style.backgroundColor = "#3d4a36"
                   e.currentTarget.style.borderColor = C.gold
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = C.gold
+                  e.currentTarget.style.backgroundColor = C.navy
                   e.currentTarget.style.borderColor = buttonStyle.borderColor
                 }}
               >

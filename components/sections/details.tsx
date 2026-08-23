@@ -996,15 +996,22 @@ export function Details() {
             className={`${theSeasons.className} text-sm font-semibold uppercase tracking-[0.14em] sm:text-base`}
             style={{ color: paperWash.sage }}
           >
-            At {siteConfig.reception.time}
+            {siteConfig.reception.location}
           </p>
           <p
-            className="font-goudy-italic mx-auto mt-3 max-w-[28rem] text-[0.8125rem] leading-[1.7] sm:mt-4 sm:text-[0.9375rem] sm:leading-[1.75]"
-            style={{ color: paperWash.sage }}
+            className={`${cinzel.className} mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] sm:text-[0.75rem]`}
+            style={{ color: paperWash.sageSoft }}
           >
-            After the ceremony, we warmly invite you to continue the celebration
-            at the residence of the couple.
+            At {siteConfig.reception.time}
           </p>
+          {siteConfig.reception.venue ? (
+            <p
+              className="font-goudy-italic mx-auto mt-3 max-w-[26rem] text-[0.8125rem] leading-[1.7] sm:mt-4 sm:text-[0.9375rem] sm:leading-[1.75]"
+              style={{ color: paperWash.sage }}
+            >
+              {siteConfig.reception.venue}
+            </p>
+          ) : null}
         </div>
        
       </div>

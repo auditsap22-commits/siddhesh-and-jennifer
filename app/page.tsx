@@ -5,6 +5,7 @@ import { motion } from "motion/react"
 import dynamic from "next/dynamic"
 import { Hero as MainHero } from "@/components/sections/hero"
 import { Welcome } from "@/components/sections/welcome"
+import { OurStory } from "@/components/sections/our-story"
 import { Countdown } from "@/components/sections/countdown"
 import { WeddingTimeline } from "@/components/sections/wedding-timeline"
 import { Gallery } from "@/components/sections/gallery"
@@ -219,6 +220,7 @@ export default function Home() {
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
               <Welcome />
+              <OurStory />
                {/* <CoupleVideo />  */}
               {/* <LoveStory /> */}
               {/* <ProposalVideo /> */}
@@ -235,7 +237,7 @@ export default function Home() {
               <GuestList />
               <BookOfGuests />
               {/* <PrincipalSponsors /> */}
-              {/* <WeddingPlaylist /> */}
+              <WeddingPlaylist />
               <FAQ />
               <Registry />
               {/* <SnapShare /> */}

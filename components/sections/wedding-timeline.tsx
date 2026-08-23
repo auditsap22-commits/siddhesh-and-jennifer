@@ -104,52 +104,128 @@ function TimelineTitle() {
   )
 }
 
+function addMinutesToTime(time: string, minutesToAdd: number): string {
+  const match = time.trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i)
+  if (!match) return time
+
+  let hours = Number(match[1])
+  const minutes = Number(match[2])
+  const meridiem = match[3].toUpperCase()
+  if (meridiem === "PM" && hours !== 12) hours += 12
+  if (meridiem === "AM" && hours === 12) hours = 0
+
+  const total = (((hours * 60 + minutes + minutesToAdd) % (24 * 60)) + 24 * 60) % (24 * 60)
+  let nextHours = Math.floor(total / 60)
+  const nextMinutes = total % 60
+  const nextMeridiem = nextHours >= 12 ? "PM" : "AM"
+  nextHours = nextHours % 12
+  if (nextHours === 0) nextHours = 12
+
+  return `${nextHours}:${String(nextMinutes).padStart(2, "0")} ${nextMeridiem}`
+}
+
+function toTitleCase(value: string): string {
+  return value
+    .toLowerCase()
+    .split(/\s+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+}
+
 function buildTimelineEvents(siteConfig: SiteConfig): TimelineEvent[] {
   const ceremonyVenue = siteConfig.ceremony.location
-  const receptionVenue = siteConfig.reception.location
+  const receptionVenue = toTitleCase(siteConfig.reception.location)
+  const entourageTime = siteConfig.ceremony.entourageTime
+  const arrivalTime = siteConfig.ceremony.guestsTime
+  const ceremonyTime = siteConfig.ceremony.time
+  const receptionTime = siteConfig.reception.time
+  const photosTime = addMinutesToTime(ceremonyTime, 120)
+  const cocktailTime = addMinutesToTime(receptionTime, -30)
+  const lunchTime = addMinutesToTime(receptionTime, 45)
+  const cakeTime = addMinutesToTime(receptionTime, 120)
+  const danceTime = addMinutesToTime(receptionTime, 165)
+  const sendOffTime = addMinutesToTime(receptionTime, 300)
 
   return [
     {
-      time: "2:30 PM",
-      title: "Assembly",
+      time: entourageTime,
+      title: "Entourage Assembly",
+      description: "Wedding party gathers before the ceremony begins.",
+      location: ceremonyVenue,
+      icon: GuestsIcon,
+      imageSrc: "/weddingtimeline/assemble.png",
+    },
+    {
+      time: arrivalTime,
+      title: "Guest Arrival",
+      description: "Please be seated so the ceremony may begin on time.",
       location: ceremonyVenue,
       icon: GuestsIcon,
       imageSrc: "/weddingtimeline/arrivalimage.png",
     },
     {
-      time: "3:00 PM",
-      title: "Processional",
+      time: ceremonyTime,
+      title: "Ceremony",
+      description: "The nuptial celebration at Holy Mass.",
       location: ceremonyVenue,
       icon: RingsIcon,
       imageSrc: "/weddingtimeline/WeddingCeremony.png",
     },
     {
-      time: "4:30 PM",
+      time: photosTime,
       title: "Photos",
+      description: "A brief gathering for family and entourage portraits.",
       location: ceremonyVenue,
       icon: RingsIcon,
       imageSrc: "/weddingtimeline/PhotoSession.png",
     },
     {
-      time: "5:00 PM",
+      time: cocktailTime,
       title: "Cocktail Hour",
+      description: "A light welcome as guests arrive at the residence.",
       location: receptionVenue,
       icon: CocktailIcon,
       imageSrc: "/weddingtimeline/CockTailHour.png",
     },
     {
-      time: "5:30 PM",
+      time: receptionTime,
       title: "Reception",
+      description: "The celebration continues after the ceremony.",
       location: receptionVenue,
       icon: DinnerIcon,
       imageSrc: "/weddingtimeline/reception welcom.png",
     },
     {
-      time: "6:15 PM",
-      title: "Dinner",
+      time: lunchTime,
+      title: "Lunch",
+      description: "Please join us at the table.",
       location: receptionVenue,
       icon: DinnerIcon,
       imageSrc: "/weddingtimeline/DinnerService.png",
+    },
+    {
+      time: cakeTime,
+      title: "Cake Cutting",
+      description: "A sweet pause in the celebration.",
+      location: receptionVenue,
+      icon: DinnerIcon,
+      imageSrc: "/weddingtimeline/cakecutting.png",
+    },
+    {
+      time: danceTime,
+      title: "Dance",
+      description: "The floor is open — come celebrate with us.",
+      location: receptionVenue,
+      icon: DanceIcon,
+      imageSrc: "/weddingtimeline/dance.png",
+    },
+    {
+      time: sendOffTime,
+      title: "Send Off",
+      description: "We close the day with love, gratitude, and one last cheer.",
+      location: receptionVenue,
+      icon: FireworksIcon,
+      imageSrc: "/weddingtimeline/SendOff.png",
     },
   ]
 }
@@ -175,7 +251,7 @@ export function WeddingTimeline() {
           className={`font-goudy-italic mx-auto mt-4 max-w-xl px-2 sm:mt-5 md:mt-6 ${sectionType.textRelaxed}`}
           style={{ color: C.text }}
         >
-          A simple overview of the key moments of our day, from arrival to farewell.
+          From morning vows at the church to the last cheer of the evening.
         </p>
         <div className="mt-4 flex items-center justify-center sm:mt-5">
           <span className="h-px w-16 sm:w-24 md:w-32" style={{ background: goldLine }} />

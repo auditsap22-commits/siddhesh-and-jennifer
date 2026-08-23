@@ -169,8 +169,10 @@ export function Footer() {
   const ceremonyDate = siteConfig.ceremony.date
   const ceremonyTime = siteConfig.ceremony.time
   const receptionTime = siteConfig.reception.time
-  const venueName = siteConfig.ceremony.location
-  const venueAddress = siteConfig.ceremony.venue
+  const ceremonyVenue = siteConfig.ceremony.location
+  const ceremonyAddress = siteConfig.ceremony.venue
+  const receptionVenue = siteConfig.reception.location
+  const receptionAddress = siteConfig.reception.venue
 
   const groomName = siteConfig.couple.groomNickname || siteConfig.couple.groom
   const brideName = siteConfig.couple.brideNickname || siteConfig.couple.bride
@@ -376,7 +378,6 @@ export function Footer() {
               </FooterCard>
             </motion.div>
 
-            {/* Event details — ceremony and reception share one venue */}
             <motion.div className="space-y-4 sm:space-y-5 min-w-0" variants={fadeInUp}>
               <FooterCard>
                 <h4
@@ -386,13 +387,17 @@ export function Footer() {
                   Ceremony & Reception
                 </h4>
                 <div className="space-y-3">
-                  <DetailRow label="Venue" value={venueName} />
-                  {venueAddress && venueAddress !== venueName && (
-                    <DetailRow label="Address" value={venueAddress} />
+                  <DetailRow label="Ceremony" value={ceremonyVenue} />
+                  {ceremonyAddress && ceremonyAddress !== ceremonyVenue && (
+                    <DetailRow label="Ceremony Address" value={ceremonyAddress} />
                   )}
                   <DetailRow label="Assembly Time" value={siteConfig.ceremony.guestsTime} />
-                  <DetailRow label="Ceremony" value={ceremonyTime} />
-                  <DetailRow label="Reception" value={receptionTime} />
+                  <DetailRow label="Ceremony Time" value={ceremonyTime} />
+                  <DetailRow label="Reception" value={receptionVenue} />
+                  {receptionAddress && receptionAddress !== receptionVenue && (
+                    <DetailRow label="Reception Address" value={receptionAddress} />
+                  )}
+                  <DetailRow label="Reception Time" value={receptionTime} />
                 </div>
               </FooterCard>
 
