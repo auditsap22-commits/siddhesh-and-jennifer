@@ -13,7 +13,7 @@ export const siteConfig = {
     backgroundMusic:"/background_music/Palagi - Tj Monterde  Violin Cover.mp3"
   },
   googleAPI:{
-    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSc9zfh2TNkiZoEm2o4WE6BIpHMuiqbhWpiIZPx3HvyQo_-zTw/formResponse",   //done
+    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSf8KSNkY6nXSiNMHS2d-IjeXrOVj0GsXtQ1xzdOoy2VMdXkPQ/formResponse",   //done
     message: "https://script.google.com/macros/s/AKfycbyAWDC5cghN91R7rsqsdKosXrEO5ID0LAEPYudF0EHEvvdL8F4QMynF_5JhojXjkx4Q/exec",  //done
     guestList: "https://script.google.com/macros/s/AKfycbwSgwsIqCfwSQaL_ACVyQlJ1VuPEGcYZdTw_X6EaK0vGnOv85VSOt73sO-4VKYVnH5m/exec",  //done
     guestRequest: "https://script.google.com/macros/s/AKfycbw4YabqsDct9QHQTANthXmtVESU_pOafDTdvACCBoeTEl8KS5sqgV9l9Cd36ES2MYvM/exec",   //done
