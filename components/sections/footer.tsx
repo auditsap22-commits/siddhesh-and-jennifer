@@ -27,38 +27,38 @@ const aboveTheBeyond = localFont({
 })
 
 const reminderInk = {
-  navy: "#4b5d44",
-  deep: "#3d4a36",
-  slate: "#6a7b5c",
-  gold: "#6a7b5c",
-  champagne: "#c9d2bc",
+  navy: "#093327",
+  deep: "#093327",
+  slate: "#fdf8f2",
+  gold: "#c5a059",
+  champagne: "#fdf8f2",
 } as const
 
 const paperWash = {
-  cream: "#f7f4eb",
-  lift: "#f9f6ee",
-  sage: "#4b5d44",
-  sageSoft: "#6a7b5c",
-  wash: "#8b9d78",
+  cream: "#fdf8f2",
+  lift: "#fff9f0",
+  sage: "#093327",
+  sageSoft: "#093327",
+  wash: "#c5a059",
 } as const
 
 const creamWash = `
-  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
-  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 28%, transparent), transparent 68%),
-  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 22%, transparent), transparent 68%),
-  linear-gradient(180deg, #ece6d6 0%, #e4ddcc 100%)
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #e8d5c4 28%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 14%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 12%, transparent), transparent 68%),
+  linear-gradient(180deg, #fdf8f2 0%, #f3ebe1 100%)
 `
 
 const palette = {
   body: paperWash.sage,
   heading: paperWash.sage,
   label: paperWash.sageSoft,
-  accent: paperWash.sageSoft,
+  accent: reminderInk.gold,
 } as const
 
 const dividerLineStyle = {
   background:
-    "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent), transparent)",
+    "linear-gradient(to right, transparent, color-mix(in srgb, #c5a059 62%, transparent), transparent)",
 } as const
 
 const ct = {
@@ -73,18 +73,18 @@ const cardStyle = {
   background: paperWash.lift,
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: "color-mix(in srgb, #4b5d44 14%, transparent)",
+  borderColor: "color-mix(in srgb, #c5a059 62%, transparent)",
   boxShadow:
-    "0 8px 28px color-mix(in srgb, #4b5d44 7%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
+    "0 8px 28px color-mix(in srgb, #093327 12%, transparent), inset 0 1px 0 color-mix(in srgb, #fdf8f2 70%, transparent)",
 } as const
 
 const socialLinkStyle = {
   borderWidth: "1px",
   borderStyle: "solid",
-  borderColor: `color-mix(in srgb, ${paperWash.sage} 28%, transparent)`,
+  borderColor: "color-mix(in srgb, #c5a059 62%, transparent)",
   backgroundColor: paperWash.cream,
   color: paperWash.sage,
-  boxShadow: "0 4px 12px color-mix(in srgb, #4b5d44 10%, transparent)",
+  boxShadow: "0 4px 12px color-mix(in srgb, #093327 10%, transparent)",
 } as const
 
 const FOOTER_QUOTES = [
@@ -96,6 +96,57 @@ const FOOTER_QUOTES = [
 const LONGEST_FOOTER_QUOTE = FOOTER_QUOTES.reduce((longest, quote) =>
   quote.length > longest.length ? quote : longest
 )
+
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 56 56" fill="none" aria-hidden="true">
+      <path
+        d="M54 3H20.5C9.6 3 3 9.6 3 20.5V54"
+        stroke="currentColor"
+        strokeWidth="1.15"
+      />
+      <path
+        d="M54 8H23C12.8 8 8 12.8 8 23V54"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        opacity="0.72"
+      />
+      <circle cx="19" cy="19" r="1.55" fill="currentColor" />
+      <path
+        d="M14.5 19.5c2.4-5 5.2-7.6 9.8-9.6"
+        stroke="currentColor"
+        strokeWidth="0.7"
+      />
+    </svg>
+  )
+}
+
+function GoldFrame() {
+  const goldLine = "color-mix(in srgb, #c5a059 78%, transparent)"
+
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute z-[5]"
+      style={{
+        inset: "clamp(0.45rem, 1.6vw, 0.9rem)",
+        border: `1px solid ${goldLine}`,
+      }}
+    >
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          inset: 5,
+          border: "1px solid color-mix(in srgb, #c5a059 62%, transparent)",
+        }}
+      />
+      <CornerOrnament className="absolute -left-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] text-[#c5a059]" />
+      <CornerOrnament className="absolute -right-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-x-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -left-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-y-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -right-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-100 text-[#c5a059]" />
+    </div>
+  )
+}
 
 function FooterCoupleNames({ groom, bride }: { groom: string; bride: string }) {
   return (
@@ -239,6 +290,7 @@ export function Footer() {
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative w-full overflow-hidden`}
       style={{ background: creamWash }}
     >
+      <GoldFrame />
       <footer className="relative z-10 pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14">
         <div className="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
           <Image
@@ -478,7 +530,7 @@ export function Footer() {
           <motion.div
             className="pt-6 sm:pt-8 border-t"
             style={{
-              borderColor: "color-mix(in srgb, #4b5d44 14%, transparent)",
+              borderColor: "color-mix(in srgb, #c5a059 42%, transparent)",
             }}
             variants={fadeInUp}
           >

@@ -111,10 +111,7 @@ export function Navbar() {
                 src={siteConfig.couple.monogram}
                 alt={`${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Monogram`}
                 fill
-                className="object-contain group-hover:scale-110 group-active:scale-105 transition-all duration-500 drop-shadow-[0_4px_16px_rgba(255,255,255,0.3)] group-hover:drop-shadow-[0_6px_22px_rgba(255,255,255,0.4)]"
-                style={{
-                  filter: "brightness(0) invert(1)",
-                }}
+                className="object-contain group-hover:scale-110 group-active:scale-105 transition-all duration-500"
               />
             </div>
             

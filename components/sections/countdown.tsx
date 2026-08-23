@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import { Section } from "@/components/section"
 import { motion } from "motion/react"
 import { Cinzel } from "next/font/google"
@@ -256,23 +257,15 @@ export function Countdown() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="relative"
         >
-          <div
-            className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem] opacity-90"
-            role="img"
-            aria-label={`${groomNickname} & ${brideNickname} Monogram`}
-            style={{
-              background: "#ffffff",
-              WebkitMaskImage: `url("${encodeURI(siteConfig.couple.monogram)}")`,
-              maskImage: `url("${encodeURI(siteConfig.couple.monogram)}")`,
-              WebkitMaskSize: "contain",
-              maskSize: "contain",
-              WebkitMaskRepeat: "no-repeat",
-              maskRepeat: "no-repeat",
-              WebkitMaskPosition: "center",
-              maskPosition: "center",
-              filter: "drop-shadow(0 0 18px rgb(255 255 255 / 28%))",
-            }}
-          />
+          <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem]">
+            <Image
+              src={siteConfig.couple.monogram}
+              alt={`${groomNickname} & ${brideNickname} Monogram`}
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 18rem, (max-width: 768px) 24rem, (max-width: 1024px) 28rem, (max-width: 1280px) 36rem, 40rem"
+            />
+          </div>
         </motion.div>
       </div>
 

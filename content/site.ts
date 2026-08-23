@@ -5,11 +5,11 @@ import {
 
 export const siteConfig = {
   couple: {
-    bride: "Juvy S. Delgaco", //Noenyl Bryle M. Gonzaga
-    brideNickname: "Juvy", //Ltryl
-    groom: "Jayson A. Papa", //Ltryl B. Benitez
-    groomNickname: "Jayson",
-    monogram:"/monogram/monogram.png" ,//Ltryl
+    bride: "Jennifer Alvarez",
+    brideNickname: "Jennifer",
+    groom: "Siddhesh Deshpande",
+    groomNickname: "Siddhesh",
+    monogram:"/decoration/monogram-new.png" ,//Ltryl
     backgroundMusic:"/background_music/Palagi - Tj Monterde  Violin Cover.mp3"
   },
   googleAPI:{
@@ -25,9 +25,9 @@ export const siteConfig = {
     googleShare: "https://docs.google.com/spreadsheets/d/1HThE9SkrMxV7v-LzvPAt8fOMJ0JHR_NKqdc3_CEFkGg/edit?usp=sharing", 
   },
   wedding: {
-    date: "September 24, 2026",
-    time: "8:00 AM",
-    venue: "Holy Cross Parish",
+    date: "January 30, 2027",
+    time: "2:00 PM",
+    venue: "TBA",
     tagline: "are getting married!!!!!",
     theme: "Our wedding palette is inspired by timeless elegance. Motif Colors: Midnight Navy, Deep Navy, Slate Navy, Antique Gold, Champagne",
     motif: "#04103B, #192030, #364061, #AB832E, #DDBA7A",
@@ -52,43 +52,43 @@ export const siteConfig = {
   },
   giftRegistry: {
     QR_1:{
-    id: "GOtyme",
-    src: "/QR/GOTYM-TIN.png",
-    label: "GO tyme bank",
-    accountNumber: "TIN : ******** 3388",
+    id: "Gcash",
+    src: "/QR/Gcash.png",
+    label: "Gcash",
+    accountNumber: "JE*****R A. : 0956 397 ****",
     },
     QR_2:{
     id: "MariBank",
-    src: "/QR/GOTYM-JEN.png",
-    label: "GO tyme bank",
-    accountNumber: "JEN : ******** 1092",
+    src: "/QR/MariBank.png",
+    label: "MariBank",
+    accountNumber: "Jennifer A: ****7353",
     }
     ,
-    QR_3:{
-    id: "BPI",
-    src: "/QR/BPI.png",
-    label: "BPI",
-    accountNumber: "JEN: ************102",
-    }
+    // QR_3:{
+    // id: "BPI",
+    // src: "/QR/BPI.png",
+    // label: "BPI",
+    // accountNumber: "JEN: ************102",
+    // }
   },
   ceremony: {
-    location: "Holy Cross Parish",
-    venue: "1, San Esteban, Nabua, Camarines Sur, Philippines",
-    map: "https://maps.app.goo.gl/AocmtuurjoLwFAMz5",
-    date: "September 24, 2026",
-    day: "Thursday",
-    time: "8:00 AM",
-    entourageTime: "7:00 AM",
-    guestsTime: "7:30 AM",
+    location: "TBA",
+    venue: "TBA",
+    map: "TBA",
+    date: "January 30, 2027",
+    day: "Saturday",
+    time: "2:00 PM",
+    entourageTime: "1:00 PM",
+    guestsTime: "1:30 PM",
     image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
   },
   reception: {
-    location: "DELGACO RESIDENCE",
-    venue: "Zone 2 San Vicente Ogbon Nabua Camarines Sur",
-    map: "https://maps.app.goo.gl/djZ317evDTZX4ghG9",
-    date: "September 24, 2026",
-    day: "Thursday",
-    time: "1:00 PM",
+    location: "TBA",
+    venue: "TBA",
+    map: "TBA",
+    date: "January 30, 2027",
+    day: "Saturday",
+    time: "5:00 PM",
     image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
   },
   dressCode: {
@@ -212,19 +212,19 @@ Now, as they prepare to say yes before God and the people they love most, Cather
     spotifyTitle: "Jen and Tin Wedding",
     curator: "Lance",
     coverUrl:
-      "https://image-cdn-ak.spotifycdn.com/image/05e34086ac8a4dc1",
+      "https://image-cdn-ak.spotifycdn.com/image/cbc36a110eb943f1",
     embedUrl:
-    //https://open.spotify.com/embed/playlist/58WOfUVSty9PSetlcVNRsr?utm_source=generator&si=0668eb4188c6446d
-      "https://open.spotify.com/embed/playlist/46fNK9rWuddDg3afoOS22T?utm_source=generator&si=05e34086ac8a4dc1",
-    spotifyUrl: "https://open.spotify.com/playlist/46fNK9rWuddDg3afoOS22T",
+    //https://open.spotify.com/embed/playlist/1TtGCqt27WLOyTF0iGzO9y?utm_source=generator&si=cbc36a110eb943f1
+      "https://open.spotify.com/embed/playlist/1TtGCqt27WLOyTF0iGzO9y?utm_source=generator&si=cbc36a110eb943f1",
+    spotifyUrl: "https://open.spotify.com/playlist/1TtGCqt27WLOyTF0iGzO9y",
     tracks: [
       {
         title: "Ikaw At Ako",
         artist: "TJ Monterde",
         duration: "04:06",
-        uri: "spotify:track:46fNK9rWuddDg3afoOS22T",
+        uri: "spotify:track:1TtGCqt27WLOyTF0iGzO9y",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
+          "https://p.scdn.co/mp3-preview/cbc36a110eb943f1",
       },
       {
         title: "Palagi - TJxKZ Version",
@@ -232,7 +232,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "04:01",
         uri: "spotify:track:4WgViu9gw3qYOr3iF9OuLG",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
+          "https://p.scdn.co/mp3-preview/cbc36a110eb943f1",
       },
       {
         title: "Tahanan - Wedding Version",
@@ -240,7 +240,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "04:54",
         uri: "spotify:track:2zxXtgZG2kd7rtbG2T2mQn",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
+          "https://p.scdn.co/mp3-preview/cbc36a110eb943f1",
       },
       {
         title: "Beautiful In White",
@@ -248,7 +248,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "03:52",
         uri: "spotify:track:43wROOsAEK0F3Fu46Vjn7W",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
+          "https://p.scdn.co/mp3-preview/cbc36a110eb943f1",
       },
       {
         title: "Wedding Dress",
@@ -256,7 +256,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "04:02",
         uri: "spotify:track:2NO4CA2TFvhGeg7XMz8PmT",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
+          "https://p.scdn.co/mp3-preview/cbc36a110eb943f1",
       },
       {
         title: "Handa Na",
@@ -264,7 +264,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
         duration: "03:04",
         uri: "spotify:track:3iF3k047ZbFs4p5GM0Q7LL",
         previewUrl:
-          "https://p.scdn.co/mp3-preview/05e34086ac8a4dc1",
+          "https://p.scdn.co/mp3-preview/cbc36a110eb943f1",
       },
     ],
   },

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
 import { Cormorant_Garamond } from 'next/font/google';
+import { useSiteConfig } from '@/hooks/use-site-config';
 import './loading-screen.css';
 
 const cormorant = Cormorant_Garamond({
@@ -34,10 +35,11 @@ const LOADING_MESSAGES = [
 
 const DECO = {
   tl: '/decoration/left-top-decoration.png',
-  tr: '/decoration/right-top-decoration.png',
-  bl: '/decoration/left-bottom-decoration.png',
+  // tr: '/decoration/right-top-decoration.png',
+  // bl: '/decoration/left-bottom-decoration.png',
   br: '/decoration/right-bottom-decoration.png',
-  names: '/decoration/coupleName.png',
+  monogram: '/decoration/monogram-new.png',
+  names: '/decoration/couple.png',
 } as const;
 
 function CornerOrnament({ className }: { className: string }) {
@@ -69,6 +71,16 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   onFadeStart,
 }) => {
   const reduceMotion = useReducedMotion();
+  const siteConfig = useSiteConfig();
+  const ceremonyDate = siteConfig.ceremony.date ?? siteConfig.wedding.date;
+  const ceremonyDay = siteConfig.ceremony.day;
+  const ceremonyTime = siteConfig.ceremony.time ?? siteConfig.wedding.time;
+  const ceremonyLocation =
+    siteConfig.ceremony.location && siteConfig.ceremony.location !== 'TBA'
+      ? siteConfig.ceremony.location
+      : siteConfig.ceremony.venue && siteConfig.ceremony.venue !== 'TBA'
+        ? siteConfig.ceremony.venue
+        : siteConfig.wedding.venue;
   const [fadeOut, setFadeOut] = useState(false);
   const [progress, setProgress] = useState(0);
   const [messageIndex, setMessageIndex] = useState(0);
@@ -155,7 +167,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
             sizes="(max-width: 768px) 52vw, 280px"
           />
         </motion.div>
-        <motion.div
+        {/* <motion.div
           className="loading-screen__deco loading-screen__deco--tr"
           aria-hidden="true"
           initial={reduceMotion ? false : { opacity: 0, x: 16, y: -16 }}
@@ -170,8 +182,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
             priority
             sizes="(max-width: 768px) 50vw, 260px"
           />
-        </motion.div>
-        <motion.div
+        </motion.div> */}
+        {/* <motion.div
           className="loading-screen__deco loading-screen__deco--bl"
           aria-hidden="true"
           initial={reduceMotion ? false : { opacity: 0, x: -16, y: 16 }}
@@ -185,7 +197,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
             height={1411}
             sizes="(max-width: 768px) 50vw, 260px"
           />
-        </motion.div>
+        </motion.div> */}
         <motion.div
           className="loading-screen__deco loading-screen__deco--br"
           aria-hidden="true"
@@ -209,12 +221,28 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
           <CornerOrnament className="loading-screen__corner loading-screen__corner--br" />
         </div>
 
+        <motion.div
+          className="loading-screen__monogram"
+          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.85, ease: entryEase, delay: textDelay }}
+        >
+          <Image
+            src={DECO.monogram}
+            alt="Jennifer and Siddhesh monogram"
+            width={1024}
+            height={1536}
+            priority
+            sizes="(max-width: 768px) 28vw, 118px"
+          />
+        </motion.div>
+
         <div className="loading-screen__panel">
           <motion.p
             className="loading-screen__eyebrow"
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: entryEase, delay: textDelay }}
+            transition={{ duration: 0.8, ease: entryEase, delay: textDelay + 0.08 }}
           >
             Together with their families
             <br />
@@ -226,26 +254,45 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
           <motion.div
             className="loading-screen__names"
             role="img"
-            aria-label="Jayson and Juvy"
+            aria-label="Siddhesh and Jennifer"
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: entryEase, delay: textDelay + 0.12 }}
+            transition={{ duration: 0.9, ease: entryEase, delay: textDelay + 0.16 }}
           >
             <Image
               src={DECO.names}
-              alt="Jayson and Juvy"
-              width={1672}
-              height={941}
+              alt="Siddhesh and Jennifer"
+              width={1536}
+              height={1024}
               priority
               sizes="(max-width: 768px) 68vw, 320px"
             />
+          </motion.div>
+
+          <motion.div
+            className="loading-screen__details"
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, ease: entryEase, delay: textDelay + 0.22 }}
+          >
+            {(ceremonyDay || ceremonyDate) && (
+              <p className="loading-screen__date">
+                {[ceremonyDay, ceremonyDate].filter(Boolean).join(' · ')}
+              </p>
+            )}
+            {ceremonyTime ? (
+              <p className="loading-screen__time">{ceremonyTime}</p>
+            ) : null}
+            {ceremonyLocation ? (
+              <p className="loading-screen__location">{ceremonyLocation}</p>
+            ) : null}
           </motion.div>
 
           <motion.p
             className="loading-screen__journey"
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: entryEase, delay: textDelay + 0.22 }}
+            transition={{ duration: 0.75, ease: entryEase, delay: textDelay + 0.3 }}
           >
             As they begin their journey together
             <br />

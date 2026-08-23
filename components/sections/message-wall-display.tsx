@@ -13,28 +13,28 @@ const cinzel = Cinzel({
 })
 
 const C = {
-  navy: "#4b5d44",
-  gold: "#6a7b5c",
-  goldBright: "#4b5d44",
-  goldSoft: "#6a7b5c",
-  paper: "#f9f6ee",
+  navy: "#093327",
+  gold: "#c5a059",
+  goldBright: "#093327",
+  goldSoft: "#c5a059",
+  paper: "#fff9f0",
 } as const
 
-const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
+const goldLine = `color-mix(in srgb, ${C.gold} 62%, transparent)`
 
 const palette = {
   body: C.navy,
   heading: C.goldBright,
-  label: C.goldSoft,
+  label: C.navy,
   accent: C.gold,
 } as const
 
 const messageCardStyle = {
-  background: `linear-gradient(180deg, color-mix(in srgb, ${C.goldSoft} 28%, ${C.paper}) 0%, ${C.paper} 48%, color-mix(in srgb, ${C.gold} 10%, ${C.paper}) 100%)`,
+  background: `linear-gradient(180deg, #fdf8f2 0%, ${C.paper} 52%, #f3ebe1 100%)`,
   borderWidth: "1px",
   borderStyle: "solid",
   borderColor: goldLine,
-  boxShadow: `0 12px 36px color-mix(in srgb, ${C.navy} 28%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.goldSoft} 55%, transparent)`,
+  boxShadow: `0 12px 36px color-mix(in srgb, #093327 12%, transparent), inset 0 1px 0 color-mix(in srgb, #fdf8f2 70%, transparent)`,
 } as const
 
 const skeletonBg = `color-mix(in srgb, ${C.gold} 22%, ${C.paper})`

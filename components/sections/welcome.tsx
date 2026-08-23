@@ -12,13 +12,14 @@ const cinzel = Cinzel({
 })
 
 const C = {
-  sage: "#4b5d44",
-  sageSoft: "#6a7b5c",
-  cream: "#f7f4eb",
-  paper: "#f9f6ee",
+  ink: "#093327",
+  cream: "#fdf8f2",
+  creamDeep: "#f3ebe1",
+  paper: "#fff9f0",
+  gold: "#c5a059",
 } as const
 
-const sageLine = `color-mix(in srgb, ${C.sage} 48%, transparent)`
+const goldLine = `color-mix(in srgb, ${C.gold} 62%, transparent)`
 
 const theSeasons = localFont({
   src: "../../Font/Fontspring-DEMO-theseasons-reg.otf",
@@ -38,18 +39,18 @@ function OrnamentalDivider({ compact = false }: { compact?: boolean }) {
       <span
         className={`h-px ${compact ? "w-6 sm:w-10" : "w-8 sm:w-12"}`}
         style={{
-          background: `linear-gradient(to right, transparent, ${sageLine}, transparent)`,
+          background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
         }}
       />
       <span
         className="h-0.5 w-0.5 rounded-full sm:h-1 sm:w-1"
-        style={{ backgroundColor: sageLine }}
+        style={{ backgroundColor: goldLine }}
         aria-hidden
       />
       <span
         className={`h-px ${compact ? "w-6 sm:w-10" : "w-8 sm:w-12"}`}
         style={{
-          background: `linear-gradient(to left, transparent, ${sageLine}, transparent)`,
+          background: `linear-gradient(to left, transparent, ${goldLine}, transparent)`,
         }}
       />
     </div>
@@ -58,7 +59,7 @@ function OrnamentalDivider({ compact = false }: { compact?: boolean }) {
 
 function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
   const lineStyle = {
-    background: `linear-gradient(to right, transparent, color-mix(in srgb, ${C.sage} 55%, transparent))`,
+    background: `linear-gradient(to right, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
   }
 
   return (
@@ -66,14 +67,14 @@ function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
       <span className="h-px w-5 sm:w-7 md:w-9" style={lineStyle} aria-hidden />
       <p
         className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
-        style={{ color: C.sage }}
+        style={{ color: C.ink }}
       >
         {groom}
         <span
           className={`${aboveTheBeyond.className} mx-1.5 inline-block normal-case tracking-normal sm:mx-2`}
           style={{
             fontSize: "1.35em",
-            color: C.sageSoft,
+            color: C.ink,
             verticalAlign: "middle",
           }}
           aria-hidden
@@ -85,7 +86,7 @@ function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
       <span
         className="h-px w-5 sm:w-7 md:w-9"
         style={{
-          background: `linear-gradient(to left, transparent, color-mix(in srgb, ${C.sage} 55%, transparent))`,
+          background: `linear-gradient(to left, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
         }}
         aria-hidden
       />
@@ -109,7 +110,7 @@ function LayeredWelcomeTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--welcome-size)",
-          color: C.sage,
+          color: C.ink,
         }}
       >
         Welcome
@@ -120,7 +121,7 @@ function LayeredWelcomeTitle() {
         className={`${aboveTheBeyond.className} relative z-10 mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9]`}
         style={{
           fontSize: "var(--script-size)",
-          color: C.sage,
+          color: C.ink,
         }}
       >
         to our love story
@@ -151,19 +152,19 @@ export function Welcome() {
           style={{
             backgroundColor: C.paper,
             backgroundImage: `
-              radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, #8b9d78 22%, transparent), transparent 68%),
-              radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, #8b9d78 18%, transparent), transparent 68%),
-              linear-gradient(180deg, ${C.cream} 0%, ${C.paper} 52%, #f3eee2 100%)
+              radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, #c5a059 14%, transparent), transparent 68%),
+              radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, #c5a059 12%, transparent), transparent 68%),
+              linear-gradient(180deg, ${C.cream} 0%, ${C.paper} 52%, ${C.creamDeep} 100%)
             `,
-            borderColor: sageLine,
-            boxShadow: `0 12px 36px color-mix(in srgb, ${C.sage} 14%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.cream} 70%, transparent)`,
+            borderColor: goldLine,
+            boxShadow: `0 12px 36px color-mix(in srgb, #093327 12%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.cream} 70%, transparent)`,
           }}
         >
           <div
             className="wedding-frame-inner hidden min-[400px]:block"
             aria-hidden
             style={{
-              borderColor: sageLine,
+              borderColor: goldLine,
             }}
           />
 
@@ -171,7 +172,7 @@ export function Welcome() {
             aria-hidden
             className="pointer-events-none absolute inset-0 rounded-[inherit]"
             style={{
-              background: `linear-gradient(135deg, color-mix(in srgb, #8b9d78 12%, transparent) 0%, transparent 48%)`,
+              background: `linear-gradient(135deg, color-mix(in srgb, #c5a059 12%, transparent) 0%, transparent 48%)`,
             }}
           />
 
@@ -179,7 +180,7 @@ export function Welcome() {
             aria-hidden
             className="pointer-events-none absolute inset-x-5 top-0 h-px sm:inset-x-8"
             style={{
-              background: `linear-gradient(to right, transparent, ${C.sageSoft}, transparent)`,
+              background: `linear-gradient(to right, transparent, ${C.gold}, transparent)`,
             }}
           />
 
@@ -196,14 +197,14 @@ export function Welcome() {
               <blockquote>
                 <p
                   className={`font-goudy-italic ${sectionType.textSnug}`}
-                  style={{ color: C.sage }}
+                  style={{ color: C.ink }}
                 >
                   &ldquo;When the time is right, I, the Lord will make it happen.&rdquo;
                 </p>
                 <figcaption className="mt-2 sm:mt-2.5">
                   <cite
                     className={`${cinzel.className} ${sectionType.label} not-italic uppercase tracking-[0.2em] sm:tracking-[0.24em]`}
-                    style={{ color: C.sageSoft }}
+                    style={{ color: C.ink }}
                   >
                     Isaiah 60:22
                   </cite>
@@ -213,7 +214,7 @@ export function Welcome() {
 
             <div
               className={`font-goudy-italic space-y-3 px-1 text-center sm:space-y-3.5 sm:px-2 md:space-y-4 ${sectionType.textRelaxed}`}
-              style={{ color: C.sage }}
+              style={{ color: C.ink }}
             >
               <p>
                 Dear family and friends, we are overjoyed to begin this new chapter together and
@@ -234,13 +235,13 @@ export function Welcome() {
             <footer className="space-y-2 px-1 pt-4 pb-2 sm:space-y-2.5 sm:px-2 sm:pt-5 sm:pb-3 md:pt-6 md:pb-4">
               <p
                 className={`${aboveTheBeyond.className} ${sectionType.script}`}
-                style={{ color: C.sageSoft }}
+                style={{ color: C.ink }}
               >
                 With all our love,
               </p>
               <p
                 className={`${cinzel.className} ${sectionType.subheader} mb-3 font-semibold tracking-[0.12em] sm:mb-4 sm:tracking-[0.16em] md:mb-5 md:tracking-[0.18em]`}
-                style={{ color: C.sage }}
+                style={{ color: C.ink }}
               >
                 {groomName} &amp; {brideName}
               </p>

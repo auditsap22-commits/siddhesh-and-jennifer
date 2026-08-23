@@ -147,30 +147,35 @@
   --font-serif: "Great Vibes", "Great Vibes Fallback";
   
 /* ─── Motif palette — edit here, affects every component ─── */
+
 /* ==========================================
    MOTIF COLORS
-   Theme: Sage Green + Eucalyptus + Warm Ivory
+   Theme: Forest Green + Blush Peach + Ivory
 ========================================== */
 
 /* Background */
---color-motif-cream:   #F4F1E8; /* Warm ivory */
+--color-motif-cream: #F7F1E8; /* Warm ivory */
 
 /* Primary Highlight */
---color-motif-yellow:  #87996A; /* Muted sage */
+--color-motif-yellow: #D9A08C; /* Soft blush peach */
 
 /* Secondary */
---color-motif-soft:    #ECE5DB; /* Soft warm beige */
+--color-motif-soft: #E8D5C9; /* Warm blush beige */
 
 /* Primary Accent */
---color-motif-accent:  #C4D1B8; /* Light eucalyptus sage */
+--color-motif-accent: #A8B7A2; /* Muted eucalyptus sage */
 
 /* Primary Brand */
---color-motif-ink:     #5B6655; /* Deep olive sage */
---color-motif-deep:    #4E5B4A; /* Deep eucalyptus */
---color-motif-medium:  #8799A7; /* Muted eucalyptus-gray */
+--color-motif-ink: #315E50; /* Rich botanical green */
+
+/* Primary Deep */
+--color-motif-deep: #06483D; /* Deep forest green */
+
+/* Primary Medium */
+--color-motif-medium: #6F8F80; /* Muted eucalyptus green */
 
 /* Neutral */
---color-motif-silver:  #F4F1E8; /* Warm ivory */
+--color-motif-silver: #F7F1E8; /* Warm ivory */
 
 
 /* ==========================================
@@ -186,31 +191,31 @@
 
 
 /* Paragraphs */
---color-welcome-text: 
-    #4E5B4A; /* Deep eucalyptus ink */
+--color-welcome-text:
+    #315E50; /* Rich botanical green */
 
 --color-welcome-text-soft:
-    color-mix(in srgb, #4E5B4A 68%, white);
+    color-mix(in srgb, #315E50 68%, white);
 
 
 /* Small Headings */
 --color-welcome-heading:
-    #5B6655; /* Deep olive sage */
+    #315E50; /* Botanical green */
 
 
 /* Script Font */
 --color-welcome-script:
-    #5B6655; /* Deep sage */
+    #D9A08C; /* Blush peach */
 
 
 /* Main Hero Heading */
 --color-welcome-navy:
-    #4E5B4A; /* Deep eucalyptus */
+    #06483D; /* Deep forest green */
 
 
 /* Buttons / Decorative Lines / Icons */
 --color-welcome-green:
-    #5B6655; /* Deep olive sage */
+    #315E50; /* Rich botanical green */
   /* ─────────────────────────────────────────────────────────── */
   --font-imperial-script: "Imperial Script", cursive;
   --font-anastasia-script: "CoupleAnastasia";

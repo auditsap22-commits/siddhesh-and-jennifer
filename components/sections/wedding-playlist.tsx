@@ -122,14 +122,14 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  navy: "#4b5d44",
-  gold: "#6a7b5c",
-  goldBright: "#4b5d44",
-  goldSoft: "#6a7b5c",
-  paper: "#f9f6ee",
+  navy: "#093327",
+  gold: "#c5a059",
+  goldBright: "#093327",
+  goldSoft: "#c5a059",
+  paper: "#fff9f0",
 } as const
 
-const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
+const goldLine = `color-mix(in srgb, ${C.gold} 62%, transparent)`
 
 const outsideInk = {
   text: "#ffffff",
@@ -151,18 +151,18 @@ const ct = {
 } as const
 
 const cardStyle = {
-  background: `linear-gradient(180deg, color-mix(in srgb, ${C.goldSoft} 28%, ${C.paper}) 0%, ${C.paper} 48%, color-mix(in srgb, ${C.gold} 10%, ${C.paper}) 100%)`,
+  background: `linear-gradient(180deg, #fdf8f2 0%, ${C.paper} 52%, #f3ebe1 100%)`,
   borderWidth: "1px",
   borderStyle: "solid",
   borderColor: goldLine,
-  boxShadow: `0 12px 36px color-mix(in srgb, ${C.navy} 28%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.goldSoft} 55%, transparent)`,
+  boxShadow: `0 12px 36px color-mix(in srgb, #093327 12%, transparent), inset 0 1px 0 color-mix(in srgb, #fdf8f2 70%, transparent)`,
 } as const
 
 const buttonStyle = {
   backgroundColor: C.navy,
-  borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+  borderColor: "color-mix(in srgb, #093327 72%, #041c16)",
   color: C.paper,
-  boxShadow: "0 10px 24px color-mix(in srgb, #4b5d44 28%, transparent)",
+  boxShadow: "0 10px 24px color-mix(in srgb, #093327 28%, transparent)",
 } as const
 
 function OutsideDivider() {
@@ -578,7 +578,7 @@ export function WeddingPlaylist() {
                 className={`${cinzel.className} group relative inline-flex w-full min-h-11 items-center justify-center gap-2 rounded-md border px-3 py-2.5 text-center font-semibold uppercase tracking-[0.12em] touch-manipulation transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-12 sm:rounded-sm sm:px-8 sm:py-3 sm:tracking-[0.24em] md:tracking-[0.28em] ${ct.btn}`}
                 style={buttonStyle}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#3d4a36"
+                  e.currentTarget.style.backgroundColor = "color-mix(in srgb, #093327 88%, #041c16)"
                   e.currentTarget.style.borderColor = C.gold
                 }}
                 onMouseLeave={(e) => {

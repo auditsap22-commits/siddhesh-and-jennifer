@@ -18,7 +18,7 @@ const DECO = {
   tr: "/decoration/right-top-decoration.png",
   bl: "/decoration/left-bottom-decoration.png",
   br: "/decoration/right-bottom-decoration.png",
-  names: "/decoration/coupleName.png",
+  names: "/decoration/couple.png",
 } as const
 
 function CornerOrnament({ className }: { className: string }) {
@@ -81,7 +81,7 @@ export function Hero() {
             width={1138}
             height={1172}
             priority
-            sizes="(max-width: 768px) 52vw, 280px"
+            sizes="(max-width: 768px) 42vw, 220px"
           />
         </div>
         <div className="hero-invite__deco hero-invite__deco--tr" aria-hidden="true">
@@ -91,7 +91,7 @@ export function Hero() {
             width={1283}
             height={1226}
             priority
-            sizes="(max-width: 768px) 50vw, 260px"
+            sizes="(max-width: 768px) 38vw, 200px"
           />
         </div>
         <div className="hero-invite__deco hero-invite__deco--bl" aria-hidden="true">
@@ -100,7 +100,7 @@ export function Hero() {
             alt=""
             width={1115}
             height={1411}
-            sizes="(max-width: 768px) 50vw, 260px"
+            sizes="(max-width: 768px) 38vw, 200px"
           />
         </div>
         <div className="hero-invite__deco hero-invite__deco--br" aria-hidden="true">
@@ -109,7 +109,7 @@ export function Hero() {
             alt=""
             width={988}
             height={1487}
-            sizes="(max-width: 768px) 52vw, 280px"
+            sizes="(max-width: 768px) 42vw, 220px"
           />
         </div>
 

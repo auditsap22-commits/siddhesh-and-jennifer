@@ -1,13 +1,14 @@
 .hero-invite {
-  --hi-cream: #f7f4eb;
-  --hi-cream-deep: #ece6d6;
-  --hi-paper: #f9f6ee;
-  --hi-sage: #4b5d44;
-  --hi-sage-soft: #6a7b5c;
-  --hi-sage-line: color-mix(in srgb, #4b5d44 62%, transparent);
-  --hi-wash: color-mix(in srgb, #8b9d78 28%, transparent);
-  --hi-inset: clamp(0.7rem, 2.6vw, 1.15rem);
-  --hi-deco: clamp(8.5rem, 46vw, 15.5rem);
+  --hi-cream: #fdf8f2;
+  --hi-cream-deep: #f3ebe1;
+  --hi-paper: #fff9f0;
+  --hi-sage: #093327;
+  --hi-sage-soft: #093327;
+  --hi-gold: #c5a059;
+  --hi-sage-line: color-mix(in srgb, #c5a059 78%, transparent);
+  --hi-wash: color-mix(in srgb, #c5a059 14%, transparent);
+  --hi-inset: clamp(0.45rem, 1.6vw, 0.9rem);
+  --hi-deco: clamp(7rem, 38vw, 12.75rem);
   position: relative;
   display: flex;
   align-items: stretch;
@@ -16,8 +17,8 @@
   overflow: hidden;
   color: var(--hi-sage);
   background:
-    radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
-    linear-gradient(180deg, var(--hi-cream-deep) 0%, #e4ddcc 100%);
+    radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #e8d5c4 28%, transparent), transparent 62%),
+    linear-gradient(180deg, var(--hi-cream) 0%, var(--hi-cream-deep) 100%);
 }
 
 .hero-invite__card {
@@ -42,8 +43,8 @@
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 46% 28% at 88% 10%, rgb(155 171 136 / 18%), transparent 72%),
-    radial-gradient(ellipse 46% 28% at 10% 90%, rgb(155 171 136 / 16%), transparent 72%);
+    radial-gradient(ellipse 46% 28% at 88% 10%, rgb(197 160 89 / 12%), transparent 72%),
+    radial-gradient(ellipse 46% 28% at 10% 90%, rgb(210 145 122 / 10%), transparent 72%);
 }
 
 .hero-invite__deco {
@@ -63,25 +64,25 @@
 .hero-invite__deco--tl {
   top: 0;
   left: 0;
-  width: clamp(9.5rem, 52vw, 16.5rem);
+  width: clamp(7.75rem, 42vw, 13.5rem);
 }
 
 .hero-invite__deco--tr {
   top: 0;
   right: 0;
-  width: clamp(8.25rem, 46vw, 14.5rem);
+  width: clamp(6.75rem, 38vw, 12rem);
 }
 
 .hero-invite__deco--bl {
   bottom: 0;
   left: 0;
-  width: clamp(8.25rem, 46vw, 14.5rem);
+  width: clamp(6.75rem, 38vw, 12rem);
 }
 
 .hero-invite__deco--br {
   right: 0;
   bottom: 0;
-  width: clamp(9.5rem, 52vw, 16.5rem);
+  width: clamp(7.75rem, 42vw, 13.5rem);
 }
 
 .hero-invite__frame {
@@ -96,14 +97,14 @@
   content: "";
   position: absolute;
   inset: 5px;
-  border: 1px solid color-mix(in srgb, var(--hi-sage) 48%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hi-gold) 62%, transparent);
 }
 
 .hero-invite__corner {
   position: absolute;
   width: clamp(1.85rem, 7vw, 2.35rem);
   height: clamp(1.85rem, 7vw, 2.35rem);
-  color: var(--hi-sage-soft);
+  color: var(--hi-gold);
 }
 
 .hero-invite__corner--tl {
@@ -127,6 +128,16 @@
   right: -1px;
   bottom: -1px;
   transform: scale(-1);
+}
+
+.hero-invite--story {
+  min-height: 0;
+}
+
+.hero-invite--story .hero-invite__panel {
+  justify-content: flex-start;
+  padding-top: clamp(3.5rem, 10vh, 5.75rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
 }
 
 .hero-invite__panel {
@@ -185,7 +196,6 @@
   display: block;
   width: 100%;
   height: auto;
-  filter: brightness(0) saturate(100%) invert(31%) sepia(14%) saturate(780%) hue-rotate(55deg) brightness(92%);
 }
 
 .hero-invite__details {
@@ -252,22 +262,22 @@
   gap: 0.85rem;
   margin: 0;
   padding: 0.28rem 0.28rem 0.28rem 1.55rem;
-  border: 1px solid color-mix(in srgb, var(--hi-sage) 35%, transparent);
+  border: 1px solid color-mix(in srgb, #093327 72%, #041c16);
   border-radius: 999px;
-  background: var(--hi-sage);
+  background: #093327;
   color: var(--hi-cream);
   font-size: clamp(0.58rem, 2.2vw, 0.68rem);
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 8px 22px color-mix(in srgb, var(--hi-sage) 22%, transparent);
+  box-shadow: 0 8px 22px color-mix(in srgb, #093327 28%, transparent);
   transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .hero-invite__cta:hover {
-  background: color-mix(in srgb, var(--hi-sage) 88%, #3d4d36);
-  box-shadow: 0 10px 26px color-mix(in srgb, var(--hi-sage) 28%, transparent);
+  background: color-mix(in srgb, #093327 88%, #041c16);
+  box-shadow: 0 10px 26px color-mix(in srgb, #093327 34%, transparent);
   transform: translateY(-1px);
 }
 
@@ -284,33 +294,46 @@
   height: 2.15rem;
   border-radius: 999px;
   background: var(--hi-cream);
-  color: var(--hi-sage);
+  color: #093327;
 }
 
 @media (min-width: 640px) {
   .hero-invite {
     min-height: calc(100dvh - 3.5rem);
   }
+
+  .hero-invite--story {
+    min-height: 0;
+  }
 }
 
 @media (min-width: 768px) {
   .hero-invite {
-    --hi-inset: 1.05rem;
+    --hi-inset: 0.85rem;
     min-height: calc(100dvh - 4rem);
+  }
+
+  .hero-invite--story {
+    min-height: 0;
   }
 
   .hero-invite__deco--tl,
   .hero-invite__deco--br {
-    width: 16.75rem;
+    width: 13.75rem;
   }
 
   .hero-invite__deco--tr,
   .hero-invite__deco--bl {
-    width: 14.5rem;
+    width: 12rem;
   }
 
   .hero-invite__panel {
     padding: 5.25rem 3rem 2.25rem;
+  }
+
+  .hero-invite--story .hero-invite__panel {
+    padding-top: 5.25rem;
+    padding-bottom: 5rem;
   }
 
   .hero-invite__copy {
@@ -339,12 +362,12 @@
 @media (min-width: 1200px) {
   .hero-invite__deco--tl,
   .hero-invite__deco--br {
-    width: 18.5rem;
+    width: 15rem;
   }
 
   .hero-invite__deco--tr,
   .hero-invite__deco--bl {
-    width: 16rem;
+    width: 13.25rem;
   }
 
   .hero-invite__names {

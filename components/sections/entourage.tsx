@@ -26,26 +26,26 @@ const aboveTheBeyond = localFont({
 })
 
 const reminderInk = {
-  navy: "#4b5d44",
-  deep: "#3d4a36",
-  slate: "#6a7b5c",
-  gold: "#6a7b5c",
-  champagne: "#c9d2bc",
+  navy: "#093327",
+  deep: "#093327",
+  slate: "#fdf8f2",
+  gold: "#c5a059",
+  champagne: "#fdf8f2",
 } as const
 
 const paperWash = {
-  cream: "#f7f4eb",
-  lift: "#f9f6ee",
-  sage: "#4b5d44",
-  sageSoft: "#6a7b5c",
-  wash: "#8b9d78",
+  cream: "#fdf8f2",
+  lift: "#fff9f0",
+  sage: "#093327",
+  sageSoft: "#093327",
+  wash: "#c5a059",
 } as const
 
 const creamWash = `
-  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
-  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 28%, transparent), transparent 68%),
-  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 22%, transparent), transparent 68%),
-  linear-gradient(180deg, #ece6d6 0%, #e4ddcc 100%)
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #e8d5c4 28%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 14%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 12%, transparent), transparent 68%),
+  linear-gradient(180deg, #fdf8f2 0%, #f3ebe1 100%)
 `
 
 const palette = {
@@ -57,7 +57,7 @@ const palette = {
 
 const headerDividerLineStyle = {
   background:
-    "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent), transparent)",
+    "linear-gradient(to right, transparent, color-mix(in srgb, #c5a059 62%, transparent), transparent)",
 } as const
 
 const dividerLineStyle = {
@@ -79,7 +79,7 @@ function InvitationWordDeco({ side }: { side: "left" | "right" }) {
       <div
         className={`h-full w-full ${side === "right" ? "-scale-x-100" : ""}`}
         style={{
-          backgroundColor: reminderInk.champagne,
+          backgroundColor: reminderInk.gold,
           WebkitMaskImage: `url("${INVITATION_WORD}")`,
           maskImage: `url("${INVITATION_WORD}")`,
           WebkitMaskRepeat: "no-repeat",
@@ -94,13 +94,64 @@ function InvitationWordDeco({ side }: { side: "left" | "right" }) {
   )
 }
 
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 56 56" fill="none" aria-hidden="true">
+      <path
+        d="M54 3H20.5C9.6 3 3 9.6 3 20.5V54"
+        stroke="currentColor"
+        strokeWidth="1.15"
+      />
+      <path
+        d="M54 8H23C12.8 8 8 12.8 8 23V54"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        opacity="0.72"
+      />
+      <circle cx="19" cy="19" r="1.55" fill="currentColor" />
+      <path
+        d="M14.5 19.5c2.4-5 5.2-7.6 9.8-9.6"
+        stroke="currentColor"
+        strokeWidth="0.7"
+      />
+    </svg>
+  )
+}
+
+function GoldFrame() {
+  const goldLine = "color-mix(in srgb, #c5a059 78%, transparent)"
+
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute z-[5]"
+      style={{
+        inset: "clamp(0.45rem, 1.6vw, 0.9rem)",
+        border: `1px solid ${goldLine}`,
+      }}
+    >
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          inset: 5,
+          border: "1px solid color-mix(in srgb, #c5a059 62%, transparent)",
+        }}
+      />
+      <CornerOrnament className="absolute -left-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] text-[#c5a059]" />
+      <CornerOrnament className="absolute -right-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-x-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -left-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-y-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -right-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-100 text-[#c5a059]" />
+    </div>
+  )
+}
+
 function CoupleRingsMark() {
   return (
     <div className="mb-3 flex justify-center sm:mb-4 md:mb-5">
       <div
         className="h-14 w-[4.5rem] sm:h-16 sm:w-[5.25rem] md:h-[4.5rem] md:w-[5.75rem]"
         style={{
-          backgroundColor: "#ffffff",
+          backgroundColor: "#c5a059",
           WebkitMaskImage: 'url("/decoration/ring.png")',
           maskImage: 'url("/decoration/ring.png")',
           WebkitMaskSize: "contain",
@@ -124,7 +175,7 @@ const nameStyle: React.CSSProperties = {
 function EntourageCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
   const lineStyle = {
     background:
-      "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 35%, transparent))",
+      "linear-gradient(to right, transparent, color-mix(in srgb, #c5a059 70%, transparent))",
   }
 
   return (
@@ -152,7 +203,7 @@ function EntourageCoupleLabel({ groom, bride }: { groom: string; bride: string }
         className="h-px w-5 sm:w-7 md:w-9"
         style={{
           background:
-            "linear-gradient(to left, transparent, color-mix(in srgb, #4b5d44 35%, transparent))",
+            "linear-gradient(to left, transparent, color-mix(in srgb, #c5a059 70%, transparent))",
         }}
         aria-hidden
       />
@@ -523,9 +574,10 @@ export function Entourage() {
 
   return (
     <div
-      className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative w-full`}
+      className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative w-full overflow-hidden`}
       style={{ background: creamWash }}
     >
+      <GoldFrame />
       <section
         ref={sectionRef}
         id="entourage"

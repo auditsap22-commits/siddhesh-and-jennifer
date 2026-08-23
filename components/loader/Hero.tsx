@@ -3,7 +3,6 @@
 import React, {
   useCallback,
   useEffect,
-  useId,
   useMemo,
   useRef,
   useState,
@@ -33,10 +32,35 @@ const DECO = {
   tr: '/decoration/right-top-decoration.png',
   bl: '/decoration/left-bottom-decoration.png',
   br: '/decoration/right-bottom-decoration.png',
-  names: '/decoration/coupleName.png',
+  names: '/decoration/couple.png',
+  monogram: '/decoration/monogram-new.png',
 } as const;
 
-const SAGE_PARTICLES = ['#4b5d44', '#6a7b5c', '#8b9d78', '#c9d2bc'] as const;
+const FOREST_PARTICLES = ['#093327', '#0a3121', '#c5a059', '#d2917a'] as const;
+
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 56 56" fill="none" aria-hidden="true">
+      <path
+        d="M54 3H20.5C9.6 3 3 9.6 3 20.5V54"
+        stroke="currentColor"
+        strokeWidth="1.15"
+      />
+      <path
+        d="M54 8H23C12.8 8 8 12.8 8 23V54"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        opacity="0.72"
+      />
+      <circle cx="19" cy="19" r="1.55" fill="currentColor" />
+      <path
+        d="M14.5 19.5c2.4-5 5.2-7.6 9.8-9.6"
+        stroke="currentColor"
+        strokeWidth="0.7"
+      />
+    </svg>
+  );
+}
 
 const focusLiftEase: Transition = { duration: 1.15, ease: [0.22, 1, 0.36, 1] };
 const revealEntryEase: Transition = { duration: 0.9, ease: [0.22, 1, 0.36, 1] };
@@ -81,8 +105,6 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const siteConfig = useSiteConfig();
   const reduceMotion = useReducedMotion();
-  const sealId = useId().replace(/:/g, '');
-  const sealWaxGrad = `env-seal-wax-${sealId}`;
   const openedRef = useRef(false);
   const enterBtnRef = useRef<HTMLButtonElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -93,7 +115,7 @@ export const Hero: React.FC<HeroProps> = ({
   const groomName = siteConfig.couple.groomNickname;
   const brideName = siteConfig.couple.brideNickname;
   const coupleNames = `${groomName} & ${brideName}`;
-  const monogramSrc = siteConfig.couple.monogram || '/monogram/monogram.png';
+  const monogramSrc = DECO.monogram;
 
   const letterDateNumeric = useMemo(() => {
     const parsed = parseWeddingDate(siteConfig.ceremony.date ?? siteConfig.wedding.date);
@@ -407,13 +429,18 @@ export const Hero: React.FC<HeroProps> = ({
     >
       {!reduceMotion && (
         <div className="env-invite-particles pointer-events-none" aria-hidden="true">
-          <InviteParticles count={28} palette={SAGE_PARTICLES} />
+          <InviteParticles count={28} palette={FOREST_PARTICLES} />
         </div>
       )}
 
       <div className="env-invite-bg-glow pointer-events-none" aria-hidden="true" />
 
-      <div className="env-invite-frame" aria-hidden="true" />
+      <div className="env-invite-frame" aria-hidden="true">
+        <CornerOrnament className="env-invite-corner env-invite-corner--tl" />
+        <CornerOrnament className="env-invite-corner env-invite-corner--tr" />
+        <CornerOrnament className="env-invite-corner env-invite-corner--bl" />
+        <CornerOrnament className="env-invite-corner env-invite-corner--br" />
+      </div>
 
       <div className="env-invite-deco env-invite-deco--tl pointer-events-none" aria-hidden="true">
         <Image
@@ -425,7 +452,7 @@ export const Hero: React.FC<HeroProps> = ({
           sizes="(max-width: 768px) 52vw, 280px"
         />
       </div>
-      <div className="env-invite-deco env-invite-deco--tr pointer-events-none" aria-hidden="true">
+      {/* <div className="env-invite-deco env-invite-deco--tr pointer-events-none" aria-hidden="true">
         <Image
           src={DECO.tr}
           alt=""
@@ -434,10 +461,10 @@ export const Hero: React.FC<HeroProps> = ({
           priority
           sizes="(max-width: 768px) 50vw, 260px"
         />
-      </div>
-      <div className="env-invite-deco env-invite-deco--bl pointer-events-none" aria-hidden="true">
+      </div> */}
+      {/* <div className="env-invite-deco env-invite-deco--bl pointer-events-none" aria-hidden="true">
         <Image src={DECO.bl} alt="" width={1115} height={1411} sizes="(max-width: 768px) 50vw, 260px" />
-      </div>
+      </div> */}
       <div className="env-invite-deco env-invite-deco--br pointer-events-none" aria-hidden="true">
         <Image src={DECO.br} alt="" width={988} height={1487} sizes="(max-width: 768px) 52vw, 280px" />
       </div>
@@ -650,60 +677,15 @@ export const Hero: React.FC<HeroProps> = ({
                 disabled={phase !== 'idle'}
                 aria-label="Break the wax seal to open the invitation"
               >
-                <svg
-                  className="env-invite-seal-svg"
-                  viewBox="0 0 120 120"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <radialGradient id={sealWaxGrad} cx="38%" cy="30%" r="72%">
-                      <stop offset="0%" stopColor="#c5d0b4" />
-                      <stop offset="48%" stopColor="#6a7b5c" />
-                      <stop offset="100%" stopColor="#3d4d36" />
-                    </radialGradient>
-                    <clipPath id={`${sealId}-circle`}>
-                      <circle cx="60" cy="60" r="54" />
-                    </clipPath>
-                    <mask id={`${sealId}-mono-mask`}>
-                      <image
-                        href={monogramSrc}
-                        x="18"
-                        y="16"
-                        width="84"
-                        height="84"
-                        preserveAspectRatio="xMidYMid meet"
-                      />
-                    </mask>
-                  </defs>
-
-                  <circle
-                    className="env-invite-seal-blob"
-                    cx="60"
-                    cy="60"
-                    r="54"
-                    fill={`url(#${sealWaxGrad})`}
-                  />
-                  <circle
-                    cx="60"
-                    cy="60"
-                    r="54"
-                    fill="none"
-                    stroke="rgba(247,244,235,0.35)"
-                    strokeWidth="1"
-                  />
-
-                  <g clipPath={`url(#${sealId}-circle)`}>
-                    <rect
-                      x="18"
-                      y="16"
-                      width="84"
-                      height="84"
-                      fill="#f7f4eb"
-                      mask={`url(#${sealId}-mono-mask)`}
-                      className="env-invite-seal-mono-img"
-                    />
-                  </g>
-                </svg>
+                <Image
+                  src={monogramSrc}
+                  alt=""
+                  width={1024}
+                  height={1536}
+                  className="env-invite-seal-img"
+                  priority
+                  sizes="96px"
+                />
               </motion.button>
             </div>
 
@@ -786,7 +768,7 @@ export const Hero: React.FC<HeroProps> = ({
           className={`script ${anastasiaScript.className}`}
           variants={revealCopyItemVariants}
         >
-          With love, {coupleNames}
+          With love, {groomName} & {brideName}
         </motion.span>
       </motion.div>
 

@@ -38,18 +38,18 @@ const aboveTheBeyond = localFont({
 })
 
 const paperWash = {
-  cream: "#f7f4eb",
-  lift: "#f9f6ee",
-  sage: "#4b5d44",
-  sageSoft: "#6a7b5c",
-  wash: "#8b9d78",
+  cream: "#fdf8f2",
+  lift: "#fff9f0",
+  sage: "#093327",
+  sageSoft: "#093327",
+  wash: "#c5a059",
 } as const
 
 const detailsBackground = `
-  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #c9d2bc 22%, transparent), transparent 62%),
-  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 28%, transparent), transparent 68%),
-  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 22%, transparent), transparent 68%),
-  linear-gradient(180deg, #ece6d6 0%, #e4ddcc 100%)
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #e8d5c4 28%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${paperWash.wash} 14%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${paperWash.wash} 12%, transparent), transparent 68%),
+  linear-gradient(180deg, #fdf8f2 0%, #f3ebe1 100%)
 `
 
 function CornerDecorations() {
@@ -99,6 +99,57 @@ function CornerDecorations() {
   )
 }
 
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 56 56" fill="none" aria-hidden="true">
+      <path
+        d="M54 3H20.5C9.6 3 3 9.6 3 20.5V54"
+        stroke="currentColor"
+        strokeWidth="1.15"
+      />
+      <path
+        d="M54 8H23C12.8 8 8 12.8 8 23V54"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        opacity="0.72"
+      />
+      <circle cx="19" cy="19" r="1.55" fill="currentColor" />
+      <path
+        d="M14.5 19.5c2.4-5 5.2-7.6 9.8-9.6"
+        stroke="currentColor"
+        strokeWidth="0.7"
+      />
+    </svg>
+  )
+}
+
+function GoldFrame() {
+  const goldLine = "color-mix(in srgb, #c5a059 78%, transparent)"
+
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute z-[5]"
+      style={{
+        inset: "clamp(0.45rem, 1.6vw, 0.9rem)",
+        border: `1px solid ${goldLine}`,
+      }}
+    >
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          inset: 5,
+          border: "1px solid color-mix(in srgb, #c5a059 62%, transparent)",
+        }}
+      />
+      <CornerOrnament className="absolute -left-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] text-[#c5a059]" />
+      <CornerOrnament className="absolute -right-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-x-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -left-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-y-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -right-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-100 text-[#c5a059]" />
+    </div>
+  )
+}
+
 const detailText = {
   body: paperWash.sage,
   heading: paperWash.sage,
@@ -108,15 +159,15 @@ const detailText = {
 
 const cardStyle = {
   background: paperWash.lift,
-  borderColor: "color-mix(in srgb, #4b5d44 22%, transparent)",
+  borderColor: "color-mix(in srgb, #c5a059 62%, transparent)",
   borderWidth: "1px",
   borderStyle: "solid",
   boxShadow:
-    "0 8px 28px color-mix(in srgb, #4b5d44 10%, transparent), inset 0 1px 0 color-mix(in srgb, white 70%, transparent)",
+    "0 8px 28px color-mix(in srgb, #093327 12%, transparent), inset 0 1px 0 color-mix(in srgb, #fdf8f2 70%, transparent)",
 } as const
 
 const softPanelStyle = {
-  borderColor: "color-mix(in srgb, #4b5d44 16%, transparent)",
+  borderColor: "color-mix(in srgb, #c5a059 50%, transparent)",
   backgroundColor: paperWash.cream,
 } as const
 
@@ -130,7 +181,7 @@ function SectionIconDivider({ icon }: { icon: React.ReactNode }) {
         className="h-px w-8 sm:w-12 md:w-16"
         style={{
           background:
-            "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
+            "linear-gradient(to right, transparent, color-mix(in srgb, #c5a059 62%, transparent))",
         }}
       />
       {icon}
@@ -138,7 +189,7 @@ function SectionIconDivider({ icon }: { icon: React.ReactNode }) {
         className="h-px w-8 sm:w-12 md:w-16"
         style={{
           background:
-            "linear-gradient(to left, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
+            "linear-gradient(to left, transparent, color-mix(in srgb, #c5a059 62%, transparent))",
         }}
       />
     </div>
@@ -205,10 +256,10 @@ const ct = {
 
 const reminderInk = {
   navy: paperWash.sage,
-  deep: "#3d4a36",
-  slate: paperWash.sageSoft,
-  gold: paperWash.sageSoft,
-  champagne: "#c9d2bc",
+  deep: "#093327",
+  slate: paperWash.cream,
+  gold: "#c5a059",
+  champagne: paperWash.cream,
 } as const
 
 function ColorPalette({
@@ -226,7 +277,7 @@ function ColorPalette({
       role="img"
       aria-label={`Color palette: ${colors.join(", ")}`}
       style={{
-        borderColor: frame === "gold" ? reminderInk.champagne : "#FFFFFF",
+        borderColor: frame === "gold" ? reminderInk.gold : "#FFFFFF",
       }}
     >
       {colors.map((color) => (
@@ -256,7 +307,7 @@ function InvitationWordDeco({ side }: { side: "left" | "right" }) {
       <div
         className={`h-full w-full ${side === "right" ? "-scale-x-100" : ""}`}
         style={{
-          backgroundColor: reminderInk.champagne,
+          backgroundColor: reminderInk.gold,
           WebkitMaskImage: `url("${INVITATION_WORD}")`,
           maskImage: `url("${INVITATION_WORD}")`,
           WebkitMaskRepeat: "no-repeat",
@@ -321,47 +372,117 @@ function ReminderCard({
   )
 }
 
-const attireGuide = {
-  entourage: {
-    image: "/Details/entourage.png",
-    imageAspect: "3/2",
-    ladies: {
-      colors: ["#DFE8DD", "#BFCFB8", "#8EA58C", "#738A6E", "#344C3D"] as const,
-      description:
-        "Ladies are requested to wear a floor-length gown in Evergreen or Moss. Sage, Mint, and Sage Hint from our palette may also be worn.",
-    },
-    gentlemen: {
-      colors: ["#DFE8DD", "#344C3D"] as const,
-      description:
-        "Gentlemen are requested to wear a long-sleeved Sage Hint Barong Tagalog, paired with tailored Evergreen trousers and polished black formal shoes.",
-    },
-  },
-  guests: {
-    image: "/Details/guest.png",
-    imageAspect: "3/2",
-    ladies: {
-      colors: ["#DFE8DD", "#BFCFB8", "#8EA58C", "#738A6E", "#344C3D"] as const,
-      description:
-        "Ladies may wear a midi or cocktail dress in Sage Hint, Mint, Sage, Moss, or Evergreen. We welcome a range of elegant styles, so long as they stay within the guide.",
-    },
-    gentlemen: {
-      colors: ["#DFE8DD", "#BFCFB8", "#8EA58C", "#738A6E", "#344C3D"] as const,
-      description:
-        "Gentlemen may wear a collared shirt in Sage Hint, Mint, Sage, Moss, or Evergreen, paired with Sage Hint trousers and brown leather loafers.",
-    },
-  },
+const PALETTE = {
+  forest: "#093327",
+  pine: "#105844",
+  blush: "#E6AE9A",
+  petal: "#ECC7BA",
+  ivory: "#FFFFFF",
 } as const
 
+const attireGuide = [
+  {
+    title: "Mother and Father",
+    subtitle: "of Groom and Bride",
+    script: "Let's celebrate in elegance!",
+    image: "/Details/mother-and-father.png",
+    imageAspect: "1536 / 1024",
+    alt: "Attire guide for the mother and father of the bride and groom",
+    groups: [
+      {
+        label: "Mothers",
+        description:
+          "The Mother of the Bride and Mother of the Groom are invited to wear a floor-length gown in Blush or Petal.",
+      },
+      {
+        label: "Fathers",
+        description:
+          "The Father of the Bride and Father of the Groom are invited to wear a grey suit with a Forest tie and polished formal shoes.",
+      },
+    ],
+  },
+  {
+    title: "Bridesmaids and Groomsmen",
+    subtitle: "Wedding Party",
+    script: "Let's celebrate in elegance!",
+    image: "/Details/brides-and-grooms.png",
+    imageAspect: "1536 / 1024",
+    alt: "Attire guide for bridesmaids and groomsmen",
+    groups: [
+      {
+        label: "Bridesmaids",
+        description:
+          "Bridesmaids are requested to wear a floor-length satin gown in Forest or Pine.",
+      },
+      {
+        label: "Groomsmen",
+        description:
+          "Groomsmen are requested to wear a black suit, white shirt, and Forest tie.",
+      },
+    ],
+  },
+  {
+    title: "Flower Girls and Flower Boys",
+    subtitle: "Little Ones",
+    script: "Let's celebrate in elegance!",
+    image: "/Details/flower-girls-and-flower-boys.png",
+    imageAspect: "1536 / 1024",
+    alt: "Attire guide for flower girls and flower boys",
+    groups: [
+      {
+        label: "Flower Girls",
+        description:
+          "Flower girls will wear a Forest dress with a gold headband, and carry a basket of flowers.",
+      },
+      {
+        label: "Flower Boys",
+        description:
+          "Flower boys will wear a white shirt with a Forest vest, trousers, and bow tie.",
+      },
+    ],
+  },
+  {
+    title: "Guests Attire",
+    subtitle: "Family and Friends",
+    script: "Let's celebrate in elegance!",
+    image: "/Details/guest-attire.png",
+    imageAspect: "1774 / 887",
+    alt: "Attire guide for wedding guests",
+    groups: [
+      {
+        label: "Ladies",
+        note: "Casual Elegance",
+        description:
+          "Ladies may wear a midi, cocktail, or maxi dress in Forest, Pine, Blush, Petal, or Ivory. We would love to see our favorite people in these shades.",
+      },
+      {
+        label: "Gentlemen",
+        note: "Polo Shirts or Long Sleeves",
+        description:
+          "Gentlemen may wear a polo or long-sleeved shirt in Forest, Pine, Blush, Petal, or Ivory, paired with tailored trousers. We would love to see our favorite people in these shades.",
+      },
+    ],
+  },
+] as const
+
+const dressCodeColors = [
+  PALETTE.forest,
+  PALETTE.pine,
+  PALETTE.blush,
+  PALETTE.petal,
+  PALETTE.ivory,
+] as const
+
 const dressCodePalette = [
-  { name: "SAGE HINT", hex: "#DFE8DD" },
-  { name: "MINT", hex: "#BFCFB8" },
-  { name: "SAGE", hex: "#8EA58C" },
-  { name: "MOSS", hex: "#738A6E" },
-  { name: "EVERGREEN", hex: "#344C3D" },
+  { name: "FOREST", hex: PALETTE.forest },
+  { name: "PINE", hex: PALETTE.pine },
+  { name: "BLUSH", hex: PALETTE.blush },
+  { name: "PETAL", hex: PALETTE.petal },
+  { name: "IVORY", hex: PALETTE.ivory },
 ] as const
 
 const dressCodePalettePanelStyle = {
-  borderColor: "color-mix(in srgb, #4b5d44 10%, transparent)",
+  borderColor: "color-mix(in srgb, #c5a059 42%, transparent)",
   backgroundColor: paperWash.lift,
   color: paperWash.sage,
 } as const
@@ -379,15 +500,19 @@ function DressCodePaletteSwatch({
 
   return (
     <div
-      className={`flex min-w-0 flex-1 flex-col ${isLast ? "" : "border-r border-white"}`}
+      className={`flex min-w-0 flex-1 flex-col ${isLast ? "" : "border-r"}`}
+      style={{ borderColor: "color-mix(in srgb, #c5a059 62%, transparent)" }}
     >
       <div
         className="relative flex min-h-[132px] w-full items-center justify-center sm:min-h-[168px] md:min-h-[200px] lg:min-h-[232px]"
-        style={{ backgroundColor: hex }}
+        style={{
+          backgroundColor: hex,
+          boxShadow: hex.toUpperCase() === "#FFFFFF" ? "inset 0 0 0 1px color-mix(in srgb, #c5a059 55%, transparent)" : undefined,
+        }}
       >
         <span
           className={`text-[6px] font-semibold uppercase tracking-[0.08em] sm:text-[7px] md:text-[8px] lg:text-[9px] ${
-            isLight ? "text-[#3D3429]" : "text-white"
+            isLight ? "text-[#093327]" : "text-white"
           }`}
           style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
         >
@@ -414,12 +539,12 @@ function DressCodePaletteHeader() {
           className={`${aboveTheBeyond.className} mt-1 text-lg leading-none sm:mt-1.5 sm:text-xl md:text-2xl`}
           style={{ color: paperWash.sageSoft }}
         >
-          Entourage and Guests
+          Family, Entourage, and Guests
         </p>
         <div className="mx-auto mt-3 flex max-w-xs items-center justify-center gap-2 sm:mt-4 sm:max-w-sm md:max-w-md">
-          <span className="h-px flex-1" style={{ backgroundColor: "color-mix(in srgb, #4b5d44 30%, transparent)" }} />
-          <Heart className="h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3" style={{ color: paperWash.sageSoft }} aria-hidden />
-          <span className="h-px flex-1" style={{ backgroundColor: "color-mix(in srgb, #4b5d44 30%, transparent)" }} />
+          <span className="h-px flex-1" style={{ backgroundColor: "color-mix(in srgb, #c5a059 62%, transparent)" }} />
+          <Heart className="h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3" style={{ color: "#c5a059" }} aria-hidden />
+          <span className="h-px flex-1" style={{ backgroundColor: "color-mix(in srgb, #c5a059 62%, transparent)" }} />
         </div>
       </div>
     </div>
@@ -445,9 +570,10 @@ function DressCodePaletteCaption() {
 function DressCodePaletteSwatches() {
   return (
     <div
-      className="flex w-full border-t border-white"
+      className="flex w-full border-t"
       role="img"
-      aria-label="Dress code color palette: Sage Hint, Mint, Sage, Moss, Evergreen"
+      aria-label="Dress code color palette: Forest, Pine, Blush, Petal, Ivory"
+      style={{ borderColor: "color-mix(in srgb, #c5a059 62%, transparent)" }}
     >
       {dressCodePalette.map((color, index) => (
         <DressCodePaletteSwatch
@@ -460,67 +586,22 @@ function DressCodePaletteSwatches() {
   )
 }
 
-function highlightAttirePhrase(text: string, phrase: string): ReactNode {
-  const index = text.indexOf(phrase)
-  if (index === -1) return text
-
-  return (
-    <>
-      {text.slice(0, index)}
-      <strong className="font-bold underline">{phrase}</strong>
-      {text.slice(index + phrase.length)}
-    </>
-  )
-}
-
-function AttirePaletteGroup({
-  label,
-  colors,
-  description,
-}: {
-  label: string
-  colors?: readonly string[]
-  description: ReactNode
-}) {
-  return (
-    <div className="space-y-2 sm:space-y-2.5">
-      <p
-        className={`${cinzel.className} text-center ${ct.labelSm} uppercase tracking-[0.16em] font-semibold`}
-        style={{ color: detailText.label }}
-      >
-        {label}
-      </p>
-      {colors ? <ColorPalette colors={colors} /> : null}
-      <p
-        className={`font-goudy-italic ${ct.body} px-1 text-center leading-relaxed`}
-        style={{ color: detailText.body }}
-      >
-        {description}
-      </p>
-    </div>
-  )
-}
-
 function AttireCard({
   title,
+  subtitle,
+  script,
   image,
   alt,
   imageAspect,
-  children,
-}: {
-  title: string
-  image: string
-  alt: string
-  imageAspect: string
-  children: ReactNode
-}) {
+  groups,
+}: (typeof attireGuide)[number]) {
   return (
     <div className="relative group h-full">
       <div
         className="absolute -inset-1 rounded-2xl opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            "linear-gradient(to bottom right, color-mix(in srgb, #6a7b5c 18%, transparent), transparent)",
+            "linear-gradient(to bottom right, color-mix(in srgb, #c5a059 18%, transparent), transparent)",
         }}
       />
       <div
@@ -528,15 +609,27 @@ function AttireCard({
         style={cardStyle}
       >
         <div
-          className="border-b px-4 py-3 sm:px-5 sm:py-4"
-          style={{ borderColor: "color-mix(in srgb, #4b5d44 10%, transparent)" }}
+          className="border-b px-4 py-4 text-center sm:px-5 sm:py-5"
+          style={{ borderColor: "color-mix(in srgb, #c5a059 50%, transparent)" }}
         >
           <h4
-            className={`${cinzel.className} ${ct.attireCardTitle} text-center uppercase tracking-[0.22em] font-semibold leading-tight`}
+            className={`${cinzel.className} ${ct.attireCardTitle} uppercase tracking-[0.18em] font-semibold leading-tight sm:tracking-[0.22em]`}
             style={{ color: detailText.heading }}
           >
             {title}
           </h4>
+          <p
+            className={`${cinzel.className} mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] sm:text-xs md:text-sm`}
+            style={{ color: detailText.label }}
+          >
+            {subtitle}
+          </p>
+          <p
+            className={`${aboveTheBeyond.className} mt-2 text-lg leading-none sm:mt-2.5 sm:text-xl md:text-2xl`}
+            style={{ color: PALETTE.blush }}
+          >
+            {script}
+          </p>
         </div>
 
         <div className="relative flex w-full shrink-0 items-center justify-center overflow-hidden" style={{ backgroundColor: paperWash.lift }}>
@@ -552,10 +645,33 @@ function AttireCard({
         </div>
 
         <div
-          className="flex flex-1 flex-col border-t px-4 py-4 sm:px-5 sm:py-5 md:px-6"
-          style={{ borderColor: "color-mix(in srgb, #4b5d44 10%, transparent)" }}
+          className="flex flex-1 flex-col gap-5 border-t px-4 py-4 sm:gap-6 sm:px-5 sm:py-5 md:px-6"
+          style={{ borderColor: "color-mix(in srgb, #c5a059 50%, transparent)" }}
         >
-          {children}
+          {groups.map((group) => (
+            <div key={group.label} className="space-y-1.5 text-center sm:space-y-2">
+              <p
+                className={`${cinzel.className} ${ct.labelSm} font-semibold uppercase tracking-[0.16em]`}
+                style={{ color: detailText.label }}
+              >
+                {group.label}
+              </p>
+              {"note" in group && group.note ? (
+                <p
+                  className={`${cinzel.className} text-[10px] uppercase tracking-[0.14em] sm:text-[11px]`}
+                  style={{ color: PALETTE.blush }}
+                >
+                  {group.note}
+                </p>
+              ) : null}
+              <p
+                className={`font-goudy-italic ${ct.body} px-1 leading-relaxed`}
+                style={{ color: detailText.body }}
+              >
+                {group.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -611,7 +727,7 @@ function EventVenueCard({
         className="absolute -inset-1 rounded-2xl opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            "linear-gradient(to bottom right, color-mix(in srgb, #6a7b5c 15%, transparent), transparent)",
+            "linear-gradient(to bottom right, color-mix(in srgb, #c5a059 15%, transparent), transparent)",
         }}
       />
 
@@ -697,7 +813,7 @@ function EventVenueCard({
                   </p>
                   <div
                     className="h-10 sm:h-12 md:h-14 w-[2px] rounded-full"
-                    style={{ backgroundColor: paperWash.sageSoft }}
+                    style={{ backgroundColor: "#c5a059" }}
                   />
                   <p
                     className={`${cinzel.className} ${ct.year} font-semibold leading-none`}
@@ -758,7 +874,7 @@ function EventVenueCard({
                   className="p-1.5 sm:p-2 md:p-2.5 rounded-lg border shadow-sm"
                   style={{
                     backgroundColor: paperWash.lift,
-                    borderColor: "color-mix(in srgb, #4b5d44 14%, transparent)",
+                    borderColor: "color-mix(in srgb, #c5a059 50%, transparent)",
                   }}
                 >
                   <QRCodeSVG
@@ -784,19 +900,19 @@ function EventVenueCard({
               className={`${cinzel.className} flex-1 flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2.5 sm:py-3 md:py-3.5 rounded-full border font-semibold uppercase tracking-[0.12em] ${ct.btn} transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]`}
               style={{
                 backgroundColor: paperWash.sage,
-                borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+                borderColor: "color-mix(in srgb, #093327 72%, #041c16)",
                 color: paperWash.lift,
                 boxShadow:
-                  "0 6px 20px color-mix(in srgb, #4b5d44 28%, transparent)",
+                  "0 6px 20px color-mix(in srgb, #093327 28%, transparent)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#3d4a36"
-                e.currentTarget.style.borderColor = paperWash.sageSoft
+                e.currentTarget.style.backgroundColor = "color-mix(in srgb, #093327 88%, #041c16)"
+                e.currentTarget.style.borderColor = "#c5a059"
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = paperWash.sage
                 e.currentTarget.style.borderColor =
-                  "color-mix(in srgb, #3d4a36 35%, transparent)"
+                  "color-mix(in srgb, #093327 72%, #041c16)"
               }}
               aria-label={`Get directions to ${badge.toLowerCase()} venue`}
             >
@@ -810,7 +926,7 @@ function EventVenueCard({
               style={{
                 color: detailText.heading,
                 backgroundColor: paperWash.cream,
-                borderColor: "color-mix(in srgb, #4b5d44 20%, transparent)",
+                borderColor: "color-mix(in srgb, #c5a059 62%, transparent)",
               }}
               aria-label={`Copy ${badge.toLowerCase()} venue address`}
             >
@@ -901,9 +1017,10 @@ export function Details() {
 
   return (
     <div
-      className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative w-full`}
+      className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative w-full overflow-hidden`}
       style={{ background: detailsBackground }}
     >
+      <GoldFrame />
       <Section
         id="details"
         className="relative z-10 pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14 overflow-hidden"
@@ -976,7 +1093,7 @@ export function Details() {
               className="h-px w-8 sm:w-12"
               style={{
                 background:
-                  "linear-gradient(to right, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
+                  "linear-gradient(to right, transparent, color-mix(in srgb, #c5a059 62%, transparent))",
               }}
             />
             <Heart
@@ -988,7 +1105,7 @@ export function Details() {
               className="h-px w-8 sm:w-12"
               style={{
                 background:
-                  "linear-gradient(to left, transparent, color-mix(in srgb, #4b5d44 38%, transparent))",
+                  "linear-gradient(to left, transparent, color-mix(in srgb, #c5a059 62%, transparent))",
               }}
             />
           </div>
@@ -1044,57 +1161,13 @@ export function Details() {
 
         <div className="mb-6 grid grid-cols-1 items-start gap-6 sm:mb-8 sm:gap-8 md:mb-10">
           <div className="mx-auto w-full max-w-5xl space-y-6 sm:space-y-8">
-            <AttireCard
-              title="Entourage"
-              image={attireGuide.entourage.image}
-              imageAspect={attireGuide.entourage.imageAspect}
-              alt="Entourage attire guide"
-            >
-              <div className="grid grid-cols-1 gap-5 sm:gap-6">
-                <AttirePaletteGroup
-                  label="Ladies"
-                  description={highlightAttirePhrase(
-                    attireGuide.entourage.ladies.description,
-                    "floor-length gown",
-                  )}
-                />
-                <AttirePaletteGroup
-                  label="Gentlemen"
-                  description={highlightAttirePhrase(
-                    attireGuide.entourage.gentlemen.description,
-                    "Sage Hint Barong Tagalog",
-                  )}
-                />
-              </div>
-            </AttireCard>
-
-            <AttireCard
-              title="Guests"
-              image={attireGuide.guests.image}
-              imageAspect={attireGuide.guests.imageAspect}
-              alt="Guests attire guide"
-            >
-              <div className="grid grid-cols-1 gap-5 sm:gap-6">
-                <AttirePaletteGroup
-                  label="Ladies"
-                  description={highlightAttirePhrase(
-                    attireGuide.guests.ladies.description,
-                    "midi or cocktail dress",
-                  )}
-                />
-                <AttirePaletteGroup
-                  label="Gentlemen"
-                  description={highlightAttirePhrase(
-                    attireGuide.guests.gentlemen.description,
-                    "collared shirt",
-                  )}
-                />
-              </div>
-            </AttireCard>
+            {attireGuide.map((guide) => (
+              <AttireCard key={guide.image} {...guide} />
+            ))}
 
             <div
-              className="overflow-hidden rounded-xl border sm:rounded-2xl"
-              style={cardStyle}
+              className="relative overflow-hidden rounded-xl sm:rounded-2xl"
+              style={{ ...cardStyle, border: "none" }}
             >
               <DressCodePaletteHeader />
               <DressCodePaletteSwatches />
@@ -1189,9 +1262,9 @@ export function Details() {
                 <ReminderCard title="Strictly Formal">
                   <ReminderTone label="Attire">
                     Kindly follow our suggested attire and color palette above to match our
-                    wedding theme. Strictly no casual clothes, shoes, or white-colored attire.
+                    wedding theme. Strictly no casual clothes or shoes.
                   </ReminderTone>
-                  <ColorPalette colors={attireGuide.guests.ladies.colors} frame="gold" />
+                  <ColorPalette colors={dressCodeColors} frame="gold" />
                 </ReminderCard>
 
                 <div
@@ -1217,17 +1290,17 @@ export function Details() {
         <div
           className="fixed inset-0 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-500"
           onClick={() => setShowImageModal(null)}
-          style={{ backgroundColor: "rgba(61,74,54,0.96)" }}
+          style={{ backgroundColor: "rgba(9,51,39,0.96)" }}
         >
           {/* Decorative background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div
               className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "#f7f4eb", opacity: 0.12 }}
+              style={{ backgroundColor: "#fdf8f2", opacity: 0.12 }}
             />
             <div
               className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "#f7f4eb", opacity: 0.14, animationDelay: "1s" }}
+              style={{ backgroundColor: "#fdf8f2", opacity: 0.14, animationDelay: "1s" }}
             />
           </div>
 
@@ -1239,7 +1312,7 @@ export function Details() {
             {/* Decorative top accent */}
             <div
               className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
-              style={{ background: "linear-gradient(to right, #f7f4eb, #f7f4eb, #3d4a36)" }}
+              style={{ background: "linear-gradient(to right, #fdf8f2, #fdf8f2, #093327)" }}
             />
 
             {/* Enhanced close button */}
@@ -1247,7 +1320,7 @@ export function Details() {
               onClick={() => setShowImageModal(null)}
               className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20 hover:bg-motif-accent backdrop-blur-sm p-2.5 sm:p-3 rounded-xl shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 border-2 group/close"
               title="Close (ESC)"
-              style={{ backgroundColor: "#3d4a36", borderColor: "#f7f4eb", color: "#f7f4eb" }}
+              style={{ backgroundColor: "#093327", borderColor: "#fdf8f2", color: "#fdf8f2" }}
             >
               <X className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover/close:text-[#E1D5C7] transition-colors" />
             </button>
@@ -1256,11 +1329,11 @@ export function Details() {
             <div className="absolute top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 z-20">
               <div
                 className="flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-full shadow-xl border-2"
-                style={{ backgroundColor: "#3d4a36", borderColor: "#f7f4eb" }}
+                style={{ backgroundColor: "#093327", borderColor: "#fdf8f2" }}
               >
                 {showImageModal === "ceremony" ? (
                   <>
-                    <Heart className="w-4 h-4" fill="#f7f4eb" style={{ color: "#f7f4eb" }} />
+                    <Heart className="w-4 h-4" fill="#fdf8f2" style={{ color: "#fdf8f2" }} />
                     <span className="text-xs sm:text-sm font-bold" style={{ color: paperWash.cream }}>
                       Ceremony Venue
                     </span>
@@ -1279,7 +1352,7 @@ export function Details() {
             {/* Image section with enhanced effects */}
             <div
               className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] overflow-hidden"
-              style={{ backgroundColor: "#3d4a36" }}
+              style={{ backgroundColor: "#093327" }}
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-0" />
@@ -1312,10 +1385,10 @@ export function Details() {
                   <div className="space-y-2">
                     <h3
                       className={`${cinzel.className} text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-3`}
-                      style={{ color: "#f7f4eb" }}
+                      style={{ color: "#fdf8f2" }}
                     >
                       {showImageModal === "ceremony" ? (
-                        <Heart className="w-6 h-6 text-motif-cream" fill="#f7f4eb" />
+                        <Heart className="w-6 h-6 text-motif-cream" fill="#fdf8f2" />
                       ) : (
                         <Utensils className="w-6 h-6 text-motif-cream" />
                       )}
@@ -1335,10 +1408,10 @@ export function Details() {
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
                         style={{
-                          color: "#f7f4eb",
-                          backgroundColor: "#3d4a36",
+                          color: "#fdf8f2",
+                          backgroundColor: "#093327",
                           opacity: 0.9,
-                          borderColor: "#f7f4eb",
+                          borderColor: "#fdf8f2",
                         }}
                       >
                         <Clock className="w-4 h-4 text-motif-cream shrink-0" />
@@ -1351,10 +1424,10 @@ export function Details() {
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
                         style={{
-                          color: "#f7f4eb",
-                          backgroundColor: "#3d4a36",
+                          color: "#fdf8f2",
+                          backgroundColor: "#093327",
                           opacity: 0.9,
-                          borderColor: "#f7f4eb",
+                          borderColor: "#fdf8f2",
                         }}
                       >
                         <Clock className="w-4 h-4 text-motif-cream" />
