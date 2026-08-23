@@ -10,19 +10,19 @@ export const siteConfig = {
     groom: "Siddhesh Deshpande",
     groomNickname: "Siddhesh",
     monogram:"/decoration/monogram-new.png" ,//Ltryl
-    backgroundMusic:"/background_music/Palagi - Tj Monterde  Violin Cover.mp3"
+    backgroundMusic:"/background_music/Brooklyn Duo - A Thousand Years [WEDDING VERSION].mp3"
   },
   googleAPI:{
     messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSf8KSNkY6nXSiNMHS2d-IjeXrOVj0GsXtQ1xzdOoy2VMdXkPQ/formResponse",   //done
-    message: "https://script.google.com/macros/s/AKfycbyAWDC5cghN91R7rsqsdKosXrEO5ID0LAEPYudF0EHEvvdL8F4QMynF_5JhojXjkx4Q/exec",  //done
-    guestList: "https://script.google.com/macros/s/AKfycbwSgwsIqCfwSQaL_ACVyQlJ1VuPEGcYZdTw_X6EaK0vGnOv85VSOt73sO-4VKYVnH5m/exec",  //done
-    guestRequest: "https://script.google.com/macros/s/AKfycbw4YabqsDct9QHQTANthXmtVESU_pOafDTdvACCBoeTEl8KS5sqgV9l9Cd36ES2MYvM/exec",   //done
-    entourage: "https://script.google.com/macros/s/AKfycbzO_HgD5l5H2RmGVsOVp3M1-6HDRe-0zIo9DiaH_ALWtM1urIjZP5IkpzX_0bIxRdz6/exec",  //done
-    sponsors: "https://script.google.com/macros/s/AKfycbxejBXFT3hVZz1ziTqRcd2g8gy2NgpEEfW6po4fNkuIqhZi5ppVnh3qBhFamlZOfSNE/exec",  //done 
+    message: "https://script.google.com/macros/s/AKfycbzqW89piIqWzJ6fErSZ360b7hnmFp07aXGIa2scHNCvTT9yl-iuejL159flD1sj_imemA/exec",  //done
+    guestList: "https://script.google.com/macros/s/AKfycbzEHD6jpHO1vjvlkbrN2FiNtViiOoBrQEbYBheMElx3UZSPx9iuDrfkV99vIgjkYVR_Cg/exec",  //done
+    guestRequest: "https://script.google.com/macros/s/AKfycbymwPhHn2WBBp47_cllvGCOWxBZtJvIR7m4r6nyVntA3y3WGpliUFlf8UR-9XOZQpX2aw/exec",   //done
+    entourage: "https://script.google.com/macros/s/AKfycbwqoygItmvMuhimO05ZSbaUwNrB4fdKOYug_SZ84-V_D-2NRb63peIWcglJ_2bQpgx2uQ/exec",  //done
+    sponsors: "https://script.google.com/macros/s/AKfycbzCn0gM2Tev_cm-Pq8jbUAHx5Kt-J3VHKumbWPayjl-kVFCSJ8QqGOa3YBUa2-yAJPGnQ/exec",  //done 
     proposalResponses: "https://script.google.com/macros/s/AKfycbwIUDKMoMIHVwbmr6KbgmBtlGRpMGj1Z9maeHSEwsFaXNi0dAH8WYhqbtiAfg_p5D4lgw/exec", // uses entourage script with action: proposal
-    weddingDetails: "https://script.google.com/macros/s/AKfycbwJiEsJKgPaY0ro5G6cOsgJ_vR84bIrfdgugJY-zpI-HyqM9qK6bgOfxy_vbxNpv-9T/exec",   //done
+    weddingDetails: "https://script.google.com/macros/s/AKfycbxxZ7Ml54gxEMsq6veZZEYPLLngqNFcCU4kYFKG55W7wESmVPIzwAm0Xruh55zUoodueg/exec",   //done
 ////google share 
-    googleShare: "https://docs.google.com/spreadsheets/d/1HThE9SkrMxV7v-LzvPAt8fOMJ0JHR_NKqdc3_CEFkGg/edit?usp=sharing", 
+    googleShare: "https://docs.google.com/spreadsheets/d/1nQY8zBgTqpiI1sp0SrxzXefDS7_cAjEJA0CIDxFNUgE/edit?usp=sharing", 
   },
   wedding: {
     date: "January 30, 2027",
@@ -208,8 +208,8 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   playlist: {
     title: "A Playlist from our hearts",
     subtitle: "Songs that have been part of our journey together",
-    playlistName: "Jen and Tin Wedding",
-    spotifyTitle: "Jen and Tin Wedding",
+    playlistName: "Jen and Siddhesh Wedding",
+    spotifyTitle: "Jen and Siddhesh Wedding",
     curator: "Lance",
     coverUrl:
       "https://image-cdn-ak.spotifycdn.com/image/cbc36a110eb943f1",
@@ -270,14 +270,14 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   },
   snapShare: {
     googleDriveLink:
-      "https://drive.google.com/drive/folders/1RkdZxTxgWR354PpqkdEe79LU7zujFST9?usp=sharing",
+      "https://drive.google.com/drive/folders/1V9Ax3kXmixCQrfVjmA_pt_LJUBNWMNRd?usp=sharing",
     albumQR: "/QR/AlbumQR.png",
-    hashtag: ["#JENfoundHisdesTINy"],
+    hashtag: ["#JenfoundHisdesSiddhesh"],
     instructions: "Please scan this QR Code and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
   accommodation: {
     coordinator: {
-      name: "Jen / Tin",
+      name: "Jen / Siddhesh",
       phone: "to be announced",
     },
     hotels: [
