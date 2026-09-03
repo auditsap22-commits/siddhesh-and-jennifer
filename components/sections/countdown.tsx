@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
+import { GoldMonogram } from "@/components/gold-monogram"
 import { Section } from "@/components/section"
 import { motion } from "motion/react"
 import { Cinzel } from "next/font/google"
@@ -258,12 +258,10 @@ export function Countdown() {
           className="relative"
         >
           <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem]">
-            <Image
+            <GoldMonogram
               src={siteConfig.couple.monogram}
               alt={`${groomNickname} & ${brideNickname} Monogram`}
-              fill
-              className="object-contain"
-              sizes="(max-width: 640px) 18rem, (max-width: 768px) 24rem, (max-width: 1024px) 28rem, (max-width: 1280px) 36rem, 40rem"
+              className="absolute inset-0"
             />
           </div>
         </motion.div>

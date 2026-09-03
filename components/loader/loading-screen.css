@@ -166,7 +166,7 @@
 
 .loading-screen__monogram img {
   display: block;
-  width: clamp(4.4rem, 18vw, 6.4rem);
+  width: clamp(5.2rem, 21vw, 7.4rem);
   height: auto;
 }
 
@@ -245,7 +245,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: max(1.05rem, calc(var(--ls-inset) + 0.2rem));
+  bottom: max(1.55rem, calc(var(--ls-inset) + 0.7rem));
   z-index: 6;
   display: flex;
   flex-direction: column;
@@ -296,20 +296,24 @@
 }
 
 .loading-screen__track {
-  width: min(42%, 7.5rem);
-  height: 1px;
+  width: min(58%, 12.5rem);
+  height: 4px;
   overflow: hidden;
-  background: var(--ls-line-dim);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ls-gold) 22%, var(--ls-cream-deep));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ls-gold) 42%, transparent);
 }
 
 .loading-screen__bar {
   height: 100%;
+  border-radius: inherit;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, var(--ls-gold) 42%, transparent) 0%,
-    var(--ls-gold-soft) 45%,
+    var(--ls-gold) 0%,
+    var(--ls-gold-bright) 52%,
     var(--ls-gold) 100%
   );
+  box-shadow: 0 0 8px color-mix(in srgb, var(--ls-gold) 55%, transparent);
   transition: width 0.28s ease-out;
 }
 
@@ -352,7 +356,7 @@
   }
 
   .loading-screen__monogram img {
-    width: 6.75rem;
+    width: 7.6rem;
   }
 
   .loading-screen__names {
@@ -389,7 +393,7 @@
 
 @media (min-width: 1200px) {
   .loading-screen__monogram img {
-    width: 7.1rem;
+    width: 8rem;
   }
 
   .loading-screen__names {
@@ -408,7 +412,7 @@
   }
 
   .loading-screen__monogram img {
-    width: clamp(3.8rem, 13vw, 5rem);
+    width: clamp(4.4rem, 15vw, 5.8rem);
   }
 
   .loading-screen__names {
@@ -454,7 +458,7 @@
   }
 
   .loading-screen__monogram img {
-    width: 3.6rem;
+    width: 4.2rem;
   }
 
   .loading-screen__names {

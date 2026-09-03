@@ -66,9 +66,9 @@
   --env-available-h: calc(100dvh - var(--env-chrome));
   --env-width: min(310px, 78vw, calc(var(--env-available-h) * 0.64));
   --env-ratio: 1.5;
-  --env-seal-size: clamp(52px, calc(var(--env-width) * 0.19), 70px);
+  --env-seal-size: clamp(58px, calc(var(--env-width) * 0.22), 80px);
   --env-letter-w: calc(var(--env-width) * 0.92);
-  --env-letter-h: calc(var(--env-letter-w) * 1.06);
+  --env-letter-h: calc(var(--env-letter-w) * 1.22);
   --env-scene-shift: clamp(0.65rem, 2.25dvh, 1.35rem);
   --pocket-cover: 42%;
   --pocket-lip: 58%;
@@ -88,7 +88,7 @@
   padding:
     max(clamp(0.75rem, 3.5dvh, 1.5rem), env(safe-area-inset-top, 0px))
     max(0.75rem, env(safe-area-inset-right, 0px))
-    max(clamp(0.65rem, 2.5dvh, 1.25rem), env(safe-area-inset-bottom, 0px))
+    max(clamp(1.75rem, 5.5dvh, 2.75rem), env(safe-area-inset-bottom, 0px))
     max(0.75rem, env(safe-area-inset-left, 0px));
   background:
     radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #e8d5c4 28%, transparent), transparent 62%),
@@ -427,7 +427,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
+  margin: 0 0 clamp(1.25rem, 4dvh, 2.25rem);
   padding: 0;
 }
 
@@ -572,7 +572,7 @@
   position: absolute;
   left: 2%;
   right: 2%;
-  top: -195%;
+  top: -215%;
   bottom: 0;
   z-index: var(--z-contents);
   isolation: isolate;
@@ -605,7 +605,7 @@
   left: 50%;
   bottom: 0;
   width: 100%;
-  height: 175%;
+  height: 200%;
   transform: translateX(-50%);
 }
 
@@ -613,7 +613,7 @@
 .env-invite-emerge-stack {
   position: absolute;
   left: 50%;
-  bottom: 2%;
+  bottom: 1.25%;
   transform: translateX(-50%);
   width: var(--env-letter-w);
   overflow: visible;
@@ -697,9 +697,9 @@
   min-height: 0;
   overflow: hidden;
   padding:
-    clamp(0.85rem, calc(var(--env-letter-w) * 0.07), 1.2rem)
+    clamp(0.9rem, calc(var(--env-letter-w) * 0.075), 1.25rem)
     clamp(0.65rem, calc(var(--env-letter-w) * 0.06), 1.05rem)
-    clamp(2.65rem, calc(var(--env-letter-w) * 0.26), 3.5rem)
+    clamp(2.85rem, calc(var(--env-letter-w) * 0.28), 3.75rem)
     clamp(0.65rem, calc(var(--env-letter-w) * 0.06), 1.05rem);
   display: flex;
   flex-direction: column;
@@ -1057,7 +1057,7 @@
   top: 57%;
   z-index: var(--z-seal);
   width: var(--env-seal-size);
-  height: calc(var(--env-seal-size) * 1.5);
+  height: calc(var(--env-seal-size) * 1.322);
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
@@ -1328,15 +1328,19 @@
   }
 
   .env-invite-emerge-stack {
-    bottom: 5%;
+    bottom: 3.5%;
   }
 
   .env-invite-contents {
-    height: 165%;
+    height: 190%;
   }
 
   .env-invite-contents-clip {
-    top: -175%;
+    top: -195%;
+  }
+
+  .env-invite-stage {
+    margin-bottom: clamp(0.85rem, 3dvh, 1.5rem);
   }
 
   .env-invite-hint {

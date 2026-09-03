@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useRef } from "react"
 import Link from "next/link"
 import { useSiteConfig } from "@/hooks/use-site-config"
-import Image from "next/image"
+import { GoldMonogram } from "@/components/gold-monogram"
 import StaggeredMenu from "./StaggeredMenu"
 import { Cormorant_Garamond } from "next/font/google"
 
@@ -107,11 +107,10 @@ export function Navbar() {
         <div className="flex justify-between items-center h-12 sm:h-14 md:h-16">
           <Link href="#home" className="flex-shrink-0 group relative z-10">
             <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12">
-              <Image
+              <GoldMonogram
                 src={siteConfig.couple.monogram}
                 alt={`${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Monogram`}
-                fill
-                className="object-contain group-hover:scale-110 group-active:scale-105 transition-all duration-500"
+                className="absolute inset-0 group-hover:scale-110 group-active:scale-105 transition-all duration-500"
               />
             </div>
             

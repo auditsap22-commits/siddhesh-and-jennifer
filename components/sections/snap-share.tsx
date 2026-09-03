@@ -27,14 +27,13 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  navy: "#4b5d44",
-  gold: "#6a7b5c",
-  goldBright: "#4b5d44",
-  goldSoft: "#6a7b5c",
-  paper: "#f9f6ee",
+  navy: "#093327",
+  gold: "#c5a059",
+  goldBright: "#093327",
+  paper: "#fff9f0",
 } as const
 
-const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
+const goldLine = `color-mix(in srgb, ${C.gold} 62%, transparent)`
 const outsideInk = {
   text: "#ffffff",
   textSoft: "rgba(255, 255, 255, 0.82)",
@@ -44,7 +43,7 @@ const outsideInk = {
 const palette = {
   body: C.navy,
   heading: C.goldBright,
-  label: C.goldSoft,
+  label: C.navy,
   accent: C.gold,
 } as const
 
@@ -65,19 +64,21 @@ const ct = {
 } as const
 
 const cardStyle = {
-  background: `linear-gradient(180deg, color-mix(in srgb, ${C.goldSoft} 28%, ${C.paper}) 0%, ${C.paper} 48%, color-mix(in srgb, ${C.gold} 10%, ${C.paper}) 100%)`,
+  background: `linear-gradient(180deg, #fdf8f2 0%, ${C.paper} 52%, #f3ebe1 100%)`,
   borderWidth: "1px",
   borderStyle: "solid",
   borderColor: goldLine,
-  boxShadow: `0 12px 36px color-mix(in srgb, ${C.navy} 28%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.goldSoft} 55%, transparent)`,
+  boxShadow: `0 12px 36px color-mix(in srgb, #093327 12%, transparent), inset 0 1px 0 color-mix(in srgb, #fdf8f2 70%, transparent)`,
 } as const
 
 const buttonStyle = {
   backgroundColor: C.navy,
-  borderColor: "color-mix(in srgb, #3d4a36 35%, transparent)",
+  borderColor: "color-mix(in srgb, #093327 72%, #041c16)",
   color: C.paper,
-  boxShadow: "0 10px 24px color-mix(in srgb, #4b5d44 28%, transparent)",
+  boxShadow: "0 6px 20px color-mix(in srgb, #093327 35%, transparent)",
 } as const
+
+const buttonHover = "color-mix(in srgb, #093327 88%, #041c16)"
 
 const QR_FG = C.navy
 
@@ -169,7 +170,7 @@ function ContentCard({
       <div
         className="pointer-events-none absolute inset-0 rounded-[inherit]"
         style={{
-          background: `linear-gradient(135deg, color-mix(in srgb, ${C.goldSoft} 28%, transparent) 0%, transparent 48%)`,
+          background: `linear-gradient(135deg, color-mix(in srgb, ${C.gold} 12%, transparent) 0%, transparent 48%)`,
         }}
         aria-hidden
       />
@@ -199,7 +200,7 @@ function PrimaryButton({
       style={
         active
           ? {
-              backgroundColor: "#3d4a36",
+              backgroundColor: buttonHover,
               borderColor: C.gold,
               color: C.paper,
               boxShadow: buttonStyle.boxShadow,
@@ -208,7 +209,7 @@ function PrimaryButton({
       }
       onMouseEnter={(e) => {
         if (active) return
-        e.currentTarget.style.backgroundColor = "#3d4a36"
+        e.currentTarget.style.backgroundColor = buttonHover
         e.currentTarget.style.borderColor = C.gold
       }}
       onMouseLeave={(e) => {
@@ -345,18 +346,18 @@ export function SnapShare() {
               Our Favorite Moments
             </h4>
             <div className="grid w-full min-w-0 grid-cols-2 gap-2 sm:gap-3">
-              <div className="relative aspect-square overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: goldLine }}>
+              <div className="relative aspect-[2/3] overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: goldLine }}>
                 <Image
-                  src="/mobile-background/couple (1).jpeg"
+                  src="/mobile/couples (1).JPG"
                   alt="Wedding moment 1"
                   fill
                   className="object-cover"
                   style={{ imageOrientation: "from-image" }}
                 />
               </div>
-              <div className="relative aspect-square overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: goldLine }}>
+              <div className="relative aspect-[2/3] overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: goldLine }}>
                 <Image
-                  src="/mobile-background/couple (2).jpg"
+                  src="/mobile/couples (2).JPG"
                   alt="Wedding moment 2"
                   fill
                   className="object-cover"
@@ -365,7 +366,7 @@ export function SnapShare() {
               </div>
               <div className="relative col-span-2 aspect-[3/2] overflow-hidden rounded-xl border shadow-sm" style={{ borderColor: goldLine }}>
                 <Image
-                  src="/Details/video.jpg"
+                  src="/desktop/couples (1).JPG"
                   alt="Wedding moment 3"
                   fill
                   className="object-cover"
@@ -606,7 +607,7 @@ export function SnapShare() {
                     className={`${cinzel.className} group relative inline-flex items-center justify-center gap-1.5 rounded-sm border px-5 py-2.5 font-semibold uppercase tracking-[0.18em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 sm:px-6 sm:py-3 sm:tracking-[0.2em] md:tracking-[0.24em] ${ct.btn}`}
                     style={buttonStyle}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#3d4a36"
+                      e.currentTarget.style.backgroundColor = buttonHover
                       e.currentTarget.style.borderColor = C.gold
                     }}
                     onMouseLeave={(e) => {

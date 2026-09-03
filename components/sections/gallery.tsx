@@ -17,12 +17,21 @@ const cinzel = Cinzel({
 })
 
 const C = {
-  cream: "#f7f3e9",
-  lift: "#faf7ef",
-  champagne: "#DDBA7A",
-  gold: "#AB832E",
-  slate: "#364061",
+  cream: "#fdf8f2",
+  lift: "#fff9f0",
+  creamDeep: "#f3ebe1",
+  gold: "#c5a059",
+  ink: "#093327",
 } as const
+
+const creamWash = `
+  radial-gradient(80% 55% at 50% 0%, color-mix(in srgb, #e8d5c4 28%, transparent), transparent 62%),
+  radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${C.gold} 14%, transparent), transparent 68%),
+  radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${C.gold} 12%, transparent), transparent 68%),
+  linear-gradient(180deg, ${C.cream} 0%, ${C.creamDeep} 100%)
+`
+
+const goldLine = `color-mix(in srgb, ${C.gold} 62%, transparent)`
 
 const theSeasons = localFont({
   src: "../../Font/Fontspring-DEMO-theseasons-reg.otf",
@@ -36,13 +45,64 @@ const aboveTheBeyond = localFont({
   variable: "--font-above-beyond",
 })
 
-const CORNER_DECO_CLASS =
-  "block h-auto w-auto max-w-[88px] sm:max-w-[108px] md:max-w-[124px] lg:max-w-[140px]"
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 56 56" fill="none" aria-hidden="true">
+      <path d="M54 3H20.5C9.6 3 3 9.6 3 20.5V54" stroke="currentColor" strokeWidth="1.15" />
+      <path d="M54 8H23C12.8 8 8 12.8 8 23V54" stroke="currentColor" strokeWidth="0.8" opacity="0.72" />
+      <circle cx="19" cy="19" r="1.55" fill="currentColor" />
+      <path d="M14.5 19.5c2.4-5 5.2-7.6 9.8-9.6" stroke="currentColor" strokeWidth="0.7" />
+    </svg>
+  )
+}
+
+function GoldFrame() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute z-[5]"
+      style={{
+        inset: "clamp(0.45rem, 1.6vw, 0.9rem)",
+        border: `1px solid color-mix(in srgb, ${C.gold} 78%, transparent)`,
+      }}
+    >
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          inset: 5,
+          border: `1px solid color-mix(in srgb, ${C.gold} 62%, transparent)`,
+        }}
+      />
+      <CornerOrnament className="absolute -left-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] text-[#c5a059]" />
+      <CornerOrnament className="absolute -right-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-x-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -left-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-y-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -right-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-100 text-[#c5a059]" />
+    </div>
+  )
+}
+
+function CornerDecorations() {
+  return (
+    <>
+      <div className="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image src="/decoration/left-top-decoration.png" alt="" width={1138} height={1172} className="h-auto w-full" sizes="(max-width: 768px) 42vw, 264px" />
+      </div>
+      <div className="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image src="/decoration/right-top-decoration.png" alt="" width={1283} height={1226} className="h-auto w-full" sizes="(max-width: 768px) 38vw, 232px" />
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[clamp(7.5rem,38vw,14.5rem)]">
+        <Image src="/decoration/left-bottom-decoration.png" alt="" width={1115} height={1411} className="h-auto w-full" sizes="(max-width: 768px) 38vw, 232px" />
+      </div>
+      <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-[clamp(8.5rem,42vw,16.5rem)]">
+        <Image src="/decoration/right-bottom-decoration.png" alt="" width={988} height={1487} className="h-auto w-full" sizes="(max-width: 768px) 42vw, 264px" />
+      </div>
+    </>
+  )
+}
 
 function GalleryCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
   const lineStyle = {
-    background:
-      "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-welcome-navy) 35%, transparent))",
+    background: `linear-gradient(to right, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
   }
 
   return (
@@ -50,14 +110,14 @@ function GalleryCoupleLabel({ groom, bride }: { groom: string; bride: string }) 
       <span className="h-px w-5 sm:w-7 md:w-9" style={lineStyle} aria-hidden />
       <p
         className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
-        style={{ color: "var(--color-welcome-navy)" }}
+        style={{ color: C.ink }}
       >
         With {groom}
         <span
           className={`${aboveTheBeyond.className} mx-1.5 inline-block normal-case tracking-normal sm:mx-2`}
           style={{
             fontSize: "1.35em",
-            color: "var(--color-welcome-green)",
+            color: C.ink,
             verticalAlign: "middle",
           }}
           aria-hidden
@@ -69,8 +129,7 @@ function GalleryCoupleLabel({ groom, bride }: { groom: string; bride: string }) 
       <span
         className="h-px w-5 sm:w-7 md:w-9"
         style={{
-          background:
-            "linear-gradient(to left, transparent, color-mix(in srgb, var(--color-welcome-navy) 35%, transparent))",
+          background: `linear-gradient(to left, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
         }}
         aria-hidden
       />
@@ -93,7 +152,7 @@ function GalleryTitle() {
         className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em] pb-1 sm:pb-1.5`}
         style={{
           fontSize: "var(--title-size)",
-          color: "var(--color-welcome-navy)",
+          color: C.ink,
         }}
       >
         Gallery
@@ -103,7 +162,7 @@ function GalleryTitle() {
         className={`${aboveTheBeyond.className} mx-auto block w-fit max-w-full px-1 leading-[0.88] sm:leading-[0.9] mt-2 sm:mt-2.5 md:mt-3`}
         style={{
           fontSize: "var(--script-size)",
-          color: "var(--color-welcome-green)",
+          color: C.ink,
         }}
       >
         our favorite moments
@@ -114,13 +173,13 @@ function GalleryTitle() {
 }
 
 const galleryItems = [
-  { image: "/mobile-background/couple (1).jpeg", text: " " },
-  { image: "/mobile-background/couple (1).jpg", text: " " },
-  { image: "/mobile-background/couple (2).jpeg", text: " " },
-  { image: "/mobile-background/couple (2).jpg", text: " " },
-  { image: "/mobile-background/couple (3).jpeg", text: " " },
-  { image: "/mobile-background/couple (3).jpg", text: " " },
-  { image: "/mobile-background/couple (4).jpg", text: " " },
+  { image: "/mobile/couples (1).JPG", text: " " },
+  { image: "/mobile/couples (2).JPG", text: " " },
+  { image: "/mobile/couples (3).JPG", text: " " },
+  { image: "/mobile/couples (4).JPG", text: " " },
+  { image: "/mobile/couples (5).JPG", text: " " },
+  { image: "/mobile/couples (6).JPG", text: " " },
+  { image: "/mobile/couples (7).jpg", text: " " },
 ]
 
 export function Gallery() {
@@ -208,53 +267,15 @@ export function Gallery() {
 
   return (
     <div
-      className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative w-full`}
-      style={{
-        background: `
-          radial-gradient(920px 520px at 50% 8%, color-mix(in srgb, ${C.champagne} 35%, transparent) 0%, transparent 55%),
-          radial-gradient(640px 420px at 12% 88%, color-mix(in srgb, ${C.slate} 16%, transparent) 0%, transparent 58%),
-          radial-gradient(560px 380px at 92% 78%, color-mix(in srgb, ${C.gold} 14%, transparent) 0%, transparent 55%),
-          linear-gradient(180deg, ${C.cream} 0%, ${C.lift} 48%, ${C.cream} 100%)
-        `,
-      }}
+      className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative isolate w-full overflow-hidden`}
+      style={{ background: creamWash }}
     >
+      <GoldFrame />
+      <CornerDecorations />
       <Section
         id="gallery"
         className="relative z-10 pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14"
       >
-      {/* Corner decorations */}
-      <div className="pointer-events-none absolute left-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-top-corner.png"
-          alt=""
-          className={CORNER_DECO_CLASS}
-        />
-      </div>
-      <div className="pointer-events-none absolute right-0 top-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-top-corner.png"
-          alt=""
-          className={CORNER_DECO_CLASS}
-        />
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/left-bottom-corner.png"
-          alt=""
-          className={CORNER_DECO_CLASS}
-        />
-      </div>
-      <div className="pointer-events-none absolute bottom-0 right-0 z-10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/decoration/deco/right-bottom-corner.png"
-          alt=""
-          className={CORNER_DECO_CLASS}
-        />
-      </div>
 
       {/* Header */}
       <div className="relative z-20 mx-auto mb-6 max-w-5xl px-6 text-center @container/gallery sm:mb-8 sm:px-10 md:mb-10 md:px-12">
@@ -264,7 +285,7 @@ export function Gallery() {
         </div>
         <p
           className={`font-goudy-italic mx-auto max-w-2xl px-2 ${sectionType.textRelaxed}`}
-          style={{ color: "var(--color-welcome-text)" }}
+          style={{ color: C.ink }}
         >
           From our first chapter to this beautiful season of commitment — every moment has been a
           testament to love, faith, and grace.
@@ -274,20 +295,18 @@ export function Gallery() {
           <span
             className="h-px w-8 sm:w-12 md:w-16"
             style={{
-              background:
-                "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-welcome-navy) 38%, transparent))",
+              background: `linear-gradient(to right, transparent, ${goldLine})`,
             }}
           />
           <Camera
             className="h-3.5 w-3.5 sm:h-4 sm:w-4"
-            style={{ color: "var(--color-welcome-green)" }}
+            style={{ color: C.gold }}
             aria-hidden
           />
           <span
             className="h-px w-8 sm:w-12 md:w-16"
             style={{
-              background:
-                "linear-gradient(to left, transparent, color-mix(in srgb, var(--color-welcome-navy) 38%, transparent))",
+              background: `linear-gradient(to left, transparent, ${goldLine})`,
             }}
           />
         </div>
@@ -300,8 +319,8 @@ export function Gallery() {
             <div
               className="h-12 w-12 animate-spin rounded-full border-[3px]"
               style={{
-                borderColor: "color-mix(in srgb, var(--color-welcome-green) 30%, transparent)",
-                borderTopColor: "var(--color-welcome-green)",
+                borderColor: "color-mix(in srgb, #c5a059 30%, transparent)",
+                borderTopColor: C.gold,
               }}
             />
           </div>
@@ -318,6 +337,9 @@ export function Gallery() {
                     key={item.image + index}
                     type="button"
                     className="group relative snap-center shrink-0 w-[82%] cursor-pointer overflow-hidden rounded-lg transition-all duration-300"
+                    style={{
+                      border: `1px solid color-mix(in srgb, ${C.gold} 62%, transparent)`,
+                    }}
                     onClick={() => {
                       resetZoom()
                       setSelectedImage(item)
@@ -329,11 +351,11 @@ export function Gallery() {
                       className="pointer-events-none absolute -inset-0.5 rounded-lg opacity-0 blur-sm transition-opacity duration-300 group-active:opacity-100"
                       style={{
                         background:
-                          "color-mix(in srgb, var(--color-welcome-green) 25%, transparent)",
+                          "color-mix(in srgb, #c5a059 32%, transparent)",
                       }}
                     />
 
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
+                    <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
                       <Image
                         src={item.image}
                         alt={item.text || `Gallery image ${index + 1}`}
@@ -348,12 +370,12 @@ export function Gallery() {
                       className="absolute top-2 right-2 rounded-full px-2 py-1 backdrop-blur-sm"
                       style={{
                         backgroundColor:
-                          "color-mix(in srgb, var(--color-welcome-navy) 65%, transparent)",
+                          "color-mix(in srgb, #093327 72%, transparent)",
                       }}
                     >
                       <span
                         className="text-xs font-medium"
-                        style={{ color: "var(--color-welcome-bg)" }}
+                        style={{ color: C.lift }}
                       >
                         {index + 1}/{galleryItems.length}
                       </span>
@@ -364,7 +386,7 @@ export function Gallery() {
 
               <p
                 className={`font-goudy-italic mt-2 text-center tracking-wide ${sectionType.label}`}
-                style={{ color: "var(--color-welcome-heading)" }}
+                style={{ color: C.ink }}
               >
                 Swipe to explore
               </p>
@@ -377,6 +399,9 @@ export function Gallery() {
                   key={item.image + index}
                   type="button"
                   className="group relative w-full cursor-pointer overflow-hidden rounded-xl transition-all duration-300"
+                  style={{
+                    border: `1px solid color-mix(in srgb, ${C.gold} 62%, transparent)`,
+                  }}
                   onClick={() => {
                     resetZoom()
                     setSelectedImage(item)
@@ -388,11 +413,11 @@ export function Gallery() {
                     className="pointer-events-none absolute -inset-0.5 rounded-xl opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100"
                     style={{
                       background:
-                        "color-mix(in srgb, var(--color-welcome-green) 22%, transparent)",
+                        "color-mix(in srgb, #c5a059 28%, transparent)",
                     }}
                   />
 
-                  <div className="relative aspect-[3/4] md:aspect-square overflow-hidden rounded-xl">
+                  <div className="relative aspect-[2/3] overflow-hidden rounded-xl">
                     <Image
                       src={item.image}
                       alt={item.text || `Gallery image ${index + 1}`}
@@ -407,12 +432,12 @@ export function Gallery() {
                     className="absolute top-2 right-2 rounded-full px-2 py-1 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
                     style={{
                       backgroundColor:
-                        "color-mix(in srgb, var(--color-welcome-navy) 65%, transparent)",
+                        "color-mix(in srgb, #093327 72%, transparent)",
                     }}
                   >
                     <span
                       className="text-xs font-medium"
-                      style={{ color: "var(--color-welcome-bg)" }}
+                      style={{ color: C.lift }}
                     >
                       {index + 1}/{galleryItems.length}
                     </span>
@@ -426,33 +451,31 @@ export function Gallery() {
                 href="/gallery"
                 className={`${cinzel.className} group inline-flex items-center gap-4 rounded-full border py-1 pl-7 pr-1 text-[0.625rem] font-semibold uppercase tracking-[0.22em] transition-all duration-300 hover:scale-[1.02] sm:gap-5 sm:py-1.5 sm:pl-9 sm:pr-1.5 sm:text-[0.6875rem] sm:tracking-[0.28em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4`}
                 style={{
-                  backgroundColor: "#04103B",
-                  borderColor: "color-mix(in srgb, #04103B 35%, transparent)",
-                  color: "var(--color-welcome-bg)",
-                  boxShadow: "0 6px 20px color-mix(in srgb, #04103B 35%, transparent)",
+                  backgroundColor: C.ink,
+                  borderColor: "color-mix(in srgb, #093327 72%, #041c16)",
+                  color: C.lift,
+                  boxShadow: "0 6px 20px color-mix(in srgb, #093327 35%, transparent)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#192030"
-                  e.currentTarget.style.borderColor = "#04103B"
+                  e.currentTarget.style.backgroundColor =
+                    "color-mix(in srgb, #093327 88%, #041c16)"
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#04103B"
-                  e.currentTarget.style.borderColor =
-                    "color-mix(in srgb, #04103B 35%, transparent)"
+                  e.currentTarget.style.backgroundColor = C.ink
                 }}
               >
                 <span>View Full Gallery</span>
                 <span
                   className="flex h-8 w-8 items-center justify-center rounded-full sm:h-10 sm:w-10"
                   style={{
-                    backgroundColor: "var(--color-welcome-bg)",
-                    boxShadow: "0 1px 0 color-mix(in srgb, var(--color-welcome-navy) 10%, transparent)",
+                    backgroundColor: C.lift,
+                    boxShadow: "0 1px 0 color-mix(in srgb, #093327 10%, transparent)",
                   }}
                 >
                   <ArrowRight
                     className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 sm:h-4 sm:w-4"
                     strokeWidth={2.25}
-                    style={{ color: "#04103B" }}
+                    style={{ color: C.ink }}
                     aria-hidden
                   />
                 </span>
@@ -531,13 +554,12 @@ export function Gallery() {
                 className="rounded-full border px-4 py-2 backdrop-blur-md"
                 style={{
                   backgroundColor: "rgba(0,0,0,0.4)",
-                  borderColor:
-                    "color-mix(in srgb, var(--color-welcome-green) 50%, transparent)",
+                  borderColor: goldLine,
                 }}
               >
                 <span
                   className="text-sm font-medium sm:text-base"
-                  style={{ color: "var(--color-welcome-bg)" }}
+                  style={{ color: C.lift }}
                 >
                   {currentIndex + 1} / {galleryItems.length}
                 </span>

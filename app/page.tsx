@@ -220,16 +220,15 @@ export default function Home() {
                 transition={cinematicEntry ? undefined : { duration: 0.01 }}
               >
               <Welcome />
-              <OurStory />
+              {/* <OurStory /> */}
                {/* <CoupleVideo />  */}
-              {/* <LoveStory /> */}
+              <LoveStory />
               {/* <ProposalVideo /> */}
               <Countdown />
-              {/* <Gallery /> */}
+              <Gallery />
               <Details />
               <VideoMessage />
               <Messages />
-
               {/* <Accommodation /> */}
               {/* <GuestInformation /> */}
               <WeddingTimeline />
@@ -240,7 +239,7 @@ export default function Home() {
               <WeddingPlaylist />
               <FAQ />
               <Registry />
-              {/* <SnapShare /> */}
+              <SnapShare />
 
               <Footer />
               </motion.div>

@@ -38,7 +38,7 @@ const DECO = {
   // tr: '/decoration/right-top-decoration.png',
   // bl: '/decoration/left-bottom-decoration.png',
   br: '/decoration/right-bottom-decoration.png',
-  monogram: '/decoration/monogram-new.png',
+  monogram: '/monogram/monog.png',
   names: '/decoration/couple.png',
 } as const;
 
@@ -230,10 +230,10 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
           <Image
             src={DECO.monogram}
             alt="Jennifer and Siddhesh monogram"
-            width={1024}
-            height={1536}
+            width={289}
+            height={382}
             priority
-            sizes="(max-width: 768px) 28vw, 118px"
+            sizes="(max-width: 768px) 32vw, 140px"
           />
         </motion.div>
 

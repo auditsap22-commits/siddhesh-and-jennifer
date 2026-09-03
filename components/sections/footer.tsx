@@ -341,17 +341,16 @@ export function Footer() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center"
           >
-            {siteConfig.couple.monogram ? (
-              <div className="relative h-44 w-44 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72">
-                <Image
-                  src={siteConfig.couple.monogram}
-                  alt={`${coupleDisplayName} monogram`}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 288px"
-                />
-              </div>
-            ) : null}
+            <div className="relative h-44 w-44 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72">
+              <Image
+                src="/monogram/monog.png"
+                alt={`${coupleDisplayName} monogram`}
+                width={289}
+                height={382}
+                className="h-full w-full object-contain"
+                sizes="(max-width: 640px) 11rem, (max-width: 768px) 14rem, (max-width: 1024px) 16rem, 18rem"
+              />
+            </div>
           </motion.div>
 
           <div className="mt-4 max-w-md text-center sm:mt-5 md:mt-6">

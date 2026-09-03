@@ -33,7 +33,7 @@ const DECO = {
   bl: '/decoration/left-bottom-decoration.png',
   br: '/decoration/right-bottom-decoration.png',
   names: '/decoration/couple.png',
-  monogram: '/decoration/monogram-new.png',
+  monogram: '/monogram/monog.png',
 } as const;
 
 const FOREST_PARTICLES = ['#093327', '#0a3121', '#c5a059', '#d2917a'] as const;
@@ -295,8 +295,8 @@ export const Hero: React.FC<HeroProps> = ({
   */
   const letterVariants: Variants = {
     hidden: { y: '6%', scale: 0.86, opacity: 1, rotate: -0.5 },
-    rising: { y: '-12%', scale: 1, opacity: 1, rotate: 0 },
-    out: { y: '-12%', scale: 1, opacity: 1, rotate: 0 },
+    rising: { y: '-13%', scale: 1, opacity: 1, rotate: 0 },
+    out: { y: '-13%', scale: 1, opacity: 1, rotate: 0 },
     exitPortal: {
       y: '-122%',
       scale: 2.75,
@@ -680,8 +680,8 @@ export const Hero: React.FC<HeroProps> = ({
                 <Image
                   src={monogramSrc}
                   alt=""
-                  width={1024}
-                  height={1536}
+                  width={289}
+                  height={382}
                   className="env-invite-seal-img"
                   priority
                   sizes="96px"

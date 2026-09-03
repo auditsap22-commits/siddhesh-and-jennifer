@@ -9,7 +9,7 @@ export const siteConfig = {
     brideNickname: "Jennifer",
     groom: "Siddhesh Deshpande",
     groomNickname: "Siddhesh",
-    monogram:"/decoration/monogram-new.png" ,//Ltryl
+    monogram:"/monogram/newMonogram.png" ,//Ltryl
     backgroundMusic:"/background_music/Brooklyn Duo - A Thousand Years [WEDDING VERSION].mp3"
   },
   googleAPI:{
