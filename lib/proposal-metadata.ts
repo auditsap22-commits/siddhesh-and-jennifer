@@ -3,10 +3,10 @@ import { siteConfig } from "@/content/site"
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://jen-and-tin-wedding.weddinginvitationrsvp.com/"
+  "https://siddhesh-and-jennifer.weddinginvitationrsvp.com/"
 const canonicalBase = siteUrl.replace(/\/$/, "")
 
-export const PROPOSAL_OG_IMAGE_PATH = "/Details/LinkPreview.png"
+export const PROPOSAL_OG_IMAGE_PATH = "/Details/linkPreview.png"
 export const PROPOSAL_OG_IMAGE_URL = `${canonicalBase}${PROPOSAL_OG_IMAGE_PATH}`
 
 const coupleNames = `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname}`
