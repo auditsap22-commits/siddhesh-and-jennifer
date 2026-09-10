@@ -143,7 +143,6 @@ export function Hero() {
             </div>
 
             <div className="hero-invite__details">
-              <p className="hero-invite__meta">The Ceremony</p>
               {ceremonyLocation ? (
                 <p className="hero-invite__location">{ceremonyLocation}</p>
               ) : null}

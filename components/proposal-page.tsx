@@ -12,20 +12,28 @@ import {
   Sparkles,
 } from "lucide-react"
 import localFont from "next/font/local"
-import { Cinzel } from "next/font/google"
+import { Cinzel, Cormorant_Garamond } from "next/font/google"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import { LoadingScreen } from "@/components/loader/LoadingScreen"
 import { getRoleSingular } from "@/lib/proposal-roles"
-import { parseWeddingDate } from "@/lib/wedding-date"
+import { normalizeWeddingDateString, parseWeddingDate } from "@/lib/wedding-date"
 import { sectionType, welcomeTitleSize } from "@/lib/section-typography"
 import { siteConfig as defaultSiteConfig } from "@/content/site"
 import type { ProposalRole, ProposalResponse } from "@/lib/proposal-types"
 
 const Silk = dynamic(() => import("@/components/silk"), { ssr: false })
 
+const SILK_COLOR = "#105844"
+
 const cinzel = Cinzel({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 })
 
 const theSeasons = localFont({
@@ -41,43 +49,34 @@ const aboveTheBeyond = localFont({
 })
 
 const C = {
-  navy: "#04103B",
+  cream: "#fdf8f2",
+  creamDeep: "#f3ebe1",
+  paper: "#fff9f0",
+  ink: "#093327",
   gold: "#c5a059",
   goldBright: "#d4af37",
   goldSoft: "#e6d3a3",
-  paper: "#f7f3e9",
 } as const
 
-const goldLine = `color-mix(in srgb, ${C.gold} 55%, transparent)`
+const goldLine = `color-mix(in srgb, ${C.gold} 62%, transparent)`
 
 const palette = {
-  body: C.navy,
-  bodySoft: `color-mix(in srgb, ${C.navy} 68%, white)`,
-  heading: C.navy,
-  title: C.navy,
-  label: C.navy,
+  body: C.ink,
+  bodySoft: `color-mix(in srgb, ${C.ink} 68%, white)`,
+  heading: C.ink,
+  title: C.ink,
+  label: C.ink,
   accent: C.gold,
-  script: C.navy,
+  script: C.ink,
 } as const
 
 const NAME_SHADOW = `0 1px 0 color-mix(in srgb, ${C.paper} 90%, white), 0 0 12px color-mix(in srgb, ${C.goldSoft} 40%, transparent)`
 
 const BORDER_SOFT = goldLine
-const INNER_SURFACE = `color-mix(in srgb, ${C.goldSoft} 22%, ${C.paper})`
-
-const CORNER_DECO_CLASS =
-  "block h-auto w-auto max-w-[120px] sm:max-w-[180px] md:max-w-[260px] lg:max-w-[320px] xl:max-w-[380px]"
-
-const ambientGlowStyle = {
-  background: `linear-gradient(135deg, color-mix(in srgb, ${C.gold} 22%, transparent) 0%, color-mix(in srgb, ${C.goldSoft} 18%, transparent) 48%, color-mix(in srgb, ${C.navy} 10%, transparent) 100%)`,
-} as const
+const INNER_SURFACE = `color-mix(in srgb, ${C.gold} 8%, ${C.paper})`
 
 const dividerLineStyle = {
   background: `linear-gradient(to right, transparent, ${goldLine}, transparent)`,
-} as const
-
-const coupleLabelLineStyle = {
-  background: `linear-gradient(to right, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
 } as const
 
 const nameStyle: CSSProperties = {
@@ -85,26 +84,36 @@ const nameStyle: CSSProperties = {
   lineHeight: 1.3,
 }
 
+const paperTexture =
+  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E\")"
+
 const cardStyle: CSSProperties = {
-  background: `linear-gradient(180deg, color-mix(in srgb, ${C.goldSoft} 28%, ${C.paper}) 0%, ${C.paper} 48%, color-mix(in srgb, ${C.gold} 10%, ${C.paper}) 100%)`,
+  backgroundColor: C.paper,
+  backgroundImage: `
+    radial-gradient(ellipse 70% 42% at 100% 0%, color-mix(in srgb, ${C.gold} 14%, transparent), transparent 68%),
+    radial-gradient(ellipse 70% 42% at 0% 100%, color-mix(in srgb, ${C.gold} 12%, transparent), transparent 68%),
+    linear-gradient(180deg, ${C.cream} 0%, ${C.paper} 52%, ${C.creamDeep} 100%),
+    ${paperTexture}
+  `,
+  backgroundSize: "cover, cover, cover, 180px 180px",
   borderColor: goldLine,
   borderWidth: "1px",
   borderStyle: "solid",
-  boxShadow: `0 12px 36px color-mix(in srgb, ${C.navy} 28%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.goldSoft} 55%, transparent)`,
+  boxShadow: `0 12px 36px color-mix(in srgb, ${C.ink} 12%, transparent), inset 0 1px 0 color-mix(in srgb, ${C.paper} 70%, transparent)`,
 }
 
 const primaryBtnStyle: CSSProperties = {
   fontWeight: 600,
-  backgroundColor: C.gold,
-  borderColor: `color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-  color: C.navy,
-  boxShadow: `0 10px 24px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+  backgroundColor: C.ink,
+  borderColor: "color-mix(in srgb, #093327 72%, #041c16)",
+  color: C.cream,
+  boxShadow: "0 6px 20px color-mix(in srgb, #093327 35%, transparent)",
 }
 
 const secondaryBtnStyle: CSSProperties = {
   fontWeight: 600,
-  color: C.navy,
-  backgroundColor: `color-mix(in srgb, ${C.goldSoft} 18%, ${C.paper})`,
+  color: C.ink,
+  backgroundColor: C.paper,
   borderColor: goldLine,
 }
 
@@ -114,6 +123,61 @@ const labelStyle = (color: string, extra?: CSSProperties): CSSProperties => ({
   color,
   ...extra,
 })
+
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 56 56" fill="none" aria-hidden="true">
+      <path d="M54 3H20.5C9.6 3 3 9.6 3 20.5V54" stroke="currentColor" strokeWidth="1.15" />
+      <path d="M54 8H23C12.8 8 8 12.8 8 23V54" stroke="currentColor" strokeWidth="0.8" opacity="0.72" />
+      <circle cx="19" cy="19" r="1.55" fill="currentColor" />
+      <path d="M14.5 19.5c2.4-5 5.2-7.6 9.8-9.6" stroke="currentColor" strokeWidth="0.7" />
+    </svg>
+  )
+}
+
+function GoldFrame() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute z-[5]"
+      style={{
+        inset: "clamp(0.45rem, 1.6vw, 0.9rem)",
+        border: `1px solid color-mix(in srgb, ${C.gold} 78%, transparent)`,
+      }}
+    >
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          inset: 5,
+          border: `1px solid color-mix(in srgb, ${C.gold} 62%, transparent)`,
+        }}
+      />
+      <CornerOrnament className="absolute -left-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] text-[#c5a059]" />
+      <CornerOrnament className="absolute -right-px -top-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-x-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -left-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-y-100 text-[#c5a059]" />
+      <CornerOrnament className="absolute -bottom-px -right-px h-[clamp(1.85rem,7vw,2.35rem)] w-[clamp(1.85rem,7vw,2.35rem)] -scale-100 text-[#c5a059]" />
+    </div>
+  )
+}
+
+function CornerDecorations() {
+  return (
+    <>
+      <div className="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(7rem,38vw,14rem)]">
+        <Image src="/decoration/left-top-decoration.png" alt="" width={1138} height={1172} className="h-auto w-full" sizes="(max-width: 768px) 38vw, 224px" />
+      </div>
+      <div className="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(6.5rem,34vw,12rem)]">
+        <Image src="/decoration/right-top-decoration.png" alt="" width={1283} height={1226} className="h-auto w-full" sizes="(max-width: 768px) 34vw, 192px" />
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-10 w-[clamp(6.5rem,34vw,12rem)]">
+        <Image src="/decoration/left-bottom-decoration.png" alt="" width={1115} height={1411} className="h-auto w-full" sizes="(max-width: 768px) 34vw, 192px" />
+      </div>
+      <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-[clamp(7rem,38vw,14rem)]">
+        <Image src="/decoration/right-bottom-decoration.png" alt="" width={988} height={1487} className="h-auto w-full" sizes="(max-width: 768px) 38vw, 224px" />
+      </div>
+    </>
+  )
+}
 
 function OrnamentalDivider({ compact = false }: { compact?: boolean }) {
   return (
@@ -132,39 +196,6 @@ function OrnamentalDivider({ compact = false }: { compact?: boolean }) {
         style={{
           background: `linear-gradient(to left, transparent, ${C.gold})`,
         }}
-      />
-    </div>
-  )
-}
-
-function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
-  return (
-    <div className="flex items-center justify-center gap-2.5 pt-1 sm:gap-3.5 sm:pt-1.5">
-      <span className="h-px w-5 sm:w-7 md:w-9" style={coupleLabelLineStyle} aria-hidden />
-      <p
-        className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
-        style={{ color: palette.heading }}
-      >
-        {groom}
-        <span
-          className={`${aboveTheBeyond.className} mx-1.5 inline-block normal-case tracking-normal sm:mx-2`}
-          style={{
-            fontSize: "1.35em",
-            color: palette.accent,
-            verticalAlign: "middle",
-          }}
-          aria-hidden
-        >
-          &
-        </span>
-        {bride}
-      </p>
-      <span
-        className="h-px w-5 sm:w-7 md:w-9"
-        style={{
-          background: `linear-gradient(to left, transparent, color-mix(in srgb, ${C.gold} 70%, transparent))`,
-        }}
-        aria-hidden
       />
     </div>
   )
@@ -293,7 +324,7 @@ function ProposalFlowBody({
 }) {
   return (
     <p
-      className={`font-goudy-italic mx-auto max-w-lg ${sectionType.textRelaxed} ${className}`}
+      className={`${cormorant.className} italic mx-auto max-w-lg ${sectionType.textRelaxed} ${className}`}
       style={{ color: palette.body }}
     >
       {children}
@@ -301,91 +332,78 @@ function ProposalFlowBody({
   )
 }
 
-function ProposalDateBlock({
-  month,
-  dayShort,
-  dayNumber,
+function ProposalCoupleIdentity({ groom, bride }: { groom: string; bride: string }) {
+  return (
+    <div className="mx-auto flex w-full max-w-sm flex-col items-center gap-2 sm:max-w-md sm:gap-2.5 md:gap-3">
+      <div className="relative w-[clamp(4.25rem,17vw,6.25rem)]">
+        <Image
+          src="/monogram/monog.png"
+          alt="Jennifer and Siddhesh monogram"
+          width={289}
+          height={382}
+          className="h-auto w-full drop-shadow-[0_8px_20px_rgba(9,51,39,0.12)]"
+          priority
+          sizes="(max-width: 768px) 17vw, 100px"
+        />
+      </div>
+      <div
+        className="w-[min(82%,18rem)] sm:w-[min(76%,20rem)]"
+        role="img"
+        aria-label={`${groom} and ${bride}`}
+      >
+        <Image
+          src="/decoration/couple.png"
+          alt={`${groom} and ${bride}`}
+          width={1672}
+          height={941}
+          className="h-auto w-full"
+          priority
+          sizes="(max-width: 768px) 68vw, 320px"
+        />
+      </div>
+    </div>
+  )
+}
+
+function ProposalCeremonyDetails({
+  venue,
+  day,
   time,
-  year,
+  date,
 }: {
-  month: string
-  dayShort: string
-  dayNumber: string
+  venue: string
+  day: string
   time: string
-  year: string
+  date: string
 }) {
-  const dateLineStyle = {
-    background: `linear-gradient(to right, transparent, color-mix(in srgb, ${C.gold} 55%, transparent), transparent)`,
-  } as const
+  const whenLine = [day, time].filter(Boolean).join(" · ")
 
   return (
-    <div className="mx-auto w-full max-w-2xl">
-      <div className="flex flex-col items-center gap-1.5 sm:gap-2.5 md:gap-3">
-        <span
-          className={`${cinzel.className} ${sectionType.label} font-light uppercase tracking-[0.4em] sm:tracking-[0.5em]`}
+    <div className="mx-auto flex w-full max-w-sm flex-col items-center gap-1.5 px-1 text-center sm:max-w-md sm:gap-2 sm:px-2">
+      {venue ? (
+        <p
+          className={`${cinzel.className} text-[clamp(0.78rem,3vw,0.95rem)] font-bold uppercase tracking-[0.16em]`}
           style={{ color: palette.heading }}
         >
-          {month}
-        </span>
-
-        <div className="flex w-full items-center gap-2 sm:gap-4 md:gap-5">
-          <div className="flex flex-1 items-center justify-end gap-1.5 sm:gap-2.5">
-            <span className="h-[0.5px] flex-1" style={dateLineStyle} aria-hidden />
-            <span
-              className={`${cinzel.className} text-[0.6rem] font-light uppercase tracking-[0.3em] sm:text-[0.7rem] sm:tracking-[0.4em] md:text-xs`}
-              style={{ color: palette.heading }}
-            >
-              {dayShort}
-            </span>
-            <span
-              className="h-[0.5px] w-6 sm:w-8 md:w-10"
-              style={dateLineStyle}
-              aria-hidden
-            />
-          </div>
-
-          <div className="relative flex items-center justify-center px-3 sm:px-4 md:px-5">
-            <span
-              aria-hidden
-              className="absolute inset-0 mx-auto h-[70%] max-h-[180px] w-[100px] rounded-full opacity-80 blur-[28px] sm:w-[140px] md:w-[170px]"
-              style={{
-                background: `linear-gradient(to bottom, color-mix(in srgb, ${C.navy} 18%, transparent), color-mix(in srgb, ${C.navy} 8%, transparent), transparent)`,
-              }}
-            />
-            <span
-              className={`${cinzel.className} relative text-[4rem] font-light leading-none tracking-wider sm:text-[5.5rem] md:text-[6.5rem] lg:text-[7rem]`}
-              style={{
-                color: palette.title,
-                textShadow: `0 2px 8px color-mix(in srgb, ${C.navy} 18%, transparent)`,
-              }}
-            >
-              {dayNumber}
-            </span>
-          </div>
-
-          <div className="flex flex-1 items-center gap-1.5 sm:gap-2.5">
-            <span
-              className="h-[0.5px] w-6 sm:w-8 md:w-10"
-              style={dateLineStyle}
-              aria-hidden
-            />
-            <span
-              className={`${cinzel.className} text-[0.6rem] font-light uppercase tracking-[0.3em] sm:text-[0.7rem] sm:tracking-[0.4em] md:text-xs`}
-              style={{ color: palette.heading }}
-            >
-              {time.split(",")[0]}
-            </span>
-            <span className="h-[0.5px] flex-1" style={dateLineStyle} aria-hidden />
-          </div>
-        </div>
-
-        <span
-          className={`${cinzel.className} ${sectionType.label} font-light uppercase tracking-[0.4em] sm:tracking-[0.5em]`}
+          {venue}
+        </p>
+      ) : null}
+      {whenLine ? (
+        <p
+          className={`${cinzel.className} text-[clamp(0.62rem,2.4vw,0.74rem)] font-semibold uppercase tracking-[0.2em]`}
           style={{ color: palette.heading }}
         >
-          {year}
-        </span>
-      </div>
+          {whenLine}
+        </p>
+      ) : null}
+      {date ? (
+        <p
+          className={`${cormorant.className} text-[clamp(0.9rem,3.2vw,1.05rem)] font-medium italic`}
+          style={{ color: palette.body }}
+        >
+          {date}
+        </p>
+      ) : null}
     </div>
   )
 }
@@ -426,31 +444,6 @@ function ProposalRoleTitle({ roleSingular }: { roleSingular: string }) {
   )
 }
 
-function CoupleNameImage({
-  groom,
-  bride,
-  className = "",
-}: {
-  groom: string
-  bride: string
-  className?: string
-}) {
-  return (
-    <div
-      className={`relative mx-auto aspect-[528/473] w-full max-w-[min(88vw,18rem)] sm:max-w-xs md:max-w-sm ${className}`}
-    >
-      <Image
-        src="/Details/couplename.png"
-        alt={`${groom} and ${bride}`}
-        fill
-        className="object-contain drop-shadow-[0_10px_28px_rgba(45,67,79,0.14)]"
-        sizes="(max-width: 640px) 88vw, 320px"
-        priority
-      />
-    </div>
-  )
-}
-
 function DividerLine({ className = "w-16 sm:w-24 md:w-32" }: { className?: string }) {
   return <span className={`h-px ${className}`} style={dividerLineStyle} aria-hidden />
 }
@@ -458,72 +451,22 @@ function DividerLine({ className = "w-16 sm:w-24 md:w-32" }: { className?: strin
 function ProposalCard({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div className={`relative w-full ${className}`}>
-      <div className="relative">
+      <div
+        className="relative isolate overflow-hidden rounded-xl border sm:rounded-2xl"
+        style={cardStyle}
+      >
         <div
-          className="pointer-events-none absolute -inset-1 rounded-2xl opacity-50 blur-2xl sm:-inset-2"
-          style={ambientGlowStyle}
           aria-hidden
+          className="pointer-events-none absolute inset-0 z-[1]"
+          style={{
+            background:
+              "radial-gradient(ellipse 46% 28% at 88% 10%, rgb(197 160 89 / 12%), transparent 72%), radial-gradient(ellipse 46% 28% at 10% 90%, rgb(210 145 122 / 10%), transparent 72%)",
+          }}
         />
-        <div
-          className="relative overflow-hidden rounded-xl border backdrop-blur-xl sm:rounded-2xl sm:backdrop-blur-2xl"
-          style={cardStyle}
-        >
-          <div className="pointer-events-none absolute left-0 top-0 z-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/decoration/decorations/top-left-corner.png"
-              alt=""
-              className={CORNER_DECO_CLASS}
-            />
-          </div>
-          <div className="pointer-events-none absolute right-0 top-0 z-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/decoration/decorations/top-right-corner.png"
-              alt=""
-              className={CORNER_DECO_CLASS}
-            />
-          </div>
-          <div className="pointer-events-none absolute bottom-0 left-0 z-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/decoration/decorations/bottom-left-corner.png"
-              alt=""
-              className={CORNER_DECO_CLASS}
-            />
-          </div>
-          <div className="pointer-events-none absolute bottom-0 right-0 z-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/decoration/decorations/bottom-right-corner.png"
-              alt=""
-              className={CORNER_DECO_CLASS}
-            />
-          </div>
-
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-5 top-0 z-20 h-px sm:inset-x-8"
-            style={{
-              background: `linear-gradient(to right, transparent, ${C.gold}, transparent)`,
-            }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background: `linear-gradient(135deg, color-mix(in srgb, ${C.goldSoft} 22%, transparent) 0%, transparent 48%)`,
-            }}
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset sm:rounded-2xl"
-            style={{ boxShadow: `inset 0 0 0 1px color-mix(in srgb, ${C.gold} 18%, transparent)` }}
-            aria-hidden
-          />
-
-          <div className="relative z-20 p-6 text-center sm:p-10 md:p-12 md:py-14 lg:p-14 lg:py-16">
-            {children}
-          </div>
+        <GoldFrame />
+        <CornerDecorations />
+        <div className="relative z-20 p-6 text-center sm:p-10 md:p-12 md:py-14 lg:p-14 lg:py-16">
+          {children}
         </div>
       </div>
     </div>
@@ -541,14 +484,11 @@ function ProposalIntroSection() {
     () => parseWeddingDate(ceremonyDate, parseWeddingDate(defaultSiteConfig.ceremony.date)),
     [ceremonyDate],
   )
-  const ceremonyDayShort = (
+  const ceremonyDay =
     siteConfig.ceremony.day ?? parsedDate.dayOfWeek ?? defaultSiteConfig.ceremony.day
-  )
-    .slice(0, 3)
-    .toUpperCase()
   const ceremonyTime =
     siteConfig.ceremony.time ?? siteConfig.wedding.time ?? defaultSiteConfig.ceremony.time
-  const { month, day: dateNum, year } = parsedDate
+  const fullDateLabel = normalizeWeddingDateString(ceremonyDate)
   const venue =
     siteConfig.wedding.venue ?? siteConfig.ceremony.location ?? defaultSiteConfig.ceremony.location
 
@@ -557,16 +497,16 @@ function ProposalIntroSection() {
       className="mx-auto w-full max-w-xl space-y-5 text-center sm:space-y-6 md:space-y-7"
       style={{ color: palette.body, WebkitFontSmoothing: "antialiased" }}
     >
-      <header className="space-y-3 px-1 sm:space-y-3.5 sm:px-2 md:space-y-4">
-        <CoupleLabel groom={groomNickname} bride={brideNickname} />
+      <header className="space-y-3 px-1 sm:space-y-4 sm:px-2 md:space-y-5">
+        <ProposalCoupleIdentity groom={groomNickname} bride={brideNickname} />
         <ProposalPersonalInvitationTitle />
-        <div className="pt-2 sm:pt-2.5">
+        <div className="pt-1 sm:pt-2">
           <OrnamentalDivider compact />
         </div>
       </header>
 
       <div
-        className={`font-goudy-italic mx-auto max-w-xl space-y-3 px-1 text-pretty sm:space-y-3.5 sm:px-2 ${sectionType.textRelaxed}`}
+        className={`${cormorant.className} italic mx-auto max-w-xl space-y-3 px-1 text-pretty sm:space-y-3.5 sm:px-2 ${sectionType.textRelaxed}`}
         style={{ color: palette.body }}
       >
         <p>
@@ -579,29 +519,12 @@ function ProposalIntroSection() {
         </p>
       </div>
 
-      <p
-        className={`${cinzel.className} ${sectionType.label} font-semibold uppercase tracking-[0.14em] sm:tracking-[0.18em] md:tracking-[0.22em]`}
-        style={{ color: palette.heading }}
-      >
-        Our wedding day
-      </p>
-
-      {/* <CoupleNameImage groom={groomNickname} bride={brideNickname} className="my-1 sm:my-2" /> */}
-
-      <ProposalDateBlock
-        month={month}
-        dayShort={ceremonyDayShort}
-        dayNumber={dateNum}
+      <ProposalCeremonyDetails
+        venue={venue}
+        day={ceremonyDay}
         time={ceremonyTime}
-        year={year}
+        date={fullDateLabel}
       />
-
-      <p
-        className={`${cinzel.className} ${sectionType.subheader} font-medium uppercase tracking-[0.22em] sm:tracking-[0.26em] md:tracking-[0.3em]`}
-        style={{ color: palette.heading }}
-      >
-        {venue}
-      </p>
 
       <div className="pt-1 sm:pt-2">
         <OrnamentalDivider compact />
@@ -611,10 +534,10 @@ function ProposalIntroSection() {
 }
 
 const primaryBtnClass =
-  `${cinzel.className} cursor-pointer rounded-sm border px-5 py-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 sm:px-7 sm:py-3.5 sm:text-xs sm:tracking-[0.24em] md:px-8 md:py-4 md:tracking-[0.28em]`
+  `${cinzel.className} cursor-pointer rounded-full border px-5 py-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 sm:px-7 sm:py-3.5 sm:text-xs sm:tracking-[0.24em] md:px-8 md:py-4 md:tracking-[0.28em]`
 
 const secondaryBtnClass =
-  `${cinzel.className} cursor-pointer rounded-sm border px-5 py-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:px-7 sm:py-3.5 sm:text-xs sm:tracking-[0.24em] md:px-8 md:py-4 md:tracking-[0.28em]`
+  `${cinzel.className} cursor-pointer rounded-full border px-5 py-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:px-7 sm:py-3.5 sm:text-xs sm:tracking-[0.24em] md:px-8 md:py-4 md:tracking-[0.28em]`
 
 function ProposalAskSection({
   roleSingular,
@@ -665,7 +588,7 @@ function ProposalAskSection({
             {coAttendants.map((name, idx) => (
               <span
                 key={idx}
-                className="font-goudy-italic rounded-full px-3 py-1 text-xs shadow-sm"
+                className={`${cormorant.className} italic rounded-full px-3 py-1 text-xs shadow-sm`}
                 style={{ color: palette.body, border: `1px solid ${BORDER_SOFT}`, backgroundColor: C.paper }}
               >
                 {name}
@@ -689,7 +612,7 @@ function ProposalAskSection({
 
             <p
               ref={questionRef}
-              className={`font-goudy-italic col-start-1 row-start-2 mt-3 min-w-0 text-left sm:mt-6 sm:max-w-xl ${sectionType.textRelaxed}`}
+              className={`${cormorant.className} italic col-start-1 row-start-2 mt-3 min-w-0 text-left sm:mt-6 sm:max-w-xl ${sectionType.textRelaxed}`}
               style={{ color: palette.body }}
             >
               &ldquo;{description}&rdquo;
@@ -703,10 +626,10 @@ function ProposalAskSection({
               className="pointer-events-none relative col-start-2 row-start-1 row-span-2 -mr-1 min-h-[320px] sm:hidden"
             >
               <Image
-                src="/Details/proposalcoupleimg.png"
+                src="/decoration/couplenew.png"
                 alt=""
                 fill
-                className="object-contain object-bottom object-right drop-shadow-[0_16px_36px_rgba(4,16,59,0.16)]"
+                className="object-contain object-bottom object-right drop-shadow-[0_16px_36px_rgba(9,51,39,0.14)]"
                 sizes="42vw"
                 priority
               />
@@ -742,9 +665,9 @@ function ProposalAskSection({
             }
             className="pointer-events-none relative hidden shrink-0 sm:block sm:w-[min(36vw,240px)] md:w-[min(32vw,280px)] lg:w-[300px]"
           >
-            <div className="relative aspect-[3/4] w-full sm:min-h-[var(--ask-image-h)] sm:translate-y-4 md:translate-y-6">
+            <div className="relative aspect-[941/1672] w-full sm:min-h-[var(--ask-image-h)] sm:translate-y-4 md:translate-y-6">
               <Image
-                src="/Details/proposalcoupleimg.png"
+                src="/decoration/couplenew.png"
                 alt=""
                 fill
                 className="object-contain object-bottom drop-shadow-[0_20px_48px_rgba(42,37,32,0.12)]"
@@ -865,13 +788,18 @@ export function ProposalPage({ role }: ProposalPageProps) {
   const roleSingular = getRoleSingular(role.title)
 
   return (
-    <div className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative min-h-screen select-none overflow-x-hidden px-3 py-10 sm:px-6 sm:py-16 md:py-20`}>
-      {process.env.NEXT_PUBLIC_ENABLE_DECOR !== "false" && (
+    <div
+      className={`${theSeasons.variable} ${aboveTheBeyond.variable} ${cormorant.className} relative min-h-screen select-none overflow-x-hidden px-3 py-10 sm:px-6 sm:py-16 md:py-20`}
+      style={{ color: palette.body }}
+    >
+      {process.env.NEXT_PUBLIC_ENABLE_DECOR !== "false" ? (
         <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
-          <Suspense fallback={<div className="h-full w-full" style={{ backgroundColor: C.navy }} />}>
-            <Silk speed={8} scale={0.9} color={C.navy} noiseIntensity={0} rotation={0.3} />
+          <Suspense fallback={<div className="h-full w-full" style={{ backgroundColor: SILK_COLOR }} />}>
+            <Silk speed={8} scale={0.9} color={SILK_COLOR} noiseIntensity={0} rotation={0.3} />
           </Suspense>
         </div>
+      ) : (
+        <div className="pointer-events-none fixed inset-0 z-0" style={{ backgroundColor: SILK_COLOR }} aria-hidden />
       )}
 
       {!isReady && <LoadingScreen onComplete={handleLoadingComplete} />}
@@ -909,7 +837,7 @@ export function ProposalPage({ role }: ProposalPageProps) {
                   >
                     <blockquote>
                       <p
-                        className={`font-goudy-italic ${sectionType.textSnug}`}
+                        className={`${cormorant.className} italic ${sectionType.textSnug}`}
                         style={{ color: palette.body }}
                       >
                         In choosing who will stand with us, we did not begin with titles — we began
@@ -920,7 +848,7 @@ export function ProposalPage({ role }: ProposalPageProps) {
                   </figure>
 
                   <div
-                    className={`font-goudy-italic space-y-3 text-pretty sm:space-y-3.5 ${sectionType.textRelaxed}`}
+                    className={`${cormorant.className} italic space-y-3 text-pretty sm:space-y-3.5 ${sectionType.textRelaxed}`}
                     style={{ color: palette.body }}
                   >
                     <p>
@@ -967,12 +895,12 @@ export function ProposalPage({ role }: ProposalPageProps) {
               <ProposalCard>
               <div className="relative z-10 w-full space-y-4 py-1 sm:space-y-6 sm:py-3">
                 <ProposalFlowHeader
-                  icon={<Check className="h-6 w-6" style={{ color: C.navy }} />}
+                  icon={<Check className="h-6 w-6" style={{ color: C.ink }} />}
                   iconClassName="border"
                   iconStyle={{
-                    backgroundColor: C.gold,
-                    borderColor: `color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-                    boxShadow: `0 8px 20px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+                    backgroundColor: C.paper,
+                    borderColor: goldLine,
+                    boxShadow: `0 6px 18px color-mix(in srgb, ${C.ink} 10%, transparent)`,
                   }}
                   main="We are Honored"
                   script="you said yes"
@@ -986,7 +914,7 @@ export function ProposalPage({ role }: ProposalPageProps) {
                 </ProposalFlowBody>
 
                 <p
-                  className={`font-goudy-italic mx-auto mb-1 max-w-md text-center ${sectionType.textSnug}`}
+                  className={`${cormorant.className} italic mx-auto mb-1 max-w-md text-center ${sectionType.textSnug}`}
                   style={{ color: palette.bodySoft }}
                 >
                   Please enter the exact name you would like displayed on our wedding invitation
@@ -1003,12 +931,12 @@ export function ProposalPage({ role }: ProposalPageProps) {
                     placeholder="e.g. Aunt Maria Clara / Mr. James Bond"
                     value={preferredName}
                     onChange={(e) => setPreferredName(e.target.value)}
-                    className="font-goudy-italic w-full rounded-xl px-4 py-2.5 text-xs transition-all focus:outline-none sm:py-3 sm:text-sm"
+                    className={`${cormorant.className} italic w-full rounded-xl px-4 py-2.5 text-xs transition-all focus:outline-none sm:py-3 sm:text-sm`}
                     style={{
                       color: palette.body,
                       backgroundColor: INNER_SURFACE,
                       border: `1px solid ${BORDER_SOFT}`,
-                      boxShadow: `inset 0 1px 2px color-mix(in srgb, ${C.navy} 8%, transparent)`,
+                      boxShadow: `inset 0 1px 2px color-mix(in srgb, ${C.ink} 8%, transparent)`,
                     }}
                     onFocus={(e) => {
                       e.currentTarget.style.borderColor = C.gold
@@ -1016,7 +944,7 @@ export function ProposalPage({ role }: ProposalPageProps) {
                     }}
                     onBlur={(e) => {
                       e.currentTarget.style.borderColor = BORDER_SOFT
-                      e.currentTarget.style.boxShadow = `inset 0 1px 2px color-mix(in srgb, ${C.navy} 8%, transparent)`
+                      e.currentTarget.style.boxShadow = `inset 0 1px 2px color-mix(in srgb, ${C.ink} 8%, transparent)`
                     }}
                   />
                   {validationError && (
@@ -1063,13 +991,13 @@ export function ProposalPage({ role }: ProposalPageProps) {
               <div className="relative z-10 space-y-4">
                 <ProposalFlowHeader
                   animated
-                  icon={<Sparkles className="h-8 w-8" style={{ color: C.navy }} />}
+                  icon={<Sparkles className="h-8 w-8" style={{ color: C.ink }} />}
                   iconClassName="border"
                   iconStyle={{
-                    color: C.navy,
-                    backgroundColor: C.gold,
-                    borderColor: `color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-                    boxShadow: `0 8px 20px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+                    color: C.ink,
+                    backgroundColor: C.paper,
+                    borderColor: goldLine,
+                    boxShadow: `0 6px 18px color-mix(in srgb, ${C.ink} 10%, transparent)`,
                   }}
                   main="Its Official"
                   script="thank you"
@@ -1088,7 +1016,7 @@ export function ProposalPage({ role }: ProposalPageProps) {
                     Registered name
                   </span>
                   <p
-                    className={`font-goudy-italic ${sectionType.text} font-medium`}
+                    className={`${cormorant.className} italic ${sectionType.text} font-medium`}
                     style={{ ...nameStyle, color: palette.heading }}
                   >
                     {preferredName}
@@ -1132,12 +1060,12 @@ export function ProposalPage({ role }: ProposalPageProps) {
               <ProposalCard>
               <div className="relative z-10 space-y-4">
                 <ProposalFlowHeader
-                  icon={<X className="h-6 w-6" style={{ color: C.navy }} />}
+                  icon={<X className="h-6 w-6" style={{ color: C.ink }} />}
                   iconClassName="border"
                   iconStyle={{
-                    backgroundColor: C.goldSoft,
+                    backgroundColor: C.paper,
                     borderColor: goldLine,
-                    boxShadow: `0 8px 20px color-mix(in srgb, ${C.navy} 12%, transparent)`,
+                    boxShadow: `0 6px 18px color-mix(in srgb, ${C.ink} 10%, transparent)`,
                   }}
                   main="Thank You"
                   script="for responding"
@@ -1185,12 +1113,12 @@ export function ProposalPage({ role }: ProposalPageProps) {
               <ProposalCard>
               <div className="relative z-10 space-y-4">
                 <ProposalFlowHeader
-                  icon={<Heart className="h-6 w-6" style={{ color: C.navy }} />}
+                  icon={<Heart className="h-6 w-6" style={{ color: C.ink }} />}
                   iconStyle={{
-                    color: C.navy,
-                    backgroundColor: C.gold,
-                    border: `1px solid color-mix(in srgb, ${C.goldBright} 70%, transparent)`,
-                    boxShadow: `0 8px 20px color-mix(in srgb, ${C.gold} 35%, transparent)`,
+                    color: C.ink,
+                    backgroundColor: C.paper,
+                    border: `1px solid ${goldLine}`,
+                    boxShadow: `0 6px 18px color-mix(in srgb, ${C.ink} 10%, transparent)`,
                   }}
                   main="Response Sent"
                   script="successfully"

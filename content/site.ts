@@ -10,7 +10,8 @@ export const siteConfig = {
     groom: "Siddhesh Deshpande",
     groomNickname: "Siddhesh",
     monogram:"/monogram/newMonogram.png" ,//Ltryl
-    backgroundMusic:"/background_music/Brooklyn Duo - A Thousand Years [WEDDING VERSION].mp3"
+    backgroundMusic:"/background_music/Brooklyn Duo - A Thousand Years [WEDDING VERSION].mp3",
+    siteUrl: "https://siddhesh-and-jennifer.weddinginvitationrsvp.com/"
   },
   googleAPI:{
     messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSf8KSNkY6nXSiNMHS2d-IjeXrOVj0GsXtQ1xzdOoy2VMdXkPQ/formResponse",   //done
