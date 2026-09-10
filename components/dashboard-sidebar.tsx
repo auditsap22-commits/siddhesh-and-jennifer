@@ -9,13 +9,23 @@ import {
   ExternalLink,
   UserPlus,
   Heart,
+  QrCode,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSiteConfig } from "@/hooks/use-site-config"
 
+export type DashboardTab =
+  | "dashboard"
+  | "guests"
+  | "requests"
+  | "messages"
+  | "entourage"
+  | "proposals"
+  | "seating"
+
 interface DashboardSidebarProps {
-  activeTab: "dashboard" | "guests" | "requests" | "messages" | "entourage" | "proposals"
-  onTabChange: (tab: "dashboard" | "guests" | "requests" | "messages" | "entourage" | "proposals") => void
+  activeTab: DashboardTab
+  onTabChange: (tab: DashboardTab) => void
   guestRequestCount: number
   messageCount: number
 }
@@ -51,6 +61,12 @@ export function DashboardSidebar({
       label: "Guest Messages",
       icon: MessageSquare,
       badge: messageCount,
+    },
+    {
+      id: "seating" as const,
+      label: "Table Finder",
+      icon: QrCode,
+      badge: null,
     },
     {
       id: "entourage" as const,

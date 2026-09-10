@@ -11,7 +11,7 @@ import {
   X,
 } from "lucide-react"
 import { useSiteConfig } from "@/hooks/use-site-config"
-import { DashboardSidebar } from "@/components/dashboard-sidebar"
+import { DashboardSidebar, type DashboardTab } from "@/components/dashboard-sidebar"
 import { DashboardOverview } from "@/components/dashboard-overview"
 import { ImprovedGuestList, Guest } from "@/components/improved-guest-list"
 import { GuestRequests } from "@/components/guest-requests"
@@ -19,6 +19,7 @@ import { GuestMessages } from "@/components/guest-messages"
 import { type Message } from "@/app/api/messages/route"
 import { EntourageSponsors } from "@/components/entourage-sponsors"
 import { ProposalDashboard } from "@/components/proposal-dashboard"
+import { TableFinderQrCard } from "@/components/table-finder-qr-card"
 
 interface GuestRequest {
   Name: string
@@ -50,7 +51,7 @@ export default function DashboardPage() {
   const [filteredGuests, setFilteredGuests] = useState<Guest[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<"dashboard" | "guests" | "requests" | "messages" | "entourage" | "proposals">("dashboard")
+  const [activeTab, setActiveTab] = useState<DashboardTab>("dashboard")
   
   // Guest Request state
   const [guestRequests, setGuestRequests] = useState<GuestRequest[]>([])
@@ -567,6 +568,18 @@ export default function DashboardPage() {
                 principalSponsors: principalSponsors.length,
               }}
             />
+          )}
+
+          {activeTab === "seating" && (
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl font-bold text-[#111827]">Table Finder QR</h2>
+                <p className="mt-1 text-sm text-[#6B7280]">
+                  Generate a print-ready code for the entrance. Guests scan it to search their name and find their table.
+                </p>
+              </div>
+              <TableFinderQrCard />
+            </div>
           )}
 
           {activeTab === "guests" && (
