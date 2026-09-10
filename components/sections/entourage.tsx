@@ -294,9 +294,7 @@ const ROLE_CATEGORY_ORDER = [
   "Family of the Groom",
   "Family of the Bride",
   "Man of Honor",
-  "Matron of Honor",
   "Best Man",
-  "Maid of Honor",
   "Groomsmen",
   "Bridesmaids",
   "Candle Sponsors",
@@ -312,8 +310,6 @@ const ROLE_CATEGORY_ORDER = [
 ]
 
 const SINGLE_COLUMN_SECTIONS = new Set([
-  "Best Man",
-  "Maid of Honor",
   "Ring Bearer",
   "Coin Bearer",
   "Bible Bearer",
@@ -322,12 +318,13 @@ const SINGLE_COLUMN_SECTIONS = new Set([
 
 const HONOR_ATTENDANT_BLOCK_CATEGORIES = [
   "Man of Honor",
-  "Matron of Honor",
   "Best Man",
-  "Maid of Honor",
 ] as const
 
-const HIDDEN_ROLE_CATEGORIES = new Set<string>([])
+const HIDDEN_ROLE_CATEGORIES = new Set<string>([
+  "Maid of Honor",
+  "Matron of Honor",
+])
 
 function normalizeRoleCategory(category: string): string {
   const normalized = category.trim()
@@ -984,27 +981,15 @@ export function Entourage() {
                   return null
                 }
 
-                // Man of Honor, Maid/Matron of Honor, and Best Man — Man of Honor above Best Men
-                if (
-                  category === "Man of Honor" ||
-                  category === "Matron of Honor" ||
-                  category === "Maid of Honor" ||
-                  category === "Best Man"
-                ) {
+                // Man of Honor above Best Men; Best Man names split left and right
+                if (category === "Man of Honor" || category === "Best Men") {
                   const manOfHonor = grouped["Man of Honor"] || []
-                  const maidOfHonor = [
-                    ...(grouped["Maid of Honor"] || []),
-                    ...(grouped["Matron of Honor"] || []),
-                  ]
                   const bestMan = grouped["Best Man"] || []
 
                   const firstHonorCategory = HONOR_ATTENDANT_BLOCK_CATEGORIES.find(
                     (honorCategory) => (grouped[honorCategory]?.length ?? 0) > 0
                   )
                   if (category !== firstHonorCategory) return null
-
-                  const hasBestManOrMaid =
-                    bestMan.length > 0 || maidOfHonor.length > 0
 
                   return (
                     <div key="HonorAttendants">
@@ -1027,38 +1012,35 @@ export function Entourage() {
                         </TwoColumnLayout>
                       )}
 
-                      {manOfHonor.length > 0 && hasBestManOrMaid && (
+                      {manOfHonor.length > 0 && bestMan.length > 0 && (
                         <div className="flex justify-center py-1.5 sm:py-2 md:py-2.5 mb-2 sm:mb-2.5 md:mb-3">
                           <div className="w-full max-w-md h-px" style={dividerLineStyle} />
                         </div>
                       )}
 
-                      {hasBestManOrMaid && (
-                        <TwoColumnLayout leftTitle="Best Man" rightTitle="Maid of Honor">
+                      {bestMan.length > 0 && (
+                        <TwoColumnLayout singleTitle="Best Man" centerContent={true}>
                           {(() => {
-                            const maxLen = Math.max(bestMan.length, maidOfHonor.length)
+                            const half = Math.ceil(bestMan.length / 2)
+                            const left = bestMan.slice(0, half)
+                            const right = bestMan.slice(half)
+                            const maxLen = Math.max(left.length, right.length)
                             const rows = []
                             for (let i = 0; i < maxLen; i++) {
-                              const left = bestMan[i]
-                              const right = maidOfHonor[i]
+                              const l = left[i]
+                              const r = right[i]
                               rows.push(
-                                <React.Fragment key={`honor-row-${i}`}>
-                                  <div
-                                    key={`bestman-cell-${i}`}
-                                    className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden"
-                                  >
-                                    {left ? (
-                                      <NameItem member={left} align="right" />
+                                <React.Fragment key={`bestman-row-${i}`}>
+                                  <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                    {l ? (
+                                      <NameItem member={l} align="right" />
                                     ) : (
                                       <div className="py-0.5" />
                                     )}
                                   </div>
-                                  <div
-                                    key={`maid-cell-${i}`}
-                                    className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden"
-                                  >
-                                    {right ? (
-                                      <NameItem member={right} align="left" />
+                                  <div className="px-0.5 sm:px-1 md:px-1.5 min-w-0 overflow-hidden">
+                                    {r ? (
+                                      <NameItem member={r} align="left" />
                                     ) : (
                                       <div className="py-0.5" />
                                     )}
@@ -1280,7 +1262,7 @@ export function Entourage() {
               })}
               
               {/* Display any other categories not in the ordered list */}
-              {Object.keys(grouped).filter(cat => !ROLE_CATEGORY_ORDER.includes(cat) && cat !== "Other" && cat !== "Peer Sponsors").map((category) => {
+              {Object.keys(grouped).filter(cat => !ROLE_CATEGORY_ORDER.includes(cat) && cat !== "Other" && cat !== "Peer Sponsors" && !HIDDEN_ROLE_CATEGORIES.has(cat)).map((category) => {
                 const members = grouped[category]
                 return (
                   <div key={category}>

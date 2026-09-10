@@ -716,6 +716,7 @@ export function ProposalPage({ role }: ProposalPageProps) {
   const [preferredName, setPreferredName] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [validationError, setValidationError] = useState("")
+  const [submitError, setSubmitError] = useState("")
   const [responses, setResponses] = useState<ProposalResponse[]>([])
 
   const handleLoadingComplete = useCallback(() => {
@@ -745,8 +746,13 @@ export function ProposalPage({ role }: ProposalPageProps) {
       }),
     })
 
-    if (!response.ok) {
-      throw new Error("Failed to submit response")
+    const data = (await response.json().catch(() => ({}))) as {
+      success?: boolean
+      error?: string
+    }
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "Failed to submit response. Please try again.")
     }
 
     window.dispatchEvent(new Event("entourageUpdated"))
@@ -761,12 +767,16 @@ export function ProposalPage({ role }: ProposalPageProps) {
       return
     }
     setValidationError("")
+    setSubmitError("")
     setSubmitting(true)
 
     try {
       await submitResponse("Confirmed", preferredName.trim())
       setFlowState("yes_submitted")
     } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Failed to submit response. Please try again."
+      setSubmitError(message)
       console.error("Failed to submit confirmation:", err)
     } finally {
       setSubmitting(false)
@@ -774,11 +784,15 @@ export function ProposalPage({ role }: ProposalPageProps) {
   }
 
   const handleNoSubmit = async () => {
+    setSubmitError("")
     setSubmitting(true)
     try {
       await submitResponse("Declined", "Declined Entourage Offer")
       setFlowState("no_submitted")
     } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Failed to submit response. Please try again."
+      setSubmitError(message)
       console.error("Failed to submit decline:", err)
     } finally {
       setSubmitting(false)
@@ -952,6 +966,11 @@ export function ProposalPage({ role }: ProposalPageProps) {
                       <span>⚠️</span> {validationError}
                     </p>
                   )}
+                  {submitError && (
+                    <p className="mt-2 text-xs font-medium leading-relaxed" style={{ color: "#b45309" }}>
+                      {submitError}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex items-center justify-center pt-4">
@@ -1078,6 +1097,12 @@ export function ProposalPage({ role }: ProposalPageProps) {
                   truly appreciate your support and well wishes as we begin this new chapter
                   together.
                 </ProposalFlowBody>
+
+                {submitError ? (
+                  <p className="mx-auto mb-4 max-w-md text-center text-xs font-medium leading-relaxed" style={{ color: "#b45309" }}>
+                    {submitError}
+                  </p>
+                ) : null}
 
                 <div className="flex items-center justify-center pt-4">
                   <DividerLine className="w-full max-w-md" />

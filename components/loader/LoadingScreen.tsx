@@ -233,7 +233,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
             width={289}
             height={382}
             priority
-            sizes="(max-width: 768px) 32vw, 140px"
+            sizes="(max-width: 768px) 22vw, 76px"
           />
         </motion.div>
 

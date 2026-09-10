@@ -28,7 +28,7 @@ export const siteConfig = {
   wedding: {
     date: "January 30, 2027",
     time: "2:00 PM",
-    venue: "TBA",
+    venue: "Rangie’s Villa San Miguel Bulacan",
     tagline: "are getting married!!!!!",
     theme: "Our wedding palette is inspired by timeless elegance. Motif Colors: Midnight Navy, Deep Navy, Slate Navy, Antique Gold, Champagne",
     motif: "#04103B, #192030, #364061, #AB832E, #DDBA7A",
@@ -73,24 +73,24 @@ export const siteConfig = {
     // }
   },
   ceremony: {
-    location: "TBA",
-    venue: "TBA",
-    map: "TBA",
+    location: "Rangie’s Villa San Miguel Bulacan",
+    venue: "428, San Miguel, Bulacan",
+    map: "https://maps.app.goo.gl/M7rXu8JYMWFPjaBW7",
     date: "January 30, 2027",
     day: "Saturday",
     time: "2:00 PM",
     entourageTime: "1:00 PM",
     guestsTime: "1:30 PM",
-    image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
+    image: ["/Details/ceremony_1.png", "/Details/ceremony_2.png"],
   },
   reception: {
-    location: "TBA",
-    venue: "TBA",
-    map: "TBA",
+    location: "Diocesan Shrine and Parish of San Miguel Arcangel",
+    venue: "138 Buencamino Street, San Miguel, Bulacan",
+    map: "https://maps.app.goo.gl/k7gTuNrqw9h4Jids9",
     date: "January 30, 2027",
     day: "Saturday",
     time: "5:00 PM",
-    image: ["/Details/ceremony.png", "/Details/ceremony2.png"],
+    image: ["/Details/reception_1.png", "/Details/reception_2.png", "/Details/reception_3.png"],
   },
   dressCode: {
     theme: "STRICTLY FORMAL",
@@ -273,7 +273,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
     googleDriveLink:
       "https://drive.google.com/drive/folders/1V9Ax3kXmixCQrfVjmA_pt_LJUBNWMNRd?usp=sharing",
     albumQR: "/QR/AlbumQR.png",
-    hashtag: ["#JenfoundHisdesSiddhesh"],
+    hashtag: ["#JENfoundSIDDestiny"],
     instructions: "Please scan this QR Code and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
   accommodation: {

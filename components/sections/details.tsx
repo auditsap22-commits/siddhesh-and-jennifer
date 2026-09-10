@@ -337,12 +337,12 @@ function ReminderTone({
       >
         {label}
       </p>
-      <p
-        className={`font-goudy-italic ${ct.reminderBody} mx-auto max-w-prose text-pretty leading-[1.75]`}
+      <div
+        className={`font-goudy-italic ${ct.reminderBody} mx-auto max-w-prose space-y-4 text-pretty leading-[1.75]`}
         style={{ color: reminderInk.champagne }}
       >
         {children}
-      </p>
+      </div>
     </div>
   )
 }
@@ -837,7 +837,7 @@ function EventVenueCard({
                   className={`${cinzel.className} text-sm sm:text-base md:text-lg lg:text-xl font-semibold tracking-[0.1em] uppercase`}
                   style={{ color: detailText.heading }}
                 >
-                  Ceremony: {time}
+                  {badge}: {time}
                 </p>
               </div>
             ) : (
@@ -845,7 +845,7 @@ function EventVenueCard({
                 className={`${cinzel.className} text-sm sm:text-base md:text-lg lg:text-xl font-semibold tracking-[0.14em] uppercase ${showDateDetails ? "" : "py-2 sm:py-3"}`}
                 style={{ color: detailText.heading }}
               >
-                At {time}
+                {badge}: {time}
               </p>
             )}
           </div>
@@ -1078,58 +1078,24 @@ export function Details() {
           onOpenMaps={openInMaps}
         />
 
-        <div
-          className="mx-auto max-w-xl rounded-xl px-6 py-8 text-center sm:rounded-2xl sm:px-10 sm:py-10"
-          style={cardStyle}
-        >
-          <p
-            className={`${cinzel.className} text-[0.625rem] font-semibold uppercase tracking-[0.32em] sm:text-[0.6875rem] sm:tracking-[0.38em]`}
-            style={{ color: paperWash.sageSoft }}
-          >
-            Reception to follow
-          </p>
-          <div className="my-4 flex items-center justify-center gap-3 sm:my-5">
-            <span
-              className="h-px w-8 sm:w-12"
-              style={{
-                background:
-                  "linear-gradient(to right, transparent, color-mix(in srgb, #c5a059 62%, transparent))",
-              }}
-            />
-            <Heart
-              className="h-3 w-3 sm:h-3.5 sm:w-3.5"
-              style={{ color: paperWash.sageSoft }}
-              aria-hidden
-            />
-            <span
-              className="h-px w-8 sm:w-12"
-              style={{
-                background:
-                  "linear-gradient(to left, transparent, color-mix(in srgb, #c5a059 62%, transparent))",
-              }}
-            />
-          </div>
-          <p
-            className={`${theSeasons.className} text-sm font-semibold uppercase tracking-[0.14em] sm:text-base`}
-            style={{ color: paperWash.sage }}
-          >
-            {siteConfig.reception.location}
-          </p>
-          <p
-            className={`${cinzel.className} mt-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] sm:text-[0.75rem]`}
-            style={{ color: paperWash.sageSoft }}
-          >
-            At {siteConfig.reception.time}
-          </p>
-          {siteConfig.reception.venue ? (
-            <p
-              className="font-goudy-italic mx-auto mt-3 max-w-[26rem] text-[0.8125rem] leading-[1.7] sm:mt-4 sm:text-[0.9375rem] sm:leading-[1.75]"
-              style={{ color: paperWash.sage }}
-            >
-              {siteConfig.reception.venue}
-            </p>
-          ) : null}
-        </div>
+        <EventVenueCard
+          badge="Reception"
+          images={receptionImages}
+          activeImageIndex={currentReceptionImageIndex}
+          locationName={receptionVenueName}
+          venueAddress={receptionAddress}
+          day={siteConfig.reception.day}
+          dateString={siteConfig.reception.date}
+          time={siteConfig.reception.time}
+          venueSectionLabel="Reception"
+          showDateDetails={false}
+          mapsLink={receptionMapsLink}
+          copyId="reception"
+          fullVenue={receptionVenue}
+          copiedItems={copiedItems}
+          onCopy={copyToClipboard}
+          onOpenMaps={openInMaps}
+        />
        
       </div>
 
@@ -1210,19 +1176,27 @@ export function Details() {
               </p>
 
               <div className="flex w-full flex-col items-center gap-11 sm:gap-14 md:gap-16">
-                <ReminderCard title="A Family Celebration">
+                <ReminderCard title="A Celebration of Love">
                   <ReminderTone label="Formal">
-                    Children are most welcome at our wedding. We would be delighted to
-                    celebrate this day with your little ones and with every generation of
-                    family and friends.
+                    Today, we gather to celebrate love, family, and the beginning of our
+                    forever. We are grateful to have our dearest family and friends with us
+                    as we make this beautiful promise to one another.
                   </ReminderTone>
                   <ReminderTone label="Warm">
-                    Bring the kids! Our celebration is for the whole family, and we can&apos;t
-                    wait to share the joy with them too.
+                    Your presence is the greatest gift we could ask for. Thank you for being
+                    part of this meaningful chapter and for celebrating this special day with
+                    us.
                   </ReminderTone>
                   <ReminderTone label="Tagalog">
-                    Malugod naming inaanyayahan ang inyong mga anak. Ang aming pagdiriwang
-                    ay para sa buong pamilya, at masaya kaming makasama sila sa araw na ito.
+                    <p>
+                      Ang araw na ito ay pagdiriwang ng pagmamahalan, pamilya, at
+                      pagkakaibigan. Lubos kaming nagpapasalamat na makasama kayo sa
+                      pagsisimula ng aming buhay bilang mag-asawa.
+                    </p>
+                    <p>
+                      Ang inyong presensya ang pinakamagandang regalo. Maraming salamat sa
+                      pakikiisa sa aming espesyal na araw.
+                    </p>
                   </ReminderTone>
                 </ReminderCard>
 

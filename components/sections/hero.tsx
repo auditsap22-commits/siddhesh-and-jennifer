@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Cormorant_Garamond } from "next/font/google"
-import { ArrowRight } from "lucide-react"
 import { siteConfig } from "@/content/site"
 import "./hero.css"
 
@@ -162,15 +161,6 @@ export function Hero() {
                 </p>
               )}
             </div>
-          </div>
-
-          <div className="hero-invite__footer">
-            <a href="#guest-list" className="hero-invite__cta">
-              <span>Confirm your attendance (RSVP)</span>
-              <span className="hero-invite__cta-icon">
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
-              </span>
-            </a>
           </div>
         </div>
       </article>

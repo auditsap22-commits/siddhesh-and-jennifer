@@ -613,7 +613,7 @@
 .env-invite-emerge-stack {
   position: absolute;
   left: 50%;
-  bottom: 1.25%;
+  bottom: 3.25%;
   transform: translateX(-50%);
   width: var(--env-letter-w);
   overflow: visible;

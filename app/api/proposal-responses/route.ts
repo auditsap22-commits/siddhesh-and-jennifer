@@ -1,7 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { siteConfig } from "@/content/site"
+import {
+  getGoogleScript,
+  postGoogleScript,
+  readGoogleScriptJson,
+} from "@/lib/google-script-fetch"
 import { getProposalRoleById } from "@/lib/proposal-roles"
-import type { ProposalResponse, ProposalSubmitPayload } from "@/lib/proposal-types"
+import type { ProposalResponse, ProposalRole, ProposalSubmitPayload } from "@/lib/proposal-types"
 
 const PROPOSAL_SCRIPT_URL = siteConfig.googleAPI.proposalResponses
 const ENTOURAGE_SCRIPT_URL = siteConfig.googleAPI.entourage
@@ -30,60 +35,134 @@ function normalizeResponse(row: Record<string, unknown>): ProposalResponse | nul
   }
 }
 
+async function postScriptAction(
+  url: string,
+  payload: Record<string, unknown>,
+): Promise<Record<string, unknown>> {
+  const response = await postGoogleScript(url, payload)
+  const data = await readGoogleScriptJson<Record<string, unknown>>(response)
+
+  if (!response.ok) {
+    throw new Error(
+      typeof data.error === "string" ? data.error : "Google Apps Script request failed",
+    )
+  }
+
+  if (typeof data.error === "string" && data.error.trim()) {
+    throw new Error(data.error)
+  }
+
+  return data
+}
+
+async function syncEntourageName(roleDef: ProposalRole, name: string) {
+  const fillPayload = {
+    action: "fill-slot",
+    Name: name,
+    RoleCategory: roleDef.roleCategory,
+    RoleCategoryAliases: roleDef.roleCategoryAliases ?? [],
+    Email: "",
+  }
+
+  try {
+    await postScriptAction(ENTOURAGE_SCRIPT_URL, fillPayload)
+    return
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    if (!message.includes('Invalid action')) {
+      throw error
+    }
+  }
+
+  await postScriptAction(ENTOURAGE_SCRIPT_URL, {
+    action: "create",
+    Name: name,
+    RoleCategory: roleDef.roleCategory,
+    RoleTitle: roleDef.title,
+    Email: "",
+  })
+}
+
+async function syncSponsorName(
+  roleDef: ProposalRole,
+  name: string,
+  fillColumn: "male" | "female",
+) {
+  const fillPayload =
+    fillColumn === "male"
+      ? {
+          action: "fill-slot",
+          fillColumn: "male",
+          MalePrincipalSponsor: name,
+          FemalePrincipalSponsor: "",
+        }
+      : {
+          action: "fill-slot",
+          fillColumn: "female",
+          MalePrincipalSponsor: "",
+          FemalePrincipalSponsor: name,
+        }
+
+  try {
+    await postScriptAction(SPONSORS_SCRIPT_URL, fillPayload)
+    return
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    if (!message.includes('Invalid action')) {
+      throw error
+    }
+  }
+
+  await postScriptAction(SPONSORS_SCRIPT_URL, {
+    action: "create",
+    MalePrincipalSponsor: fillColumn === "male" ? name : "",
+    FemalePrincipalSponsor: fillColumn === "female" ? name : "",
+  })
+}
+
 async function syncConfirmedToSheet(payload: ProposalSubmitPayload) {
   const roleDef = getProposalRoleById(payload.role)
-  if (!roleDef || payload.status !== "Confirmed") return
+  if (!roleDef || payload.status !== "Confirmed") return false
+
+  const name = payload.name.trim()
+  if (!name) return false
 
   if (roleDef.type === "entourage") {
-    await fetch(ENTOURAGE_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "fill-slot",
-        Name: payload.name.trim(),
-        RoleCategory: roleDef.roleCategory,
-        RoleCategoryAliases: roleDef.roleCategoryAliases ?? [],
-        Email: "",
-      }),
-    })
-    return
+    await syncEntourageName(roleDef, name)
+    return true
   }
 
   if (roleDef.type === "sponsor-ninong") {
-    await fetch(SPONSORS_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "fill-slot",
-        fillColumn: "male",
-        MalePrincipalSponsor: payload.name.trim(),
-        FemalePrincipalSponsor: "",
-      }),
-    })
-    return
+    await syncSponsorName(roleDef, name, "male")
+    return true
   }
 
   if (roleDef.type === "sponsor-ninang") {
-    await fetch(SPONSORS_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "fill-slot",
-        fillColumn: "female",
-        MalePrincipalSponsor: "",
-        FemalePrincipalSponsor: payload.name.trim(),
-      }),
-    })
+    await syncSponsorName(roleDef, name, "female")
+    return true
   }
+
+  return false
+}
+
+async function saveProposalLog(
+  payload: ProposalSubmitPayload,
+  roleCategory: string,
+) {
+  await postScriptAction(PROPOSAL_SCRIPT_URL, {
+    action: "proposal",
+    role: payload.role,
+    name: payload.name,
+    status: payload.status,
+    submittedAt: payload.submittedAt,
+    category: roleCategory,
+    id: `${payload.role}-${Date.now()}`,
+  })
 }
 
 export async function GET() {
   try {
-    const response = await fetch(`${PROPOSAL_SCRIPT_URL}?action=proposals`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-    })
+    const response = await getGoogleScript(`${PROPOSAL_SCRIPT_URL}?action=proposals`)
 
     if (!response.ok) {
       throw new Error("Failed to fetch proposal responses")
@@ -141,47 +220,40 @@ export async function POST(request: NextRequest) {
       submittedAt: submittedAt || new Date().toISOString(),
     }
 
-    let logSaved = false
-    try {
-      const response = await fetch(PROPOSAL_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "proposal",
-          role: payload.role,
-          name: payload.name,
-          status: payload.status,
-          submittedAt: payload.submittedAt,
-          category: roleDef.roleCategory,
-          id: `${role}-${Date.now()}`,
-        }),
-      })
-      logSaved = response.ok
-    } catch {
-      logSaved = false
+    if (status === "Confirmed" && !payload.name) {
+      return NextResponse.json(
+        { error: "Name is required for confirmed responses" },
+        { status: 400 },
+      )
     }
 
+    await saveProposalLog(payload, roleDef.roleCategory)
+
+    let synced = false
     if (status === "Confirmed" && payload.name) {
-      await syncConfirmedToSheet(payload)
-    }
-
-    if (!logSaved && status === "Declined") {
-      throw new Error("Failed to save proposal response")
+      try {
+        synced = await syncConfirmedToSheet(payload)
+      } catch (syncError) {
+        console.error("Failed to sync confirmed name to entourage/sponsor sheet:", syncError)
+      }
     }
 
     return NextResponse.json(
       {
         success: true,
-        logSaved,
-        synced: status === "Confirmed" && Boolean(payload.name),
+        logSaved: true,
+        synced,
       },
-      { status: 201 }
+      { status: 201 },
     )
   } catch (error) {
     console.error("Error saving proposal response:", error)
     return NextResponse.json(
-      { error: "Failed to save proposal response" },
-      { status: 500 }
+      {
+        error:
+          error instanceof Error ? error.message : "Failed to save proposal response",
+      },
+      { status: 500 },
     )
   }
 }
@@ -195,20 +267,11 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "id is required" }, { status: 400 })
     }
 
-    const response = await fetch(PROPOSAL_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "delete-proposal",
-        id: id.trim(),
-      }),
+    const data = await postScriptAction(PROPOSAL_SCRIPT_URL, {
+      action: "delete-proposal",
+      id: id.trim(),
     })
 
-    if (!response.ok) {
-      throw new Error("Failed to delete proposal response")
-    }
-
-    const data = await response.json()
     return NextResponse.json(data, { status: 200 })
   } catch (error) {
     console.error("Error deleting proposal response:", error)

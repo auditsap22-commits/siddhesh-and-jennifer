@@ -155,7 +155,7 @@
 
 .loading-screen__monogram {
   position: absolute;
-  top: clamp(5.1rem, 12vh, 6.5rem);
+  top: clamp(2.15rem, 5.4vh, 3.1rem);
   left: 0;
   right: 0;
   z-index: 6;
@@ -166,7 +166,7 @@
 
 .loading-screen__monogram img {
   display: block;
-  width: clamp(5.2rem, 21vw, 7.4rem);
+  width: clamp(3.15rem, 13vw, 4.45rem);
   height: auto;
 }
 
@@ -352,11 +352,11 @@
   }
 
   .loading-screen__monogram {
-    top: 5.75rem;
+    top: 2.85rem;
   }
 
   .loading-screen__monogram img {
-    width: 7.6rem;
+    width: 4.5rem;
   }
 
   .loading-screen__names {
@@ -393,7 +393,7 @@
 
 @media (min-width: 1200px) {
   .loading-screen__monogram img {
-    width: 8rem;
+    width: 4.75rem;
   }
 
   .loading-screen__names {
@@ -408,11 +408,11 @@
   }
 
   .loading-screen__monogram {
-    top: clamp(4.2rem, 10vh, 5.2rem);
+    top: clamp(1.85rem, 5.2vh, 2.6rem);
   }
 
   .loading-screen__monogram img {
-    width: clamp(4.4rem, 15vw, 5.8rem);
+    width: clamp(2.7rem, 10vw, 3.6rem);
   }
 
   .loading-screen__names {
@@ -454,11 +454,11 @@
   }
 
   .loading-screen__monogram {
-    top: 4rem;
+    top: 1.7rem;
   }
 
   .loading-screen__monogram img {
-    width: 4.2rem;
+    width: 2.85rem;
   }
 
   .loading-screen__names {
