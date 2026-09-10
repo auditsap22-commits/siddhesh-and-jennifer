@@ -73,9 +73,9 @@ export const siteConfig = {
     // }
   },
   ceremony: {
-    location: "Rangie’s Villa San Miguel Bulacan",
-    venue: "428, San Miguel, Bulacan",
-    map: "https://maps.app.goo.gl/M7rXu8JYMWFPjaBW7",
+    location: "Diocesan Shrine and Parish of San Miguel Arcangel", ///Rangie’s Villa San Miguel Bulacan
+    venue: "138 Buencamino Street, San Miguel, Bulacan", ///428, San Miguel, Bulacan
+    map: "https://maps.app.goo.gl/k7gTuNrqw9h4Jids9", ///https://maps.app.goo.gl/M7rXu8JYMWFPjaBW7
     date: "January 30, 2027",
     day: "Saturday",
     time: "2:00 PM",
@@ -84,9 +84,9 @@ export const siteConfig = {
     image: ["/Details/ceremony_1.png", "/Details/ceremony_2.png"],
   },
   reception: {
-    location: "Diocesan Shrine and Parish of San Miguel Arcangel",
-    venue: "138 Buencamino Street, San Miguel, Bulacan",
-    map: "https://maps.app.goo.gl/k7gTuNrqw9h4Jids9",
+    location: "Rangie’s Villa San Miguel Bulacan",
+    venue: "428, San Miguel, Bulacan",
+    map: "https://maps.app.goo.gl/M7rXu8JYMWFPjaBW7",
     date: "January 30, 2027",
     day: "Saturday",
     time: "5:00 PM",
